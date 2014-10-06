@@ -1,0 +1,29 @@
+{
+  "name": "testr",
+  "version": "0.0.1",
+  "description": "A simple app to make Selenium Webdriver tests easier to run",
+  "main": "app.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/greyarch/testr.git"
+  },
+  "keywords": [
+    "selenium",
+    "webdriver",
+    "testing",
+    "test"
+  ],
+  "author": "Greyarch BV",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/greyarch/testr/issues"
+  },
+  "homepage": "https://github.com/greyarch/testr",
+  "dependencies": {
+    "coffee-script": "^1.8.0",
+    "selenium-webdriver": "^2.43.5"
+  }
+}
