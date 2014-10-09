@@ -1,35 +1,33 @@
 objects = require './objects'
 exports.run = (script) ->
-	@wd = webdriver = require 'selenium-webdriver'
-	@ui = driver = new @wd.Builder().
-	withCapabilities(@wd.Capabilities.chrome()).
-	build()
+  @wd = webdriver = require 'selenium-webdriver'
+  @ui = driver = new @wd.Builder().
+  withCapabilities(@wd.Capabilities.chrome()).
+  build()
 
-	@set = (el, val) ->
-		if typeof el == 'string'
-			@set @_(el), val
-		else
-			@elements(el).then (element) => element.set val
-			
-	@with = (findType) -> webdriver.By[findType]
-	@find = (locatorType, locatorValue) => driver.findElement @with(locatorType) locatorValue
-	@_ = (key) => @find objects[key].locator, objects[key].value
-	
-	@wait = (func, interval) -> driver.wait func, interval
-	@getTitle = -> driver.getTitle()
+  @set = (el, val) ->
+    if typeof el == 'string'
+      @set @_(el), val
+    else
+      @elements(el).then (element) => element.set val
 
-	@goTo = (url) -> driver.get url
-	@quit = -> driver.quit()
-	
-	if typeof script == 'function'
-		script.call @
-	else
-		for step in script
-			do (step) =>
-				if @keywords[step.keyword]
-					@keywords[step.keyword] step.arguments
-				else 
-					@[step.keyword] step.arguments
+  @with = (findType) -> webdriver.By[findType]
+  @find = (locatorType, locatorValue) => driver.findElement @with(locatorType) locatorValue
+  @_ = (key) => @find objects[key].locator, objects[key].value
+
+  @wait = (func, interval) -> driver.wait func, interval
+  @getTitle = -> driver.getTitle()
+
+  @goTo = (url) -> driver.get url
+  @quit = -> driver.quit()
+
+  if typeof script == 'function'
+    script.call @
+  else
+    for step in script.steps
+      do (step) =>
+        keyword = @keywords[step.name] || @[step.name]
+        keyword step.arguments
 
 @elements = (el) =>
 	el.getTagName().then (tag) =>
@@ -45,10 +43,10 @@ exports.run = (script) ->
 			
 @keywords =
 	'go to': (args) =>	@goTo args.url
-	
+
 	'fill in': (args) => @set k, v for k, v of args
-	
-	'check the title': (args) => 
+
+	'check the title': (args) =>
 		@wait =>
 			@getTitle().then (title) =>
 				title == args.title

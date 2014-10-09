@@ -24,6 +24,8 @@
   "homepage": "https://github.com/greyarch/testr",
   "dependencies": {
     "coffee-script": "^1.8.0",
-    "selenium-webdriver": "^2.43.5"
+    "selenium-webdriver": "^2.43.5",
+    "request": "~2.45.0",
+    "form-data": "~0.1.4"
   }
 }
