@@ -1,7 +1,13 @@
 module.exports =
-	"query.input": 
-		locator: "name"
-		value: "q"
-	"button.search": 
-		locator: "name"
-		value: "btnG"
+  "first":
+  	locator: "model"
+  	value: "first"
+  "second":
+  	locator: "model"
+  	value: "second"
+  "result":
+    locator: "css"
+    value: "h2.ng-binding"
+  "go-button":
+    locator: "buttonText"
+    value: "Go!"
