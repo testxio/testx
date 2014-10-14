@@ -1,9 +1,9 @@
 module.exports =
   steps: [
     {
-    name: 'goto'
+    name: 'go to'
     arguments:
-      url: 'http://juliemr.github.io/protractor-demo/'
+      url: 'protractor-demo/'
     }
     {
     name: 'check title is'

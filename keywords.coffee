@@ -8,7 +8,7 @@ get = (key) -> els(find key).then (el) -> el.get()
 set = (key, value) -> els(find key).then (el) -> el.set value
 
 module.exports =
-  'goto': (args) -> browser.get args.url
+  'go to': (args) -> browser.get args.url
   'check title is': (args) -> expect(browser.getTitle()).toEqual args.title
   'check equals': (args) ->
     for key, val of args
@@ -19,7 +19,6 @@ module.exports =
       do => set key, val
 
 els = (el) ->
-  console.log el
   el.getTagName().then (tag) ->
     switch tag
       when 'input', 'textbox'

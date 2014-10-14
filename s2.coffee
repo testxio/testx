@@ -1,6 +1,8 @@
 keywords = require './keywords'
 script = require './script'
-describe 'angularjs homepage 2', ->
-  it 'should have a title 2', ->
+describe 'json script', ->
+  it 'should succeed', ->
     for step in script.steps
-      do => keywords[step.name] step.arguments
+      do =>
+        console.log 'executing step', step.name, 'with arguments', step.arguments
+        keywords[step.name] step.arguments
