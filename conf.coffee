@@ -1,6 +1,6 @@
 exports.config =
 #  seleniumAddress: 'http://localhost:4444/wd/hub' #can be specified on the command line with --seleniumAddress=http://localhost:4444/wd/hub
-  specs: ['spec.coffee']
+  specs: ['spec/*']
 
   capabilities:
     browserName: 'chrome'

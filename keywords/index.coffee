@@ -1,4 +1,4 @@
-objects = require './objects'
+objects = require '../objects'
 
 find = (key) ->
   [loc, val] = [objects[key].locator, objects[key].value]

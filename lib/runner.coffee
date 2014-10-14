@@ -1,4 +1,4 @@
-keywords = require './keywords'
+keywords = require '../keywords'
 xls2script = require './xls2script'
 
 exports.run = run = (script) ->
