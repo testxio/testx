@@ -7,8 +7,8 @@ exports.config =
     shardTestFiles: true
     maxInstances: 2
 
-  jasmineNodeOpts:
-    silent: true
+#  jasmineNodeOpts:
+#    silent: true
 
   onPrepare: ->
     require 'jasmine-reporters'
