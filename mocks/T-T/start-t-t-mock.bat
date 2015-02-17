@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\SmartBear\SoapUI-5.0.0\bin\mockservicerunner.bat" -m "CompetentBinding MockService" "%1T-T-Mock-soapui-project.xml"

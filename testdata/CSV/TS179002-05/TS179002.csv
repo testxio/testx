@@ -1,0 +1,19 @@
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-- TS179002 / TS179005: 4 personen worden met een VOG aangemaakt en gekoppeld aan nieuwe houder 'Sorteer Koppelingen B.V.', deze data wordt ook gebruikt om te navigeren met breadcrumbs
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+insert into houders values(newid(), '17900201', 'Sorteer Koppelingen B.V.')
+
+insert into personen values(newid(), CURRENT_TIMESTAMP, 'Eef Koppeleen', '298514540', 100, 'Koppeleen, Eef')
+,(newid(), CURRENT_TIMESTAMP, 'Tom Koppeltwee', '154631711', 100, 'Koppeltwee, Tom')
+,(newid(), CURRENT_TIMESTAMP, 'Dave Koppeldrie', '045855018', 100, 'Koppeldrie, Dave')
+,(newid(), CURRENT_TIMESTAMP, 'Vince Koppelvier', '031880393', 100, 'Koppelvier, Vince')
+
+insert into vogs values(newid(), '30000001', current_timestamp, (select id from personen where VoornaamAchternaam='Eef Koppeleen'))
+,(newid(), '30000002', current_timestamp, (select id from personen where VoornaamAchternaam='Tom Koppeltwee'))
+,(newid(), '30000003', current_timestamp, (select id from personen where VoornaamAchternaam='Dave Koppeldrie'))
+,(newid(), '30000004', current_timestamp, (select id from personen where VoornaamAchternaam='Vince Koppelvier'))
+
+insert into koppelingen values(newid(), '2014-12-09 09:40:12.000', (select id from houders where Naam='Sorteer Koppelingen B.V.'), (select id from personen where VoornaamAchternaam='Eef Koppeleen'))
+,(newid(), '2014-12-08 09:40:12.000', (select id from houders where Naam='Sorteer Koppelingen B.V.'), (select id from personen where VoornaamAchternaam='Tom Koppeltwee'))
+,(newid(), '2014-12-07 09:40:12.000', (select id from houders where Naam='Sorteer Koppelingen B.V.'), (select id from personen where VoornaamAchternaam='Dave Koppeldrie'))
+,(newid(), '2014-12-06 09:40:12.000', (select id from houders where Naam='Sorteer Koppelingen B.V.'), (select id from personen where VoornaamAchternaam='Vince Koppelvier'))

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+<testsuite name="authenticeren digid" errors="0" tests="3" failures="0" time="23.252" timestamp="2015-02-17T10:01:54">
+  <testcase classname="authenticeren digid" name="CSK-141;CSK-159;CSK-177;CSK-262;CSK-241;valide bsn en vog opgeven" time="8.891"></testcase>
+  <testcase classname="authenticeren digid" name="CSK-143;CSK-161;CSK-268;corrigeren ongeldige vog" time="7.686"></testcase>
+  <testcase classname="authenticeren digid" name="CSK-160;CSK-263;opvoeren vog na inloggen met digid" time="6.653"></testcase>
+</testsuite>
+<testsuite name="toevoegen vog" errors="0" tests="4" failures="0" time="43.732" timestamp="2015-02-17T10:02:18">
+  <testcase classname="toevoegen vog" name="CSK-234;tweede vog toevoegen vanuit overzicht" time="8.664"></testcase>
+  <testcase classname="toevoegen vog" name="CSK-240;CSK-239;toevoegen ongeldige of reeds bestaande vog" time="12.517"></testcase>
+  <testcase classname="toevoegen vog" name="CSK-303;tweede vog toevoegen vanaf inlogpagina" time="7.216"></testcase>
+  <testcase classname="toevoegen vog" name="CSK-306;CSK-307;toevoegen ongeldige of reeds bestaande vog vanaf inlogpagina" time="15.321"></testcase>
+</testsuite>
+<testsuite name="communicatiewijze persoon" errors="0" tests="4" failures="0" time="61.35" timestamp="2015-02-17T10:03:01">
+  <testcase classname="communicatiewijze persoon" name="CSK-228;CSK-229;CSK-936;CSK-940;post wordt als default communicatiewijze ingesteld" time="15.911"></testcase>
+  <testcase classname="communicatiewijze persoon" name="CSK-937;CSK-938;berichtenbox wordt als default communicatiewijze ingesteld" time="14.249"></testcase>
+  <testcase classname="communicatiewijze persoon" name="CSK-941;CSK-942;CSK-944;keuze e-mail als communicatiewijze bevestigen" time="16.158"></testcase>
+  <testcase classname="communicatiewijze persoon" name="CSK-943;post als communicatiewijze bevestigen" time="15.018"></testcase>
+</testsuite>
+<testsuite name="ophalen persoonsgegevens brp" errors="0" tests="4" failures="0" time="151.117" timestamp="2015-02-17T10:04:03">
+  <testcase classname="ophalen persoonsgegevens brp" name="CSK-482;houder koppelt persoon met incompleet geboortedatum in BRP" time="67.992"></testcase>
+  <testcase classname="ophalen persoonsgegevens brp" name="CSK-483;CSK-484;houder koppelt persoon met compleet geboortedatum in BRP" time="20.268"></testcase>
+  <testcase classname="ophalen persoonsgegevens brp" name="CSK-503;koppeling BRP inactief" time="7.112"></testcase>
+  <testcase classname="ophalen persoonsgegevens brp" name="CSK-468;controle op gebruikte attributen vanuit BRP" time="55.726"></testcase>
+</testsuite>
+<testsuite name="raadplegen en wijzigen eigen gegevens persoon" errors="0" tests="3" failures="0" time="25.106" timestamp="2015-02-17T10:06:34">
+  <testcase classname="raadplegen en wijzigen eigen gegevens persoon" name="CSK-235;CSK-236;CSK-237;CSK-527;geregistreerd persoon heeft inzage in persoonsgegevens" time="11.581"></testcase>
+  <testcase classname="raadplegen en wijzigen eigen gegevens persoon" name="CSK-508;CSK-509;CSK-510;geregistreerd persoon heeft inzage in gekoppelde houders" time="6.838"></testcase>
+  <testcase classname="raadplegen en wijzigen eigen gegevens persoon" name="CSK-521;overzicht houders leeg als geen koppelingen aanwezig zijn" time="6.677"></testcase>
+</testsuite>
+<testsuite name="uitschrijven door persoon zelf" errors="0" tests="2" failures="0" time="25.498" timestamp="2015-02-17T10:06:59">
+  <testcase classname="uitschrijven door persoon zelf" name="CSK-512;CSK-515;CSK-516;CSK-517;CSK-518;persoon kan zichzelf uitschrijven" time="17.732"></testcase>
+  <testcase classname="uitschrijven door persoon zelf" name="CSK-513;CSK-514;gekoppeld persoon kan niet worden uitgeschreven" time="7.755"></testcase>
+</testsuite>
+<testsuite name="authenticeren eherkenning" errors="0" tests="2" failures="0" time="10.685" timestamp="2015-02-17T10:07:24">
+  <testcase classname="authenticeren eherkenning" name="CSK-316;CSK-357; Aanmelden e-herkenning (mock) happy flow" time="6.094"></testcase>
+  <testcase classname="authenticeren eherkenning" name="CSK-322; Aanmelden e-herkenning (mock) incorrecte inloggegevens" time="4.584"></testcase>
+</testsuite>
+<testsuite name="verifieren houder" errors="0" tests="2" failures="0" time="9.239" timestamp="2015-02-17T10:07:35">
+  <testcase classname="verifieren houder" name="CSK-325;houder van een geregistreerde kov kan inloggen met kvk-nummer" time="4.266"></testcase>
+  <testcase classname="verifieren houder" name="CSK-326;onbekende houder wordt een foutmelding getoond" time="4.968"></testcase>
+</testsuite>
+<testsuite name="raadplegen eigen gegevens houder" errors="0" tests="7" failures="0" time="121.555" timestamp="2015-02-17T10:07:44">
+  <testcase classname="raadplegen eigen gegevens houder" name="CSK-327;CSK-328;handelsnaam en informatieblok worden getoond aan houder" time="5.251"></testcase>
+  <testcase classname="raadplegen eigen gegevens houder" name="CSK-356;CSK-380;CSK-383;CSK-385;houder raadpleegt overzicht koppelingen en sorteert deze" time="11.142"></testcase>
+  <testcase classname="raadplegen eigen gegevens houder" name="CSK-412;overzicht houder zonder koppelingen" time="8.52"></testcase>
+  <testcase classname="raadplegen eigen gegevens houder" name="CSK-413;paginagrootte overzicht koppelingen instelbaar" time="13.326"></testcase>
+  <testcase classname="raadplegen eigen gegevens houder" name="CSK-469;CSK-471;CSK-472;CSK-473;CSK-474;filter koppelingen overzicht" time="31.342"></testcase>
+  <testcase classname="raadplegen eigen gegevens houder" name="CSK-470;paginering wordt bijgewerkt bij filteren en sortering blijft behouden" time="25.445"></testcase>
+  <testcase classname="raadplegen eigen gegevens houder" name="CSK-788;CSK-789;onthouden voorkeur interface" time="26.497"></testcase>
+</testsuite>
+<testsuite name="raadplegen details persoon door houder" errors="0" tests="1" failures="0" time="9.899" timestamp="2015-02-17T10:09:46">
+  <testcase classname="raadplegen details persoon door houder" name="CSK-407;houder kan detailgegevens persoon inzien" time="9.892"></testcase>
+</testsuite>
+<testsuite name="vastleggen koppeling persoon" errors="0" tests="8" failures="0" time="81.4" timestamp="2015-02-17T10:09:56">
+  <testcase classname="vastleggen koppeling persoon" name="CSK-339;CSK-354;houder koppelt bekende personen" time="11.073"></testcase>
+  <testcase classname="vastleggen koppeling persoon" name="CSK-340;houder koppelt persoon en annuleert" time="8.842"></testcase>
+  <testcase classname="vastleggen koppeling persoon" name="CSK-355;CSK-342;Backend validatie op gegevens te koppelen persoon" time="11.924"></testcase>
+  <testcase classname="vastleggen koppeling persoon" name="CSK-343;CSK-344;Frontend validatie op gegevens te koppelen persoon" time="13.733"></testcase>
+  <testcase classname="vastleggen koppeling persoon" name="CSK-353;Meerdere houders koppelen dezelfde persoon" time="15.955"></testcase>
+  <testcase classname="vastleggen koppeling persoon" name="CSK-827; opslaan geboortedatum bij registreren persoon" time="10.088"></testcase>
+  <testcase classname="vastleggen koppeling persoon" name="CSK-933;Controle dat adres niet wordt getoond wanneer BRP niet beschikbaar is" time="4.31"></testcase>
+  <testcase classname="vastleggen koppeling persoon" name="CSK-932;Controle dat geboortejaar wordt getoond wanneer BRP niet beschikbaar is" time="5.452"></testcase>
+</testsuite>
+<testsuite name="verbreken koppeling" errors="0" tests="3" failures="0" time="40.352" timestamp="2015-02-17T10:11:17">
+  <testcase classname="verbreken koppeling" name="CSK-476;CSK-477;CSK-479;houder kan koppeling verwijderen uit database" time="11.236"></testcase>
+  <testcase classname="verbreken koppeling" name="CSK-480;tabeloverzicht wordt direct bijgewerkt na ontkoppeling" time="14.839"></testcase>
+  <testcase classname="verbreken koppeling" name="CSK-499;CSK-500;CSK-501;CSK-502;opnieuw koppelen van persoon door houder mogelijk" time="14.266"></testcase>
+</testsuite>
+<testsuite name="zoek persoon" errors="0" tests="1" failures="0" time="14.063" timestamp="2015-02-17T10:11:57">
+  <testcase classname="zoek persoon" name="CSK-722;validatie bsn nummer in houder overzicht" time="14.061"></testcase>
+</testsuite>
+<testsuite name="publieke website" errors="0" tests="5" failures="0" time="13.885" timestamp="2015-02-17T10:12:12">
+  <testcase classname="publieke website" name="CSK-216;header wordt correct weergegeven op de algemene info pagina" time="5.741"></testcase>
+  <testcase classname="publieke website" name="CSK-217;footer wordt correct weergegeven op de algemene info pagina" time="2"></testcase>
+  <testcase classname="publieke website" name="CSK-218;onbekende pagina levert een 404 error op" time="2.066"></testcase>
+  <testcase classname="publieke website" name="CSK-152;CSK-153;CSK-154;CSK-222;inschrijf informatie default zichtbaar voor alle bezoekers" time="2.782"></testcase>
+  <testcase classname="publieke website" name="CSK-317;relevante informatie default zichtbaar voor houders" time="1.28"></testcase>
+</testsuite>
+</testsuites>

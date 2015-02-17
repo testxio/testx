@@ -1,8 +1,5 @@
 runner = require '../lib/runner'
 
-describe 'CS tests', ->
-  it 'should run from excel script', ->
-    runner.runExcelSheet 'xls/sample.xls', 'Test'
-  it 'should run normally', ->
-    browser.get 'protractor-demo/'
-    expect(browser.getTitle()).toEqual 'Super Calculator'
+describe 'art', ->
+  it 'CSK-722;validatie bsn nummer in houder overzicht', ->
+    runner.runExcelSheet 'xls/prkp/UC043_CSK194_zoekPersoon.xls', 'TS194006'

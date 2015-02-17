@@ -1,0 +1,7 @@
+call RunSingleCsUnitTestsWithCoverage Prkp.Backend.Api.Models
+call RunSingleCsUnitTestsWithCoverage Prkp.Backend.DataAccess
+call RunSingleCsUnitTestsWithCoverage Prkp.Backend.Domain
+call RunSingleCsUnitTestsWithCoverage Prkp.Backend.DomainServices
+call RunSingleCsUnitTestsWithCoverage Prkp.External.Services.GbaService
+call RunSingleCsUnitTestsWithCoverage Prkp.Shared
+call RunSingleCsUnitTestsWithCoverage Prkp.Backend.Api
