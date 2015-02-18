@@ -1,3 +1,0 @@
-runner = require '../lib/runner'
-
-describe 'work in progress', ->
