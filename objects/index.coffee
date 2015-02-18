@@ -1,7 +1,7 @@
 _ = require 'lodash'
 
 module.exports = ->
-  _.assign(objects, require('./alerts'))
+  _.assign(objects, require('./another'))
 
 objects =
 #digid mock pagina
