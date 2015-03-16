@@ -41,8 +41,8 @@ module.exports =
   'ignore synchronization': (args) ->
     ignore = if args.ignore in ['true', 'yes', '1'] then true else false
     browser.ignoreSynchronization = ignore
-  'wait for redirect': (args) ->
-    browser.sleep args.milliseconds
+  'sleep': (args) ->
+    browser.sleep (args.milliseconds || 0) + 1000 * (args.seconds || 0)
   'wait to appear': waitForPresence allTrue
   'wait to disappear': waitForPresence allFalse
   'run': (args) -> runner.runExcelSheet args.file, args.sheet, _.omit(args, ['file', 'sheet'])

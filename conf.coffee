@@ -3,28 +3,35 @@ util = require 'util'
 FormData = require 'form-data'
 fs = require 'fs'
 
+
+
 exports.config =
-#  seleniumAddress: 'http://localhost:4444/wd/hub' #can be specified on the command line with --seleniumAddress=http://localhost:4444/wd/hub
+  seleniumAddress: 'http://localhost:4444/wd/hub' #can be overriden via the command line option with --seleniumAddress=http://localhost:4444/wd/hub
   specs: ['spec/*']
 
   capabilities:
     browserName: 'chrome'
     shardTestFiles: false
     maxInstances: 2
+    # chromeOptions:
+    #   args: ['user-agent=Mozilla/5.0 (iPhone 8.0)']
 
   jasmineNodeOpts:
     silent: true
     defaultTimeoutInterval: 300000
 
-  rootElement: 'html'
+  rootElement: 'html' # change to the root element of the angular.js app
 
   params:
     xls2testUrl: 'http://docker1.rni.org:4567'
 
-  afterEach: ->
-    browser.executeScript 'window.localStorage.clear();'
-
   onPrepare: ->
+    # comment next line for angular.js apps
+    beforeEach -> browser.ignoreSynchronization = true
+
+    # uncomment next line to clear local storage before each test
+    # beforeEach -> browser.executeScript 'window.localStorage.clear();'
+
     require 'jasmine-reporters'
     jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter 'testresults/junit', true, true, 'junit', true)
 

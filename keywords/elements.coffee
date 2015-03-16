@@ -5,6 +5,9 @@ module.exports = (el) ->
         el.getAttribute('type').then (t) ->
           get: -> el.getAttribute 'value'
           set: if t == 'submit' then el.click else defaultSet(el)
+      when 'img'
+        get: -> el.getAttribute('src')
+        set: defaultSet
       else
         defaultElement el
 
