@@ -26,11 +26,11 @@
     "coffee-script": "^1.8.0",
     "form-data": "~0.1.4",
     "jasmine-reporters": "^1.0.1",
-    "protractor-html-screenshot-reporter": "0.0.17",
-    "request": "~2.45.0",
-    "selenium-webdriver": "^2.43.5",
     "jasmine-spec-reporter": "~0.6.0",
+    "lodash": "~2.4.1",
+    "protractor-html-screenshot-reporter": "0.0.17",
     "q": "~1.0.1",
-    "lodash": "~2.4.1"
+    "request": "^2.45.0",
+    "selenium-webdriver": "^2.43.5"
   }
 }

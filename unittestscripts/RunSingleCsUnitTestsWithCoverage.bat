@@ -1,1 +1,0 @@
-call C:\OpenCover\OpenCover.Console.exe -target:RunSingleCsUnitTests.bat -hideskipped:Filter -targetargs:%1.Tests -excludebyattribute:*.ExcludeFromCodeCoverage* -register:Path32 -filter:+[%1]* -output:..\testresults\%1-coverage.xml

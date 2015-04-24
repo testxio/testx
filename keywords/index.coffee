@@ -2,6 +2,7 @@ objects = require('../objects')()
 els = require './elements'
 _ = require 'lodash'
 runner = require '../lib/runner'
+request = require 'request'
 
 _by = (key) ->
   [loc, val] = [objects[key].locator, objects[key].value]
@@ -18,7 +19,7 @@ waitForPresence = (reducer) ->
       waits = for key, obj of _.omit(args, 'timeout')
         find(obj).isPresent()
       protractor.promise.all(waits).then reducer
-    , args.timeout
+    , parseInt(args.timeout)
 
 allTrue = (items) -> items.reduce (x, y) -> x && y
 allFalse = (items) -> !items.reduce (x, y) -> x || y

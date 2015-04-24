@@ -3,6 +3,16 @@ keywords = require '../keywords'
 functions = require('../functions')()
 xls2script = require './xls2script'
 
+exports.runScript = runScript = (script, ctx) =>
+  context = _.assign(ctx || {}, functions)
+  flow = protractor.promise.controlFlow()
+  flow.execute(run(step, context)) for step in script.steps
+
+exports.runExcelSheet = (file, sheet, context) =>
+  flow = protractor.promise.controlFlow()
+  flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
+    runScript script, context
+
 run = (step, context) ->
   ->
     args = {}
@@ -14,12 +24,8 @@ run = (step, context) ->
             result()
           else
             result
-#    console.log args
-#    console.log "Executing step #{step.meta['Full name']} on row #{step.meta.Row} with arguments:"
-    keywords[step.name] args, context
+    console.log """Executing step \x1b[36m#{step.meta['Full name']}\x1b[m on \x1b[33mrow #{step.meta.Row}\x1b[m with arguments:
+                  \x1b[38;5;245m#{JSON.stringify(args, undefined, 2)}\x1b[m
 
-exports.runExcelSheet = (file, sheet, ctx) =>
-  context = _.assign(ctx || {}, functions)
-  flow = protractor.promise.controlFlow()
-  flow.execute(-> xls2script.convert(file, sheet)).then (script) ->
-    flow.execute(run(step, context)) for step in script.steps
+                """
+    keywords[step.name] args, context
