@@ -26,7 +26,7 @@ Getting started:
 5. You are now ready to run (from within the project directory):
 
 	```sh
-	protractor conf.coffee --baseUrl=http://google.com --seleniumAddress=http://localhost:4444/wd/hub
+	protractor conf.coffee --baseUrl=http://google.com
 	```
 6. Start writing your own tests and keywords. Don't forget to change the conf file accordingly.
 7. Enjoy responsibly!
