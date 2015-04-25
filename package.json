@@ -14,7 +14,11 @@
     "selenium",
     "webdriver",
     "testing",
-    "test"
+    "test",
+    "web testing",
+    "excel",
+    "keyword",
+    "keyword-driven"
   ],
   "author": "Greyarch BV",
   "license": "ISC",
