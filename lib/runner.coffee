@@ -1,6 +1,6 @@
 _ = require 'lodash'
-keywords = require '../keywords'
-functions = require('../functions')()
+keywords = require('../keywords').get()
+functions = require('../functions').get()
 xls2script = require './xls2script'
 
 exports.runScript = runScript = (script, ctx) =>

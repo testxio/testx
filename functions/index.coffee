@@ -2,8 +2,8 @@ _ = require 'lodash'
 
 rnd = (n) -> Math.floor(Math.random() * n)
 
-module.exports = ->
-  _.assign(functions, browser?.params?.testx?.functions?())
+exports.add = (funcs) -> _.assign(functions, funcs)
+exports.get = -> functions
 
 functions =
   generateElevenProof: ->

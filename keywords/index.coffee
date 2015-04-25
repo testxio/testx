@@ -24,7 +24,10 @@ waitForPresence = (reducer) ->
 allTrue = (items) -> items.reduce (x, y) -> x && y
 allFalse = (items) -> !items.reduce (x, y) -> x || y
 
-module.exports =
+exports.add = (kw) -> _.assign(keywords, kw)
+exports.get = -> keywords
+
+keywords =
   'go to': (args) ->
     browser.get args.url
   'save': (args, ctx) ->
