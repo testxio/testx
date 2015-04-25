@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A simple app to make Selenium Webdriver tests easier to run",
   "main": "app.coffee",
   "scripts": {

@@ -1,6 +1,11 @@
+_ = require 'lodash'
+
 rnd = (n) -> Math.floor(Math.random() * n)
 
 module.exports = ->
+  _.assign(functions, browser?.params?.testx?.functions?())
+
+functions =
   generateElevenProof: ->
     nr = [0, 0, rnd(10), rnd(10), rnd(10), rnd(10), rnd(10), rnd(10), rnd(10), rnd(7)]
     if (nr[9] == 0) && (nr[8] == 0) && (nr[7] == 0) then nr[8] = 1

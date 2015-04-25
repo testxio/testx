@@ -1,4 +1,4 @@
-objects = require('../objects')()
+objects = require('../objects').get()
 els = require './elements'
 _ = require 'lodash'
 runner = require '../lib/runner'

@@ -10,7 +10,9 @@ exports.runScript = runScript = (script, ctx) =>
 
 exports.runExcelSheet = (file, sheet, context) =>
   flow = protractor.promise.controlFlow()
+  console.log file, sheet
   flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
+    console.log script
     runScript script, context
 
 run = (step, context) ->
