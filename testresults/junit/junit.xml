@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-<testsuite name="sample test" errors="0" tests="1" failures="0" time="4.611" timestamp="2015-04-22T11:00:01">
-  <testcase classname="sample test" name="CSK-722;validatie bsn nummer in houder overzicht" time="4.605"></testcase>
+<testsuite name="sample test" errors="0" tests="1" failures="0" time="3.932" timestamp="2015-04-25T13:01:11">
+  <testcase classname="sample test" name="CSK-722;validatie bsn nummer in houder overzicht" time="3.929"></testcase>
 </testsuite>
 </testsuites>
