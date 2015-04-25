@@ -31,7 +31,7 @@ module.exports =
       form.append 'testrun_version', browser.params.testVersion || '0' #set via --params.testVersion command line parameter
       form.append 'test_target', browser.params.testTarget || 'unknown; set via --params.testTarget command line parameter'
       form.append 'test_platform', browser.params.testPlatform || 'chrome' #set via --params.testPlatform command line parameter
-      form.submit 'http://testwiki.lrk.org:4567/upload', (err, res) ->
+      form.submit browser.params.testx.reportServiceUrl, (err, res) ->
         if err then throw err
         console.log 'Results sent!'
     else

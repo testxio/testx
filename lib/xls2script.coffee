@@ -7,7 +7,7 @@ exports.convert = (xlsFile, sheet) ->
   deferred = q.defer() # maybe we should not depend on protractor being exposed in the global namespace
   form = new FormData()
   form.append 'file', fs.createReadStream(xlsFile)
-  form.submit "#{browser.params.xls2testUrl}/#{sheet}", (err, res) ->
+  form.submit "#{browser.params.testx.xls2testUrl}/#{sheet}", (err, res) ->
     if err then deferred.reject err
     result = ''
     res.on 'data', (data) -> result += data.toString()
