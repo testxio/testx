@@ -8,10 +8,10 @@ module.exports = ->
     nr[1] = Math.floor(nr[0] - (Math.floor(nr[0] / 11)) * 11)
     if nr[1] > 9
       if nr[2] > 0
-        nr[2]-=1
-        nr[1]=8
+        nr[2] -= 1
+        nr[1] = 8
       else
-        nr[2]+=1
-        nr[1]=[1]
+        nr[2] += 1
+        nr[1] = 1
 
     nr[1..9].reverse().join('')
