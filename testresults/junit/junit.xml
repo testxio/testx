@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<testsuites>
-<testsuite name="sample test" errors="0" tests="1" failures="0" time="3.586" timestamp="2015-04-25T14:25:49">
-  <testcase classname="sample test" name="CSK-722;validatie bsn nummer in houder overzicht" time="3.582"></testcase>
-</testsuite>
-</testsuites>
