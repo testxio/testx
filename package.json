@@ -1,5 +1,5 @@
 {
-  "name": "testr",
+  "name": "testx",
   "version": "0.0.1",
   "description": "A simple app to make Selenium Webdriver tests easier to run",
   "main": "app.coffee",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/greyarch/testr.git"
+    "url": "https://github.com/greyarch/testx.git"
   },
   "keywords": [
     "selenium",
@@ -19,11 +19,11 @@
   "author": "Greyarch BV",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/greyarch/testr/issues"
+    "url": "https://github.com/greyarch/testx/issues"
   },
-  "homepage": "https://github.com/greyarch/testr",
+  "homepage": "https://github.com/greyarch/testx",
   "dependencies": {
-    "coffee-script": "^1.8.0",
+    "coffee-script": "^1.9.2",
     "form-data": "~0.1.4",
     "jasmine-reporters": "^1.0.1",
     "jasmine-spec-reporter": "~0.6.0",

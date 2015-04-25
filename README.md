@@ -1,7 +1,7 @@
-testr
+testx
 =====
 
-Protractor based keyword driven test framework.
+Protractor and MS Excel based keyword driven test framework. It is possible to use it without MS Excel as well, but Excel provides a very powerful computational platform, that makes everything a lot easier. Of course if you don't want to shell out for MS Excel you can use any of the numerous copies like LibreOffice (OpenOffice) Calc, etc.
 
 Getting started:
 
