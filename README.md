@@ -9,15 +9,12 @@ Make sure you have Node.js, npm (it comes with node) and coffee-script installed
 
 Install protractor (may need to run as root/administrator):
 
-	```sh
 	npm install -g protractor
-	```
+
 Update and start local selenium server using webdriver-manager (comes with protractor):
 
-	```sh
 	webdriver-manager update
 	webdriver-manager start
-	```
 
 ## Installation
 
@@ -25,14 +22,10 @@ Create a protractor project.
 
 Add this module to your project
 
-	```sh
 	npm install testx --save
-	```
 
 ## Run
 
 From within the project directory:
 
-	```sh
 	protractor conf.coffee --baseUrl=http://google.com
-	```
