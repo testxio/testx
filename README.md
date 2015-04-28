@@ -35,7 +35,7 @@ In MS Excel a test looks something like that (taken from the sample project):
 | ------------- | ----------- | ----------- |
 |               | url         |             |
 | go to         | /           |             |
-|               | query-input | seasrch-btn |
+|               | query-input | search-btn |
 | set           | new york    |             |
 |               | object      | timeout     |
 | wait to appear| result-link | 4000        |
