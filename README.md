@@ -18,18 +18,18 @@ Simply put your tests will consist of *steps*. Each step consists of a *keyword*
 The keyword is and action or a check (or both, can be anything really).
 The arguments consist of a name and a value. Both the name and the value can be literals, context references or object keys.
 
-In MS Excel it a test looks something like that (taken from the sample project):
+In MS Excel a test looks something like that (taken from the sample project):
 
-<table>
-		<tr> <td></td> <td>url</td> </tr>
-		<tr> <td>go to</td> <td>/</td> </tr>
-		<tr> <td></td> <td>query-input</td> <td>seasrch-btn</td> </tr>
-		<tr> <td>set</td> <td>new yourk</td> <td></td> </tr>
-		<tr> <td></td> <td>object</td> <td>timeout</td> </tr>
-		<tr> <td>wait to appear</td> <td>result-link</td> <td>4000</td> </tr>
-		<tr> <td></td> <td>result-link</td> </tr>
-		<tr> <td>check matches</td> <td>New York</td> </tr>
-</table>
+	<table>
+			<tr> <td></td> <td>url</td> </tr>
+			<tr> <td>go to</td> <td>/</td> </tr>
+			<tr> <td></td> <td>query-input</td> <td>seasrch-btn</td> </tr>
+			<tr> <td>set</td> <td>new yourk</td> <td></td> </tr>
+			<tr> <td></td> <td>object</td> <td>timeout</td> </tr>
+			<tr> <td>wait to appear</td> <td>result-link</td> <td>4000</td> </tr>
+			<tr> <td></td> <td>result-link</td> </tr>
+			<tr> <td>check matches</td> <td>New York</td> </tr>
+	</table>
 
 
 Keywords
