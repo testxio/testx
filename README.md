@@ -35,7 +35,7 @@ In MS Excel a test looks something like that (taken from the sample project, ign
 | ------------- | ----------- | ----------- |
 |               | url         |             |
 | go to         | /           |             |
-|               | query-input | search-btn |
+|               | query-input | search-btn  |
 | set           | new york    |             |
 |               | object      | timeout     |
 | wait to appear| result-link | 4000        |
@@ -50,10 +50,36 @@ In this context the keyword is the action.
 Objects
 -------
 The other key component at work here is the **object map**.
-It is a dictionary of *object keys* - the stuff you put in your scripts - and *object locators*.
+
+It is a dictionary of *object keys* - the stuff you put in your scripts to identify objects on the screen - and *object locators*.
+
 Object locators are simple objects consisting of *locator* and *value*.
+
 The locator can be any of the supported protractor element selector types, i.e. *id*, *css*, *xpath*, etc.
+
 The value is the actual value of the selector - "element-id", ".hidden.button", "//input[@type='button']", etc.
+
+Clients (test projects) use the **addObjects** method to add to the object map. For example (from the sample project *conf.coffee*)
+
+	...
+	testx = require 'testx'
+	onPrepare: ->
+		testx.addObjects require('./objects')
+	...
+
+And in *objects/index.coffee* you'll have something like:
+
+	module.exports =
+	  "query-input":
+	    locator: "css"
+	    value: "input[name='q']"
+	  "search-btn":
+	    locator: "css"
+	    value: "button[name='btnG']"
+	  "result-link":
+	    locator: "css"
+	    value: "li.g a"
+
 
 ## Prerequisites
 
