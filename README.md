@@ -24,13 +24,22 @@ In MS Excel a test looks something like that (taken from the sample project):
 		<tr> <td></td> <td>url</td> </tr>
 		<tr> <td>go to</td> <td>/</td> </tr>
 		<tr> <td></td> <td>query-input</td> <td>seasrch-btn</td> </tr>
-		<tr> <td>set</td> <td>new yourk</td> <td></td> </tr>
+		<tr> <td>set</td> <td>new york</td> <td></td> </tr>
 		<tr> <td></td> <td>object</td> <td>timeout</td> </tr>
 		<tr> <td>wait to appear</td> <td>result-link</td> <td>4000</td> </tr>
 		<tr> <td></td> <td>result-link</td> </tr>
 		<tr> <td>check matches</td> <td>New York</td> </tr>
 </table>
 
+|--------------|:-----------:|:-----------:|
+|              |url          ||
+|go to         |/            ||
+|              |query-input  |seasrch-btn|
+|set           |new york     ||
+|              |object       |timeout|
+|wait to appear|result-link  |4000|
+|              |result-link  ||
+|check matches |New York     ||
 
 Keywords
 --------
