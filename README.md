@@ -31,15 +31,16 @@ In MS Excel a test looks something like that (taken from the sample project):
 		<tr> <td>check matches</td> <td>New York</td> </tr>
 </table>
 
-| ------------ | ----------- | ----------- |
-|              |url          ||
-| go to         |/            ||
-|              |query-input  |seasrch-btn|
-| set           |new york     ||
-|              |object       |timeout|
-| wait to appear|result-link  |4000|
-|              |result-link  ||
-| check matches |New York     ||
+| Keyword       | Argument 1  | Argument 2  |
+| ------------- | ----------- | ----------- |
+|               | url         |             |
+| go to         | /           |             |
+|               | query-input | seasrch-btn |
+| set           | new york    |             |
+|               | object      | timeout     |
+| wait to appear| result-link | 4000        |
+|               | result-link |             |
+| check matches | New York    |             |
 
 Keywords
 --------
