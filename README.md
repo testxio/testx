@@ -18,7 +18,7 @@ Simply put your tests will consist of *steps*. Each step consists of a *keyword*
 The keyword is and action or a check (or both, can be anything really).
 The arguments consist of a name and a value. Both the name and the value can be literals, context references or object keys.
 
-In MS Excel a test looks something like that (taken from the sample project):
+In MS Excel a test looks something like that (taken from the sample project, ignore header row):
 
 <table>
 		<tr> <td></td> <td>url</td> </tr>
@@ -49,9 +49,11 @@ In this context the keyword is the action.
 
 Objects
 -------
-
-TBA
-
+The other key component at work here is the **object map**.
+It is a dictionary of *object keys* - the stuff you put in your scripts - and *object locators*.
+Object locators are simple objects consisting of *locator* and *value*.
+The locator can be any of the supported protractor element selector types, i.e. *id*, *css*, *xpath*, etc.
+The value is the actual value of the selector - "element-id", ".hidden.button", "//input[@type='button']", etc.
 
 ## Prerequisites
 
@@ -78,7 +80,7 @@ From within the test project directory:
 ## Configuration
 
 To be able to use **testx** you'll need to services external to it.
-One of them is essential - the xls(x) file to test convertor,
+One of them is essential - the xls(x) file to test converter,
 and the other one, the reporting service is optional and sending data to it is switched off by default.
 
 All **testx** configuration lives in your protractor configuration file under params.testx, for example (in coffeescript)
@@ -93,7 +95,7 @@ All **testx** configuration lives in your protractor configuration file under pa
 ## Keywords
 
 **testx** comes with a simpple set keywords that can be extended/overriden from the project.
-See the *addKeywords* method for details.
+See the **addKeywords** method for details.
 
 Predefind keywords are:
 
