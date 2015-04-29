@@ -3,11 +3,17 @@ util = require 'util'
 FormData = require 'form-data'
 fs = require 'fs'
 
+unpack = (func) -> (obj) ->
+  if typeof obj == 'function'
+    func obj()
+  else
+    func obj
+
 module.exports =
   runExcelSheet: require('./lib/runner').runExcelSheet
-  addObjects: require('./objects').add
-  addKeywords: require('./keywords').add
-  addFunctions: require('./functions').add
+  addObjects: unpack require('./objects').add
+  addKeywords: unpack require('./keywords').add
+  addFunctions: unpack require('./functions').add
 
   onPrepare: ->
     require 'jasmine-reporters'
