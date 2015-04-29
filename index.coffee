@@ -30,13 +30,13 @@ module.exports =
       console.log 'Sending results to the test results repository...'
       form = new FormData()
       form.append 'junit', fs.createReadStream('testresults/junit/junit.xml')
-      form.append 'application_name', browser.params.appName || 'unknkown; set via --params.appName command line parameter'
-      form.append 'application_version', browser.params.appVersion || '0' #set via --params.appVersion command line parameter
-      form.append 'testrun_description', browser.params.testDesc || 'ART' #set via --params.appVersion command line parameter
-      form.append 'testrun_user', browser.params.testUser || 'unknown; set via --params.testUser command line parameter'
-      form.append 'testrun_version', browser.params.testVersion || '0' #set via --params.testVersion command line parameter
-      form.append 'test_target', browser.params.testTarget || 'unknown; set via --params.testTarget command line parameter'
-      form.append 'test_platform', browser.params.testPlatform || 'chrome' #set via --params.testPlatform command line parameter
+      form.append 'application_name', browser.params.testx.appName || 'unknown' # set via --params.testx.appName command line parameter'
+      form.append 'application_version', browser.params.testx.appVersion || '0' #set via --params.testx.appVersion command line parameter
+      form.append 'testrun_description', browser.params.testx.testDesc || 'ART' #set via --params.testx.appVersion command line parameter
+      form.append 'testrun_user', browser.params.testx.testUser || 'unknown' #set via --params.testx.testUser command line parameter'
+      form.append 'testrun_version', browser.params.testx.testVersion || '0' #set via --params.testx.testVersion command line parameter
+      form.append 'test_target', browser.params.testx.testTarget || 'unknown' #set via --params.testx.testTarget command line parameter'
+      form.append 'test_platform', browser.params.testx.testPlatform || 'chrome' #set via --params.testx.testPlatform command line parameter
       form.submit browser.params.testx.reportServiceUrl, (err, res) ->
         if err then throw err
         console.log 'Results sent!'
