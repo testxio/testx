@@ -18,7 +18,7 @@ exports.element = (key) ->
         when 'input', 'textbox'
           @getAttribute 'value'
         when 'img'
-          @getAttribute('src')
+          @getAttribute 'src'
         else
           @getText()
   el

@@ -3,8 +3,17 @@ _ = require 'lodash'
 runner = require '../lib/runner'
 request = require 'request'
 
-get = (key) -> object(key).get()
-set = (key, value) -> object(key).set value
+EC =  -> protractor.ExpectedConditions
+
+DEFAULT_TIMEOUT = -> browser.params.testx.actionTimeout || 5000
+
+waitForObject = (key) -> browser.wait EC().presenceOf(object key), DEFAULT_TIMEOUT()
+get = (key) ->
+  waitForObject key
+  object(key).get()
+set = (key, value) ->
+  waitForObject key
+  object(key).set value
 
 waitForPresence = (reducer) ->
   (args) ->
