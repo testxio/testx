@@ -7,9 +7,10 @@ exports.get = -> objects
 exports.element = (key) ->
   el = element _by(key)
   el.set = (val) ->
-    if val
+    if val == "[CLEAR]"
       @clear()
-      @sendKeys val
+    else if val
+      @sendKeys protractor.Key.chord(protractor.Key.CONTROL, "a") + val
     else
       @click()
   el.get = ->
