@@ -1,23 +1,16 @@
-objects = require('../objects').get()
-els = require './elements'
+object = require('../objects').element
 _ = require 'lodash'
 runner = require '../lib/runner'
 request = require 'request'
 
-_by = (key) ->
-  [loc, val] = [objects[key].locator, objects[key].value]
-  protractor.By[loc] val
-
-find = (key) -> element _by(key)
-
-get = (key) -> els(find key).then (el) -> el.get()
-set = (key, value) -> els(find key).then (el) -> el.set value
+get = (key) -> object(key).get()
+set = (key, value) -> object(key).set value
 
 waitForPresence = (reducer) ->
   (args) ->
     browser.wait ->
       waits = for key, obj of _.omit(args, 'timeout')
-        find(obj).isPresent()
+        object(obj).isPresent()
       protractor.promise.all(waits).then reducer
     , parseInt(args.timeout)
 

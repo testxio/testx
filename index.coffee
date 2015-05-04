@@ -14,8 +14,11 @@ module.exports =
   addObjects: unpack require('./objects').add
   addKeywords: unpack require('./keywords').add
   addFunctions: unpack require('./functions').add
+  element: require('./objects').element
 
   onPrepare: ->
+    require 'coffee-errors'
+
     require 'jasmine-reporters'
     jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter 'testresults/junit', true, true, 'junit', true)
 

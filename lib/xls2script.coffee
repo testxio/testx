@@ -4,7 +4,7 @@ fs = require 'fs'
 q = require 'q'
 
 exports.convert = (xlsFile, sheet) ->
-  deferred = q.defer() # maybe we should not depend on protractor being exposed in the global namespace
+  deferred = q.defer()
   form = new FormData()
   form.append 'file', fs.createReadStream(xlsFile)
   form.submit "#{browser.params.testx.xls2testUrl}/#{sheet}", (err, res) ->
