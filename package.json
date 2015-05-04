@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A library for executing MS Excel based, keyword driven tests with Protractor.",
   "main": "app.coffee",
   "scripts": {
@@ -29,6 +29,7 @@
   "dependencies": {
     "coffee-errors": "^0.8.6",
     "coffee-script": "^1.9.2",
+    "csv-parse": "^0.1.1",
     "form-data": "~0.1.4",
     "jasmine-reporters": "^1.0.1",
     "jasmine-spec-reporter": "~0.6.0",

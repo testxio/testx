@@ -30,6 +30,8 @@ module.exports =
 
   onComplete: ->
     if browser.params.reportResults
+      console.warn "--params.reportResults is deprecated, please use --params.testx.reportResults instead."
+    if browser.params.reportResults || browser.params.testx.reportResults
       console.log 'Sending results to the test results repository...'
       form = new FormData()
       form.append 'junit', fs.createReadStream('testresults/junit/junit.xml')
@@ -44,4 +46,4 @@ module.exports =
         if err then throw err
         console.log 'Results sent!'
     else
-      console.log 'Test results are not saved to TRR. Execute with --params.reportResults=true to report test results.'
+      console.warn 'Test results are not saved to TRR. Execute with --params.testx.reportResults=true to report test results.'
