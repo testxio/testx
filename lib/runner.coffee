@@ -10,9 +10,9 @@ exports.runScript = runScript = (script, ctx) =>
 
 exports.runExcelSheet = (file, sheet, context) =>
   flow = protractor.promise.controlFlow()
-  console.log file, sheet
+  console.log "Executing script on sheet #{sheet.red} in file #{file.red}"
   flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
-    console.log script
+    console.log JSON.stringify(script, undefined, 2)
     runScript script, context
 
 run = (step, context) ->
@@ -26,8 +26,9 @@ run = (step, context) ->
             result()
           else
             result
-    console.log """Executing step \x1b[36m#{step.meta['Full name']}\x1b[m on \x1b[33mrow #{step.meta.Row}\x1b[m with arguments:
-                  \x1b[38;5;245m#{JSON.stringify(args, undefined, 2)}\x1b[m
-
-                """
-    keywords[step.name] args, context
+    fullName = step.meta['Full name'].cyan
+    row = "row #{step.meta.Row}".yellow
+    arg = JSON.stringify(args, undefined, 2).grey
+    console.log "Executing step #{fullName} on #{row} with arguments:\n#{arg}\n"
+    protractor.promise.controlFlow().execute ->
+      keywords[step.name] args, context

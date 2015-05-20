@@ -33,7 +33,8 @@ module.exports =
             @getAttribute 'src'
           else
             @getText()
-    el.wait = (timeout) -> browser.wait protractor.ExpectedConditions.presenceOf(@), timeout
+    el.wait = (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
+      browser.wait expCondition.call(protractor.ExpectedConditions, @), timeout
     el
 
 _by = (key) ->

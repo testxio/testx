@@ -16,7 +16,7 @@ waitForPresence = (reducer) ->
   (args) ->
     browser.wait ->
       waits = for key, obj of _.omit(args, 'timeout')
-        object(obj).isPresent()
+        object(obj).isDisplayed()
       protractor.promise.all(waits).then reducer
     , parseInt(args.timeout)
 

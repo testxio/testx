@@ -29,6 +29,7 @@
   "dependencies": {
     "coffee-errors": "^0.8.6",
     "coffee-script": "^1.9.2",
+    "colors": "^1.1.0",
     "csv-parse": "^0.1.1",
     "form-data": "~0.1.4",
     "jasmine-reporters": "^1.0.1",
