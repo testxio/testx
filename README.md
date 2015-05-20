@@ -13,7 +13,15 @@ This will free you from having to implement all the things like generating rando
 It is possible to use **testx** without MS Excel as well, but then it looses a lot of its usefulness.
 Of course if you don't want to shell out for MS Excel you can use any of the numerous copies like LibreOffice (OpenOffice) Calc, etc.
 
-Simply put your tests will consist of *steps*. Each step consists of a *keyword* and *arguments*.
+The conversion between MS Excel and the (JSON) test script format is done by an external service.
+We provide such a service at **http://xls.testx.io**. To use it simply put this in your configuration file, like so (in coffeescript):
+
+	params:
+    testx:
+	    xls2testUrl: 'http://xls.testx.io'
+
+
+The tests consist of *steps*. Each step consists of a *keyword* and *arguments*.
 
 The keyword is and action or a check (or both, can be anything really).
 The arguments consist of a name and a value. Both the name and the value can be literals, context references or object keys.
