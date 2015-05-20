@@ -135,18 +135,18 @@ Predefind keywords are:
 | ---------------------- | ------------- | --------------- |------------ | ---------------------------- |
 | go to                  |               |                 | navigate to a (relative to the --baseUrl) url |  |
 |                        | url           | the url to navigate to || No |
-| save                   |               |                 | save the value of the object to the specified variable|
+| save                   |               |                 | save the value of the object to the specified variable||
 |                        | *object key*  | *variable name* || Yes |
-| check equals           |               | checks if the value of the object is exactly equal to the expected |            |
+| check equals           |               || checks if the value of the object is exactly equal to the expected |            |
 |                        | *object key*  | *expected*      || Yes |
-| check matches          |               | checks if the value of the object matches the expected regular expression |            |
+| check matches          |               || checks if the value of the object matches the expected regular expression ||
 |                        | *object key*  | *expected regex* || Yes |
 | set                    |               |                 | *sets* the value to the object; the exact action depends on the HTML type of the object. For example the value will be filled in an input box. If the value is empty string the action is **click** |
 |                        | *object key*  | *value*         || Yes |
 | wait to appear         |               |                 | Wait for all the specified objects to appear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored |
 |                        | *ignored*     | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
-| wait to disappear      |               | Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored |            |
+| wait to disappear      |               || Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored |            |
 |                        | *ignorred*    | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
 | run                    |               |                 | Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution |
