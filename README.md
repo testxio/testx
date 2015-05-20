@@ -14,12 +14,7 @@ It is possible to use **testx** without MS Excel as well, but then it looses a l
 Of course if you don't want to shell out for MS Excel you can use any of the numerous copies like LibreOffice (OpenOffice) Calc, etc.
 
 The conversion between MS Excel and the (JSON) test script format is done by an external service.
-We provide such a service at **http://xls.testx.io**. To use it simply put this in your configuration file, like so (in coffeescript):
-
-	params:
-    testx:
-	    xls2testUrl: 'http://xls.testx.io'
-
+We provide such a service at **http://xls.testx.io**. To use it define **xls2testUrl** in your configuration file. See example below.
 
 The tests consist of *steps*. Each step consists of a *keyword* and *arguments*.
 
@@ -122,7 +117,7 @@ All **testx** configuration lives in your protractor configuration file under pa
 	...
 	params:
 		testx:
-			xls2testUrl: 'http://my-xls-to-test.service'
+			xls2testUrl: 'http://xls.testx.io'
 			reportServiceUrl: 'http://my-reporting.service'
 	...
 
