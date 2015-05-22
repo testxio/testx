@@ -12,16 +12,10 @@ set = (key, value) ->
   object(key).wait DEFAULT_TIMEOUT()
   object(key).set value
 
-waitForPresence = (reducer) ->
+waitFor = -> (condition = protractor.ExpectedConditions.visibilityOf) ->
   (args) ->
-    browser.wait ->
-      waits = for key, obj of _.omit(args, 'timeout')
-        object(obj).isDisplayed()
-      protractor.promise.all(waits).then reducer
-    , parseInt(args.timeout)
-
-allTrue = (items) -> items.reduce (x, y) -> x && y
-allFalse = (items) -> !items.reduce (x, y) -> x || y
+    for key, obj of _.omit(args, 'timeout')
+      (object obj).wait parseInt(args.timeout), condition
 
 exports.add = (kw) -> _.assign(keywords, kw)
 exports.get = -> keywords
@@ -46,7 +40,7 @@ keywords =
     browser.ignoreSynchronization = ignore
   'sleep': (args) ->
     browser.sleep (args.milliseconds || 0) + 1000 * (args.seconds || 0)
-  'wait to appear': waitForPresence allTrue
-  'wait to disappear': waitForPresence allFalse
+  'wait to appear': -> waitFor()
+  'wait to disappear': -> waitFor protractor.ExpectedConditions.invisibilityOf
   'run': (args) -> runner.runExcelSheet args.file, args.sheet, _.omit(args, ['file', 'sheet'])
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
