@@ -31,6 +31,8 @@ module.exports =
             @getAttribute 'value'
           when 'img'
             @getAttribute 'src'
+          when 'select'
+            @$('option:checked').getText()
           else
             @getText()
     el.wait = (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->

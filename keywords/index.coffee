@@ -9,7 +9,7 @@ get = (key) ->
   object(key).wait DEFAULT_TIMEOUT()
   object(key).get()
 set = (key, value) ->
-  object(key).wait DEFAULT_TIMEOUT()
+  object(key).wait DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable
   object(key).set value
 
 waitFor = -> (condition = protractor.ExpectedConditions.visibilityOf) ->
