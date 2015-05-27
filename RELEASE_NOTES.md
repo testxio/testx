@@ -1,3 +1,8 @@
+New in version 0.3.6
+====================
+
+- Bug fix for *testx.logScript*.
+
 New in version 0.3.5
 ====================
 

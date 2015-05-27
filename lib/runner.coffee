@@ -12,7 +12,7 @@ exports.runExcelSheet = (file, sheet, context) =>
   flow = protractor.promise.controlFlow()
   console.log "Executing script on sheet #{sheet.cyan} in file #{file.cyan}"
   flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
-    console.log JSON.stringify(script, undefined, 2) if params.testx.logScript
+    console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
     runScript script, context
 
 run = (step, context) ->
