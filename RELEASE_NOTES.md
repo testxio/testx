@@ -1,3 +1,8 @@
+New in version 0.4.0
+====================
+
+- It is now possible to put (context resolvable) variables in the argument names as well as argument values.
+
 New in version 0.3.6
 ====================
 

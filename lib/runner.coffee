@@ -16,19 +16,24 @@ exports.runExcelSheet = (file, sheet, context) =>
     runScript script, context
 
 run = (step, context) ->
+  ctx = resolve context
   ->
     args = {}
     for k, v of step.arguments
       do =>
-        args[k] = v.replace /(\{\{.+?\}\})/g, (match) ->
-          result = context[match[2...-2]]
-          if typeof result == 'function'
-            result()
-          else
-            result
+        args[ctx k] = ctx v
     fullName = step.meta['Full name'].cyan
     row = "row #{step.meta.Row}".yellow
     arg = JSON.stringify(args, undefined, 2).grey
     console.log "Executing step #{fullName} on #{row} with arguments:\n#{arg}\n"
     protractor.promise.controlFlow().execute ->
       keywords[step.name] args, context
+
+resolve = (context) ->
+  (variable) ->
+    variable.replace /(\{\{.+?\}\})/g, (match) ->
+      result = context[match[2...-2]]
+      if typeof result == 'function'
+        result()
+      else
+        result
