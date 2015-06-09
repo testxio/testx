@@ -23,9 +23,16 @@ exports.get = -> keywords
 keywords =
   'go to': (args) ->
     browser.get args.url
+  'go forward': ->
+    browser.navigate().forward()
+  'go back': ->
+    browser.navigate().back()
+  'refresh page': ->
+    browser.navigate().refresh()
   'save': (args, ctx) ->
+    save = (v) -> (value) -> ctx[v] = value
     for key, val of args
-      do => (get key).then (value) -> ctx[val] = value
+      do => (get key).then save(val)
   'check equals': (args) ->
     for key, val of args
       do => expect(get key).toEqual val
@@ -40,6 +47,20 @@ keywords =
     browser.ignoreSynchronization = ignore
   'sleep': (args) ->
     browser.sleep (args.milliseconds || 0) + 1000 * (args.seconds || 0)
+  'switch to': (args) ->
+    if args.title
+      q.all browser.getAllWindowHandles().then (handles) ->
+        _.map handles, (wh) =>
+            browser.switchTo().window(wh)
+              result = {}
+              result[browser.getTitle()] = wh
+              result
+      .done (titles) =>
+        for title in titles
+          do =>
+            browser.switchTo().window titles[args.title]
+    if args.frame
+      browser.switchTo().frame args.frame
   'wait to appear': -> waitFor()
   'wait to disappear': -> waitFor protractor.ExpectedConditions.invisibilityOf
   'run': (args) -> runner.runExcelSheet args.file, args.sheet, _.omit(args, ['file', 'sheet'])
