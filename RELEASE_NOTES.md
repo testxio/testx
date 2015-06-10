@@ -1,3 +1,13 @@
+New in version 0.5.0
+====================
+Added the following new keywords
+- *go forward* - simulates a click on the **Forward** browser button
+- *go back* - simulates a click on the **Back** browser button
+- *refresh page* - refreshes the current page
+- *switch to* - switches the action to another:
+  - window, using the **title** argument
+  - frame, using the **frame** argument
+
 New in version 0.4.0
 ====================
 

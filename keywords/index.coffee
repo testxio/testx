@@ -48,19 +48,25 @@ keywords =
   'sleep': (args) ->
     browser.sleep (args.milliseconds || 0) + 1000 * (args.seconds || 0)
   'switch to': (args) ->
+    result = q.defer()
     if args.title
       q.all browser.getAllWindowHandles().then (handles) ->
         _.map handles, (wh) =>
-            browser.switchTo().window(wh)
-              result = {}
-              result[browser.getTitle()] = wh
-              result
-      .done (titles) =>
-        for title in titles
-          do =>
-            browser.switchTo().window titles[args.title]
+          browser.switchTo().window(wh).then =>
+            browser.getTitle().then (t) ->
+              title: t
+              handle: wh
+      .then (titles) =>
+        ttls = (t.title for t in titles)
+        if args.title not in ttls
+          result.reject new Error("Could not find a window with title '#{args.title}'! Known windows are [#{ttls}].")
+        else
+          for t in titles
+            if t.title == args.title
+              browser.switchTo().window(t.handle).then -> result.resolve true
     if args.frame
-      browser.switchTo().frame args.frame
+      browser.switchTo().frame(args.frame).then -> result.resolve true
+    result.promise
   'wait to appear': -> waitFor()
   'wait to disappear': -> waitFor protractor.ExpectedConditions.invisibilityOf
   'run': (args) -> runner.runExcelSheet args.file, args.sheet, _.omit(args, ['file', 'sheet'])
