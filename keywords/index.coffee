@@ -12,9 +12,9 @@ set = (key, value) ->
   object(key).wait DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable
   object(key).set value
 
-waitFor = -> (condition = protractor.ExpectedConditions.visibilityOf) ->
-  (args) ->
-    for key, obj of _.omit(args, 'timeout')
+waitFor = (args, condition = protractor.ExpectedConditions.visibilityOf) ->
+  for key, obj of _.omit(args, 'timeout')
+    do =>
       (object obj).wait parseInt(args.timeout), condition
 
 exports.add = (kw) -> _.assign(keywords, kw)
@@ -67,7 +67,7 @@ keywords =
     if args.frame
       browser.switchTo().frame(args.frame).then -> result.resolve true
     result.promise
-  'wait to appear': -> waitFor()
-  'wait to disappear': -> waitFor protractor.ExpectedConditions.invisibilityOf
+  'wait to appear': (args) -> waitFor args
+  'wait to disappear': (args) -> waitFor args, protractor.ExpectedConditions.invisibilityOf
   'run': (args) -> runner.runExcelSheet args.file, args.sheet, _.omit(args, ['file', 'sheet'])
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'

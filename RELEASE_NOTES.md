@@ -1,3 +1,7 @@
+New in version 0.5.1
+====================
+Fixes for *wait to appear* and *wait to disappear* keywords.
+
 New in version 0.5.0
 ====================
 Added the following new keywords
