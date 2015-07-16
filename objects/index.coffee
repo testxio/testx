@@ -40,5 +40,8 @@ module.exports =
     el
 
 _by = (key) ->
-  [loc, val] = [objects[key].locator, objects[key].value]
-  protractor.By[loc] val
+  if objects[key]?.locator
+    [loc, val] = [objects[key].locator, objects[key].value]
+    protractor.By[loc] val
+  else
+    throw new Error "Could not find a locator for object '#{key}'! Is this object defined?"
