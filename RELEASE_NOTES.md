@@ -1,3 +1,9 @@
+New in version 0.6.0
+====================
+Added native parsing for XLSX files. When the *xls2testUrl* parameter is not provided the native parsing will be used. Custom date formatting of the online service is not supported yet. No i18n.
+
+Improved the error reporting when using an object that is not defined in the object map.
+
 New in version 0.5.1
 ====================
 Fixes for *wait to appear* and *wait to disappear* keywords.
