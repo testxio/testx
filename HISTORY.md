@@ -1,3 +1,7 @@
+New in version 0.7.0
+====================
+Allowing functions in the object map.
+
 New in version 0.6.0
 ====================
 Added native parsing for XLSX files. When the *xls2testUrl* parameter is not provided the native parsing will be used. Custom date formatting of the online service is not supported yet. No i18n.
