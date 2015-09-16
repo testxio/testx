@@ -1,5 +1,4 @@
 request = require 'request'
-util = require 'util'
 FormData = require 'form-data'
 fs = require 'fs'
 

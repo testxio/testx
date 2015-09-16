@@ -1,3 +1,7 @@
+New in version 0.7.1
+====================
+Refactoring: pulled out the native XLSX script parsing in a separate project (and npm package)  [testx-xlsx-parser](http://github.com/greyarch/testx-xlsx-parser).
+
 New in version 0.7.0
 ====================
 Allowing functions in the object map.
