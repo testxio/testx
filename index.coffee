@@ -31,7 +31,8 @@ module.exports =
   onComplete: ->
     if browser.params.reportResults
       console.warn "--params.reportResults is deprecated, please use --params.testx.reportResults instead."
-    if browser.params.reportResults || browser.params.testx.reportResults
+    reportResults = browser.params.reportResults || browser.params.testx.reportResults
+    if reportResults && reportResults != 'false'
       console.log 'Sending results to the test results repository...'
       form = new FormData()
       form.append 'junit', fs.createReadStream('testresults/junit/junit.xml')
