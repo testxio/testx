@@ -3,6 +3,14 @@ testx
 
 A library for executing MS Excel based, keyword driven tests with Protractor.
 
+- [How does it work](#how-does-it-work)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Run](#run)
+- [Configuration](#configuration)
+- [Core keywords](#core-keywords)
+- [Additional keyword packages](#additional-keyword-packages)
+
 ## How does it work
 **testx** aims to make web application testing easier by using keyword driven testing.
 
@@ -13,9 +21,10 @@ This will free you from having to implement all the things like generating rando
 It is possible to use **testx** without MS Excel as well, but then it looses a lot of its usefulness.
 Of course if you don't want to shell out for MS Excel you can use any of the numerous copies like LibreOffice (OpenOffice) Calc, etc.
 
-The conversion between MS Excel and the (JSON) test script format is done by an external service.
-We provide such a service at **http://xls.testx.io**. To use it define **xls2testUrl** in your configuration file. See example below.
+As of **testx 0.7.1** the conversion between MS Excel and the (JSON) test script format will be done by **testx**. Previous version used an external service.
+This behavior can still be used if you specify **xls2testUrl** in your configuration file. See example below. Such a service used to be available at http://xls.testx.io, but is currently taken down. Please, create an issue if you'd like this service back.
 
+### Test structure
 The tests consist of *steps*. Each step consists of a *keyword* and *arguments*.
 
 The keyword is and action or a check (or both, can be anything really).
@@ -23,27 +32,15 @@ The arguments consist of a name and a value. Both the name and the value can be 
 
 In MS Excel a test looks something like that (taken from the sample project, ignore header row):
 
-<table>
-		<tr> <td></td> <td>url</td> </tr>
-		<tr> <td>go to</td> <td>/</td> </tr>
-		<tr> <td></td> <td>query-input</td> <td>seasrch-btn</td> </tr>
-		<tr> <td>set</td> <td>new york</td> <td></td> </tr>
-		<tr> <td></td> <td>object</td> <td>timeout</td> </tr>
-		<tr> <td>wait to appear</td> <td>result-link</td> <td>4000</td> </tr>
-		<tr> <td></td> <td>result-link</td> </tr>
-		<tr> <td>check matches</td> <td>New York</td> </tr>
-</table>
-
-| Keyword       | Argument 1  | Argument 2  |
-| ------------- | ----------- | ----------- |
-|               | url         |             |
-| go to         | /           |             |
-|               | query-input | search-btn  |
-| set           | new york    |             |
-|               | object      | timeout     |
-| wait to appear| result-link | 4000        |
-|               | result-link |             |
-| check matches | New York    |             |
+|                   | url         |             |
+| -------------     | ----------- | ----------- |
+| **go to**         | /           |             |
+|                   | **query-input** | **search-btn**  |
+| **set**           | new york    |             |
+|                   | **object**  | **timeout** |
+| **wait to appear**| result-link | 4000        |
+|                   | **result-link** |         |
+| **check matches** | New York    |            ||
 
 Keywords
 --------
@@ -83,6 +80,14 @@ And in *objects/index.coffee* you'll have something like:
 	    locator: "css"
 	    value: "li.g a"
 
+Objects can also be read from CSV file. The file looks like that:
+
+	query-input,css,"input[name='q']"
+	search-btn,css,"button[name='btnG']"
+	result-link,css,"li.g a"
+
+## API
+TBD
 
 ## Prerequisites
 
@@ -121,7 +126,7 @@ All **testx** configuration lives in your protractor configuration file under pa
 			reportServiceUrl: 'http://my-reporting.service'
 	...
 
-## Keywords
+## Core keywords
 
 **testx** comes with a simpple set keywords that can be extended/overriden from the project.
 See the **addKeywords** method for details.
@@ -133,26 +138,38 @@ Predefind keywords are:
 
 | Keyword                | Argument name | Argument value  | Description | Supports repeating arguments |
 | ---------------------- | ------------- | --------------- |------------ | ---------------------------- |
-| go to                  |               |                 | navigate to a (relative to the --baseUrl) url |  |
-|                        | url           | the url to navigate to || No |
-| save                   |               |                 | save the value of the object to the specified variable||
-|                        | *object key*  | *variable name* || Yes |
 | check equals           |               || checks if the value of the object is exactly equal to the expected |            |
 |                        | *object key*  | *expected*      || Yes |
 | check matches          |               || checks if the value of the object matches the expected regular expression ||
 |                        | *object key*  | *expected regex* || Yes |
-| set                    |               |                 | *sets* the value to the object; the exact action depends on the HTML type of the object. For example the value will be filled in an input box. If the value is empty string the action is **click** |
+| clear local storage    |               |                 | Clears local storage. This keyword has no arguments. ||
+| go back                |               |                 | simulates pressing of the **Back** browser button |  |
+| go forward             |               |                 | simulates pressing of the **Fotrward** browser button |  |
+| go to                  |               |                 | navigate to a (relative to the --baseUrl) url |  |
+|                        | url           | the url to navigate to || No |
+| ignore synchronization |               |                 | Turn page synchronization for angular apps on or off ||
+|                        | ignore        | true / false    || No |
+| refresh page           |               |                 | simulates pressing of the **Refresh** browser button |  |
+| save                   |               |                 | save the value of the object to the specified variable||
+|                        | *object key*  | *variable name* || Yes |
+| set                    ||| *sets* the value to the object; the exact action depends on the HTML type of the object. For example the value will be filled in an input box. If the value is empty string the action is **click** ||
 |                        | *object key*  | *value*         || Yes |
-| wait to appear         |               |                 | Wait for all the specified objects to appear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored |
+| sleep                  ||| pause the execution  of the script ||
+|                        | seconds       | number of seconds to sleep  || No |
+|                        | milliseconds  | number of milliseconds to sleep  || No |
+| switch to              ||| switches the current action context to a different iframe or window |  |
+|                        | title         | the title of the window you want to switch to| only one of *title* or *frame* can be specified | No |
+|                        | frame         | *object key* identifying an iframe you want to switch to | only one of *title* or *frame* can be specified | No |
+| wait to appear         ||| Wait for all the specified objects to appear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored ||
 |                        | *ignored*     | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
-| wait to disappear      |               || Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored |            |
+| wait to disappear      ||| Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored |            |
 |                        | *ignorred*    | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
-| run                    |               |                 | Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution |
+| run                    ||| Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution ||
 |                        | file          | full file path  || No |
 |                        | sheet         | the name of the excel sheet || No |
 |                        | *var name*    | *var value*     || Yes |
-| ignore synchronization |               |                 | Turn page synchronization for angular apps on or off |
-|                        | ignore        | true / false    || No |
-| clear local storage    |               |                 | Clears local storage. This keyword has no arguments. |
+
+## Additional keyword packages
+TBD
