@@ -1,3 +1,7 @@
+New in version 0.7.3
+====================
+Improved documentation.
+
 New in version 0.7.2
 ====================
 - Improved documentation.

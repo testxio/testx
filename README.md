@@ -80,11 +80,29 @@ And in *objects/index.coffee* you'll have something like:
 	    locator: "css"
 	    value: "li.g a"
 
-Objects can also be read from CSV file. The file looks like that:
+Objects can also be read from CSV file. The file looks like this:
 
 	query-input,css,"input[name='q']"
 	search-btn,css,"button[name='btnG']"
 	result-link,css,"li.g a"
+
+
+As of **testx 0.7.0** object values can be functions as well. This gives you the ability to parameterize object. This is easiest to explain with an example. Let's say you have this object definition:
+
+	module.exports =
+	  "query-input":
+	    locator: "css"
+	    value: (name) ->
+	      "input[name='#{name}']"
+
+It can then be used to set an *input* element with arbitrary name like so:
+
+|                 | query-input(q) |
+| -------------   | ----------- |
+| **set**         | something ||
+
+In the example above "q" will be passed to the *value* function of the object as the *name* parameter and the return value of the function will be used to locate the element.
+Currently the parameters are separated by comma and do not need to be put in quotes.
 
 ## API
 TBD
@@ -138,23 +156,23 @@ Predefind keywords are:
 
 | Keyword                | Argument name | Argument value  | Description | Supports repeating arguments |
 | ---------------------- | ------------- | --------------- |------------ | ---------------------------- |
-| check equals           |               || checks if the value of the object is exactly equal to the expected |            |
+| check equals           |               || Checks if the value of the object is exactly equal to the expected |            |
 |                        | *object key*  | *expected*      || Yes |
-| check matches          |               || checks if the value of the object matches the expected regular expression ||
+| check matches          |               || Checks if the value of the object matches the expected regular expression ||
 |                        | *object key*  | *expected regex* || Yes |
 | clear local storage    |               |                 | Clears local storage. This keyword has no arguments. ||
-| go back                |               |                 | simulates pressing of the **Back** browser button |  |
-| go forward             |               |                 | simulates pressing of the **Fotrward** browser button |  |
-| go to                  |               |                 | navigate to a (relative to the --baseUrl) url |  |
+| go back                |               |                 | Simulates pressing of the **Back** browser button |  |
+| go forward             |               |                 | Simulates pressing of the **Fotrward** browser button |  |
+| go to                  |               |                 | Navigate to a (relative to the --baseUrl) url |  |
 |                        | url           | the url to navigate to || No |
 | ignore synchronization |               |                 | Turn page synchronization for angular apps on or off ||
 |                        | ignore        | true / false    || No |
-| refresh page           |               |                 | simulates pressing of the **Refresh** browser button |  |
-| save                   |               |                 | save the value of the object to the specified variable||
+| refresh page           |               |                 | Simulates pressing of the **Refresh** browser button |  |
+| save                   |               |                 | Save the value of the object to the specified variable. The saved value can then be referred to by putting the variable name in double curly brackets like so *{{varname}}*. This can be done in both argument name and argument value ||
 |                        | *object key*  | *variable name* || Yes |
 | set                    ||| *sets* the value to the object; the exact action depends on the HTML type of the object. For example the value will be filled in an input box. If the value is empty string the action is **click** ||
 |                        | *object key*  | *value*         || Yes |
-| sleep                  ||| pause the execution  of the script ||
+| sleep                  ||| Pause the execution  of the script ||
 |                        | seconds       | number of seconds to sleep  || No |
 |                        | milliseconds  | number of milliseconds to sleep  || No |
 | switch to              ||| switches the current action context to a different iframe or window |  |
