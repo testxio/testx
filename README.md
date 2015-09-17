@@ -113,7 +113,7 @@ TBD
 
 ## Installation
 
-Create a protractor project. For a sample project clone https://github.com/greyarch/testx-example
+Create a protractor project. For a sample project clone https://github.com/greyarch/testx-quickstart
 
 Add this module to your project:
 
