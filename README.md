@@ -27,7 +27,7 @@ This behavior can still be used if you specify **xls2testUrl** in your configura
 ### Test structure
 The tests consist of *steps*. Each step consists of a *keyword* and *arguments*.
 
-The keyword is and action or a check (or both, can be anything really).
+The keyword is an action or a check (or both, can be anything really).
 The arguments consist of a name and a value. Both the name and the value can be literals, context references or object keys.
 
 In MS Excel a test looks something like that (taken from the sample project, ignore header row):
@@ -190,4 +190,10 @@ Predefind keywords are:
 |                        | *var name*    | *var value*     || Yes |
 
 ## Additional keyword packages
-TBD
+| Npm package | Description |
+| ----------- | ----------- |
+|[testx-http-keywords](https://www.npmjs.com/package/testx-http-keywords)|Keywords to send simple http requests using the testx library.|
+|[testx-pdf-keywords](https://www.npmjs.com/package/testx-pdf-keywords)|Keywords to test pdf files using the testx library.|
+|[testx-pop3-keywords](https://www.npmjs.com/package/testx-pop3-keywords)|Keywords to test mailserver using pop3.|
+|[testx-postgres-keywords](https://www.npmjs.com/package/testx-postgres-keywords)|Keywords to test postgres db.|
+|[testx-soap-keywords](https://www.npmjs.com/package/testx-soap-keywords)|Extension for testx to test soap services.|
