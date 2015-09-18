@@ -40,14 +40,20 @@ module.exports =
     el
 
 _by = (key) ->
-  [first, rest...] = (e.trim() for e in key.split /\(|\)|\,/ when e)
-  obj = objects[first]
-  if obj
+  match = /^(.+)\((.*)\)$/.exec key.trim()
+  if match
+    [full, func, args] = match
+    obj = objects[func]
     if typeof obj == 'function'
-      if rest.length == obj.length
-        obj = obj.apply(@, rest)
+      parsed = eval "[#{args}]"
+      if parsed.length == obj.length
+        obj = obj.apply(@, parsed)
+        protractor.By[obj.locator] obj.value
       else
-        throw new Error "Object '#{first}' is a function with #{obj.length} arguments. You are trying to execute it with #{rest.length} arguments."
-    protractor.By[obj.locator] obj.value
+        throw new Error "Object '#{func}' is a function with #{obj.length} argument(s). You are trying to execute it with #{parsed.length} argument(s)."
+    else
+      throw new Error "Object '#{func}' is not a function."
+  else if object = objects[key]
+    protractor.By[object.locator] object.value
   else
-    throw new Error "Could not find a locator for object '#{first}'! Is this object defined?"
+    throw new Error "Could not find a locator for object '#{key}'! Is this object defined?"

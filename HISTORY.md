@@ -1,3 +1,8 @@
+New in version 0.7.4
+====================
+- Improved parsing of parameters when using object map functions.
+- Improved documentation.
+
 New in version 0.7.3
 ====================
 Improved documentation.

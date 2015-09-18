@@ -90,18 +90,17 @@ Objects can also be read from CSV file. The file looks like this:
 As of **testx 0.7.0** objects ini the object map can be functions as well. This gives you the ability to parameterize object. This is easiest to explain with an example. Let's say you have this object definition:
 
 	module.exports =
-	  "query-input": (name) ->
+	  "query-input": (attr, val) ->
 	    locator: "css"
-	    value: "input[name='#{name}']"
+	    value: "input[#{attr}='#{val}']"
 
-It can then be used to set an *input* element with arbitrary name like so:
+It can then be used to set an *input* element with arbitrary name like so (in your Excel sheet):
 
-|                 | query-input(q) |
+|                 | query-input('name','q') |
 | -------------   | ----------- |
-| **set**         | something ||
+| **set**         | something  ||
 
-In the example above "q" will be passed to the *value* function of the object as the *name* parameter and the return value of the function will be used to locate the element.
-Currently the parameters are separated by comma and do not need to be put in quotes.
+In the example above "name" and "q" will be passed to the object function as the *attr* and *val* parameters and the return value of the function will be used to locate the element. In this example the resulting locator will be "input[name='q']". The only requirement is that the parameters you pass have to be put in quotes. If you want to have a quote (') as part of a parameter you need to escape it using back slash (\\).
 
 ## API
 TBD
