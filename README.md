@@ -87,13 +87,12 @@ Objects can also be read from CSV file. The file looks like this:
 	result-link,css,"li.g a"
 
 
-As of **testx 0.7.0** object values can be functions as well. This gives you the ability to parameterize object. This is easiest to explain with an example. Let's say you have this object definition:
+As of **testx 0.7.0** objects ini the object map can be functions as well. This gives you the ability to parameterize object. This is easiest to explain with an example. Let's say you have this object definition:
 
 	module.exports =
-	  "query-input":
+	  "query-input": (name) ->
 	    locator: "css"
-	    value: (name) ->
-	      "input[name='#{name}']"
+	    value: "input[name='#{name}']"
 
 It can then be used to set an *input* element with arbitrary name like so:
 
