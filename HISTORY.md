@@ -1,3 +1,13 @@
+New in version 1.0.1
+====================
+- Corrected a typo in the documentation.
+- Added missing history for 1.0.0.
+
+New in version 1.0.0
+====================
+- Reporting removed from **testx**. See [testx-ictu-reporter](https://www.npmjs.com/package/testx-ictu-reporter) package.
+- Change in the **testx** interface (see documentation).
+
 New in version 0.7.4
 ====================
 - Improved parsing of parameters when using object map functions.
