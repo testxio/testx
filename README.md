@@ -3,13 +3,40 @@ testx
 
 A library for executing MS Excel based, keyword driven tests with Protractor.
 
+- [Migrating to testx 1.x](#migrating-to-testx-1.x)
 - [How does it work](#how-does-it-work)
 - [Prerequisites](#prerequisites)
+- [API](#api)
 - [Installation](#installation)
 - [Run](#run)
 - [Configuration](#configuration)
 - [Core keywords](#core-keywords)
 - [Additional keyword packages](#additional-keyword-packages)
+
+## Migrating to testx 1.x
+There are a few breaking changes in **testx 1.0** as compared to **testx 0.x**, but you should only need to change your configuration file and not your tests.
+
+ ### Reporting
+ Reporting is no longer done by **testx**. Instead you should take care of it yourself. I've pulled out (and refactored a bit) the old reporting code into a separate package [testx-ictu-reporter](https://www.npmjs.com/package/testx-ictu-reporter).
+
+### Adding objects, keywords and functions
+There is a slight change in the **testx** object.
+
+Instead of
+
+	testx.addObjects(require './objects')
+	testx.addObjects 'objects/objects.csv'
+	testx.addKeywords(require './keywords')
+	testx.addKeywords(require 'testx-pdf-keywords')
+	testx.addFunctions(require './my-functions')
+
+You will now do
+
+	testx.objects.add(require './objects')
+	testx.objects.add 'objects/objects.csv'
+	testx.keywords.add(require './keywords')
+	testx.keywords.add(require 'testx-pdf-keywords')
+	testx.functions.add(require './my-functions')
 
 ## How does it work
 **testx** aims to make web application testing easier by using keyword driven testing.
@@ -21,16 +48,13 @@ This will free you from having to implement all the things like generating rando
 It is possible to use **testx** without MS Excel as well, but then it looses a lot of its usefulness.
 Of course if you don't want to shell out for MS Excel you can use any of the numerous copies like LibreOffice (OpenOffice) Calc, etc.
 
-As of **testx 0.7.1** the conversion between MS Excel and the (JSON) test script format will be done by **testx**. Previous version used an external service.
-This behavior can still be used if you specify **xls2testUrl** in your configuration file. See example below. Such a service used to be available at http://xls.testx.io, but is currently taken down. Please, create an issue if you'd like this service back.
-
 ### Test structure
 The tests consist of *steps*. Each step consists of a *keyword* and *arguments*.
 
 The keyword is an action or a check (or both, can be anything really).
 The arguments consist of a name and a value. Both the name and the value can be literals, context references or object keys.
 
-In MS Excel a test looks something like that (taken from the sample project, ignore header row):
+In MS Excel a test looks something like that (taken from the sample project):
 
 |                   | url         |             |
 | -------------     | ----------- | ----------- |
@@ -42,13 +66,11 @@ In MS Excel a test looks something like that (taken from the sample project, ign
 |                   | **result-link** |         |
 | **check matches** | New York    |            ||
 
-Keywords
---------
+#### Keywords
 You can think of the step as the action you want to perform using the provided arguments.
 In this context the keyword is the action.
 
-Objects
--------
+#### Objects
 The other key component at work here is the **object map**.
 
 It is a dictionary of *object keys* - the stuff you put in your scripts to identify objects on the screen - and *object locators*.
@@ -61,11 +83,9 @@ The value is the actual value of the selector - "element-id", ".hidden.button", 
 
 Clients (test projects) use the **addObjects** method to add to the object map. For example (from the sample project *conf.coffee*)
 
-	...
 	testx = require 'testx'
 	onPrepare: ->
-		testx.addObjects require('./objects')
-	...
+		testx.objects.add require('./objects')
 
 And in *objects/index.coffee* you'll have something like:
 
@@ -133,21 +153,23 @@ To be able to use **testx** you'll need to services external to it.
 One of them is essential - the xls(x) file to test converter,
 and the other one, the reporting service is optional and sending data to it is switched off by default.
 
-All **testx** configuration lives in your protractor configuration file under params.testx, for example (in coffeescript)
+All **testx** configuration lives in your protractor configuration file under *params.testx*, for example (in coffeescript)
 
-	...
 	params:
 		testx:
-			xls2testUrl: 'http://xls.testx.io'
-			reportServiceUrl: 'http://my-reporting.service'
-	...
+      logScript: true
+      actionTimeout: 4000
+
+The available configuration options are
+ - **logScript** - if *true* **testx** will log the test script (JSON) on the console before executing it; defaults to *false*.
+ - **actionTimeout** - the timeout in milliseconds before a *get* or *set* action will fail, for example because the target element is not visible; defaults to 5000.
 
 ## Core keywords
 
-**testx** comes with a simpple set keywords that can be extended/overriden from the project.
+**testx** comes with a simple set keywords that can be extended/overriden from the project.
 See the **addKeywords** method for details.
 
-Predefind keywords are:
+Predefined keywords are:
 
 *object key* - the object key as specified in the object map. The keyword is applied to this object (DOM element).
 *value of the object* - this string value depends on the HTML type of the object. For example it will be the text of a label or the value attribute of an input element.

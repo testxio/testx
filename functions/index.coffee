@@ -1,4 +1,8 @@
 _ = require 'lodash'
+defunc = require('../lib/utils').defunc
 
-exports.add = (funcs) -> _.assign(functions, funcs)
-exports.get = -> functions
+functions = {}
+
+module.exports =
+  add: (funcs) -> _.assign functions, defunc(funcs)
+  get: -> functions
