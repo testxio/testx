@@ -16,8 +16,8 @@ A library for executing MS Excel based, keyword driven tests with Protractor.
 ## Migrating to testx 1.x
 There are a few breaking changes in **testx 1.0** as compared to **testx 0.x**, but you should only need to change your configuration file and not your tests.
 
- ### Reporting
- Reporting is no longer done by **testx**. Instead you should take care of it yourself. I've pulled out (and refactored a bit) the old reporting code into a separate package [testx-ictu-reporter](https://www.npmjs.com/package/testx-ictu-reporter).
+### Reporting
+Reporting is no longer done by **testx**. Instead you should take care of it yourself. I've pulled out (and refactored a bit) the old reporting code into a separate package [testx-ictu-reporter](https://www.npmjs.com/package/testx-ictu-reporter).
 
 ### Adding objects, keywords and functions
 There is a slight change in the **testx** object.
