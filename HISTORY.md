@@ -1,3 +1,7 @@
+New in version 1.2.0
+====================
+Exposed the generic runScript method in the testx API. Used for implementing runners for non-Excel based test scripts, for example scripts in Google Sheets.
+
 New in version 1.1.0
 ====================
 - Improved error logging when trying to execute a missing XLSX file.
