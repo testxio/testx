@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "0.7.4",
+  "version": "1.0.1",
   "description": "A library for executing MS Excel based, keyword driven tests with Protractor.",
   "main": "app.coffee",
   "scripts": {
@@ -16,6 +16,8 @@
     "testing",
     "test",
     "web testing",
+    "functional testing",
+    "regression testing",
     "excel",
     "keyword",
     "keyword-driven"
@@ -32,10 +34,7 @@
     "colors": "^1.1.0",
     "csv-parse": "^0.1.1",
     "form-data": "~0.1.4",
-    "jasmine-reporters": "^1.0.1",
-    "jasmine-spec-reporter": "~0.6.0",
     "lodash": "~2.4.1",
-    "protractor-html-screenshot-reporter": "0.0.17",
     "q": "~1.0.1",
     "request": "^2.45.0",
     "selenium-webdriver": "^2.43.5",

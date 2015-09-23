@@ -1,7 +1,9 @@
-object = require('../objects').element
 _ = require 'lodash'
-runner = require '../lib/runner'
 request = require 'request'
+
+object = require('../objects').element
+runner = require '../lib/runner'
+defunc = require('../lib/utils').defunc
 
 DEFAULT_TIMEOUT = -> browser.params.testx.actionTimeout || 5000
 
@@ -17,8 +19,9 @@ waitFor = (args, condition = protractor.ExpectedConditions.visibilityOf) ->
     do =>
       (object obj).wait parseInt(args.timeout), condition
 
-exports.add = (kw) -> _.assign(keywords, kw)
-exports.get = -> keywords
+module.exports =
+  add: (kw) -> _.assign keywords, defunc(kw)
+  get: -> keywords
 
 keywords =
   'go to': (args) ->

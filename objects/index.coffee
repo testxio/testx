@@ -1,11 +1,13 @@
 _ = require 'lodash'
 parse = require 'csv-parse'
 fs = require 'fs'
+defunc = require('../lib/utils').defunc
 
 objects = {}
 
 module.exports =
   add: (objs) ->
+    objs = defunc objs
     if typeof objs == "object"
       _.assign(objects, objs)
     else # if the argument is not an object we assume it is a CSV file path
