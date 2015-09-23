@@ -12,15 +12,15 @@ exports.runScript = runScript = (script, ctx) =>
   flow.execute(run(step, context)) for step in script.steps
 
 exports.runExcelSheet = (file, sheet, context) =>
-  fs.stat reportFile, (err, stat) ->
+  fs.stat file, (err, stat) ->
     if err
       throw new Error "Could not find file '#{file}'."
     else
       if stat.isFile()
         flow = protractor.promise.controlFlow()
         console.log colors.cyan("====================================================================================================")
-        console.log colors.underline.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}\n"
-        console.log colors.cyan("====================================================================================================")
+        console.log colors.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}"
+        console.log colors.cyan("====================================================================================================\n")
         flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
           console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
           runScript script, context
@@ -36,8 +36,9 @@ run = (step, context) ->
         args[ctx k] = ctx v
     fullName = step.meta['Full name'].cyan
     row = colors.yellow "row #{step.meta.Row}"
-    arg = colors.grey JSON.stringify(args, undefined, 2)
-    console.log "Executing step #{fullName} on #{row} with arguments:\n#{arg}\n"
+    console.log "Executing step #{fullName} on #{row} with arguments:"
+    for k, v of args
+      console.log(colors.grey "  #{k}: #{v}")
     protractor.promise.controlFlow().execute ->
       keywords[step.name] args, context
 
