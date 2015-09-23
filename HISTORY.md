@@ -1,3 +1,9 @@
+New in version 1.1.0
+====================
+- Improved error logging when trying to execute a missing XLSX file.
+- Improved console logging of step arguments.
+- Explicit handling of check boxes and radio buttons.
+
 New in version 1.0.1
 ====================
 - Corrected a typo in the documentation.
