@@ -1,8 +1,10 @@
+fs = require 'fs'
 _ = require 'lodash'
+colors = require 'colors'
+
 keywords = require('../keywords').get()
 functions = require('../functions').get()
 xls2script = require './xls2script'
-colors = require 'colors'
 
 exports.runScript = runScript = (script, ctx) =>
   context = _.assign(ctx || {}, functions)
@@ -12,16 +14,18 @@ exports.runScript = runScript = (script, ctx) =>
 exports.runExcelSheet = (file, sheet, context) =>
   fs.stat reportFile, (err, stat) ->
     if err
-      throw new Error "Could not find file #{file}."
+      throw new Error "Could not find file '#{file}'."
     else
       if stat.isFile()
         flow = protractor.promise.controlFlow()
+        console.log colors.cyan("====================================================================================================")
         console.log colors.underline.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}\n"
+        console.log colors.cyan("====================================================================================================")
         flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
           console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
           runScript script, context
       else
-        throw new Error "#{file} is not a file."
+        throw new Error "'#{file}' is not a file."
 
 run = (step, context) ->
   ctx = resolve context
