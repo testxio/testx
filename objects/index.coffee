@@ -27,7 +27,14 @@ module.exports =
     el.get = ->
       @getTagName().then (tag) =>
         switch tag
-          when 'input', 'textbox'
+          when 'input'
+            @getAttribute('type').then (tp) ->
+              switch tp
+                when 'radio', 'checkbox'
+                  @isSelected()
+                else
+                  @getAttribute 'value'
+          when 'textbox'
             @getAttribute 'value'
           when 'img'
             @getAttribute 'src'
