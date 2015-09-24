@@ -12,20 +12,15 @@ exports.runScript = runScript = (script, ctx) =>
   flow.execute(run(step, context)) for step in script.steps
 
 exports.runExcelSheet = (file, sheet, context) =>
-  fs.stat file, (err, stat) ->
-    if err
-      throw new Error "Could not find file '#{file}'."
-    else
-      if stat.isFile()
-        flow = protractor.promise.controlFlow()
-        console.log colors.cyan("====================================================================================================")
-        console.log colors.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}"
-        console.log colors.cyan("====================================================================================================\n")
-        flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
-          console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
-          runScript script, context
-      else
-        throw new Error "'#{file}' is not a file."
+  stat = fs.statSync file
+  if stat.isFile()
+    flow = protractor.promise.controlFlow()
+    flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
+      console.log colors.cyan("====================================================================================================")
+      console.log colors.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}"
+      console.log colors.cyan("====================================================================================================\n")
+      console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
+      runScript script, context
 
 run = (step, context) ->
   ctx = resolve context
