@@ -21,6 +21,8 @@ exports.runExcelSheet = (file, sheet, context) =>
       console.log colors.cyan("====================================================================================================\n")
       console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
       runScript script, context
+  else
+    console.error "#{file} is not a file."
 
 run = (step, context) ->
   ctx = resolve context
