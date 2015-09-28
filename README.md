@@ -19,6 +19,8 @@ There are a few breaking changes in **testx 1.0** as compared to **testx 0.x**, 
 ### Reporting
 Reporting is no longer done by **testx**. Instead you should take care of it yourself. I've pulled out (and refactored a bit) the old reporting code into a separate package [testx-ictu-reporter](https://www.npmjs.com/package/testx-ictu-reporter).
 
+This lead to the removal of the onPrepare and onComplete methods from the **testx** API. These methods were only adding the jasmine reporters and sending test results, respectively, so there is no need for them anymore. You should just remove the calls to them from your config file.
+
 ### Adding objects, keywords and functions
 There is a slight change in the **testx** object.
 
