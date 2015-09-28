@@ -30,7 +30,7 @@ module.exports =
       @getTagName().then (tag) =>
         switch tag
           when 'input'
-            @getAttribute('type').then (tp) ->
+            @getAttribute('type').then (tp) =>
               switch tp
                 when 'radio', 'checkbox'
                   @isSelected()

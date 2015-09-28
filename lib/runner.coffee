@@ -20,7 +20,7 @@ exports.runExcelSheet = (file, sheet, context) =>
       console.log colors.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}"
       console.log colors.cyan("====================================================================================================\n")
       console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
-      context = _.extend context,
+      context = _.extend context || {},
         _meta:
           file: file
           sheet: sheet
