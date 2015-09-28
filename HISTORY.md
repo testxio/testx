@@ -1,6 +1,6 @@
 New in version 1.3.0
 ====================
- - Improved reporting of assertion failures - displaying file name, sheet name and row number of failing assertiion.
+ - Improved reporting of assertion failures - displaying file name, sheet name and row number of failing assertion.
  - Fix: incorrect value retrieval of input boxes.
 
 New in version 1.2.1
