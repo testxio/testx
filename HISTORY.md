@@ -1,3 +1,8 @@
+New in version 1.3.0
+====================
+ - Improved reporting of assertion failures - displaying file name, sheet name and row number of failing assertiion.
+ - Fix: incorrect value retrieval of input boxes.
+
 New in version 1.2.1
 ====================
 Fixed async problem with the Excel runner.
