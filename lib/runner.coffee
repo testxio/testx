@@ -20,6 +20,10 @@ exports.runExcelSheet = (file, sheet, context) =>
       console.log colors.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}"
       console.log colors.cyan("====================================================================================================\n")
       console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
+      context = _.extend context,
+        _meta:
+          file: file
+          sheet: sheet
       runScript script, context
   else
     console.error "#{file} is not a file."
@@ -36,6 +40,7 @@ run = (step, context) ->
     console.log "Executing step #{fullName} on #{row} with arguments:"
     for k, v of args
       console.log(colors.grey "  #{k}: #{v}")
+    context._meta = _.extend context._meta, step.meta
     protractor.promise.controlFlow().execute ->
       keywords[step.name] args, context
 

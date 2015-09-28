@@ -1,5 +1,6 @@
 _ = require 'lodash'
 request = require 'request'
+colors = require 'colors'
 
 object = require('../objects').element
 runner = require '../lib/runner'
@@ -23,6 +24,9 @@ module.exports =
   add: (kw) -> _.assign keywords, defunc(kw)
   get: -> keywords
 
+assertFailedMsg = (ctx) ->
+  "Assertion failure at: file '#{ctx._meta.file}', sheet '#{ctx._meta.sheet}', row #{ctx._meta.Row}"
+
 keywords =
   'go to': (args) ->
     browser.get args.url
@@ -36,12 +40,12 @@ keywords =
     save = (v) -> (value) -> ctx[v] = value
     for key, val of args
       do => (get key).then save(val)
-  'check equals': (args) ->
+  'check equals': (args, ctx) ->
     for key, val of args
-      do => expect(get key).toEqual val
-  'check matches': (args) ->
+      expect(get key).toEqual val, assertFailedMsg(ctx)
+  'check matches': (args, ctx) ->
     for key, val of args
-      do => expect(get key).toMatch val
+      expect(get key).toMatch val, assertFailedMsg(ctx)
   'set': (args) ->
     for key, val of args
       do => set key, val
