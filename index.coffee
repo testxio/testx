@@ -18,8 +18,8 @@ module.exports =
   with: (f) ->
     flow = protractor.promise.controlFlow()
     keywords = require('./keywords').get()
-    wrap = (f, passContext = true) -> (params...) ->
-      flow.execute ->
+    wrap = (f, passContext = true) -> (params...) =>
+      flow.execute =>
         params.push context if passContext
         f.apply @, params
     context = {}
@@ -29,6 +29,6 @@ module.exports =
         .apply(@, params)
         .then (values) ->(v.value_ for v in values)
       log: wrap(console.log, false)
-      do: (f) -> (wrap f)()
+      do: (f) -> (wrap.call kwrds, f)()
 
     f.bind(kwrds)
