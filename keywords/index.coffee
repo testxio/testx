@@ -25,7 +25,7 @@ module.exports =
   get: -> keywords
 
 assertFailedMsg = (ctx) ->
-  "Assertion failure at: file '#{ctx._meta.file}', sheet '#{ctx._meta.sheet}', row #{ctx._meta.Row}"
+  "Assertion failure at: file '#{ctx?._meta?.file}', sheet '#{ctx?._meta?.sheet}', row #{ctx?._meta?.Row}"
 
 keywords =
   'go to': (args) ->
