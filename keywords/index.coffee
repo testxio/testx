@@ -18,7 +18,7 @@ set = (key, value) ->
 waitFor = (args, condition = protractor.ExpectedConditions.visibilityOf) ->
   for key, obj of _.omit(args, 'timeout')
     do =>
-      (object obj).wait parseInt(args.timeout), condition
+      (object obj).wait (parseInt(args.timeout) or DEFAULT_TIMEOUT()), condition
 
 module.exports =
   add: (kw) -> _.assign keywords, defunc(kw)
