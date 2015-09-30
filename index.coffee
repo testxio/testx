@@ -1,12 +1,9 @@
 require 'coffee-errors'
 _ = require 'lodash'
-objects = require('./objects')
 camelCase = require('camel-case')
 
-objify = (name, f) ->
-  obj = {}
-  obj[name] = f
-  obj
+objects = require('./objects')
+objectify = require('./lib/utils').objectify
 
 module.exports =
   runExcelSheet: require('./lib/runner').runExcelSheet
@@ -23,7 +20,7 @@ module.exports =
         params.push context if passContext
         f.apply @, params
     context = {}
-    kwrds = _.extend _.extend.apply(@, (objify(camelCase(k), wrap(v)) for k, v of keywords)),
+    kwrds = _.extend _.extend.apply(@, (objectify(camelCase(k), wrap(v)) for k, v of keywords)),
       get: (params...) ->
         wrap(keywords.get, false)
         .apply(@, params)

@@ -2,6 +2,7 @@ fs = require 'fs'
 _ = require 'lodash'
 colors = require 'colors'
 
+resolver = require('./utils').resolver
 keywords = require('../keywords').get()
 functions = require('../functions').get()
 xls2script = require './xls2script'
@@ -29,7 +30,7 @@ exports.runExcelSheet = (file, sheet, context) =>
     console.error "#{file} is not a file."
 
 run = (step, context) ->
-  ctx = resolve context
+  ctx = resolver context
   ->
     args = {}
     for k, v of step.arguments
@@ -43,12 +44,3 @@ run = (step, context) ->
     context._meta = _.extend context._meta, step.meta
     protractor.promise.controlFlow().execute ->
       keywords[step.name] args, context
-
-resolve = (context) ->
-  (variable) ->
-    variable.replace /(\{\{.+?\}\})/g, (match) ->
-      result = context[match[2...-2]]
-      if typeof result == 'function'
-        result()
-      else
-        result
