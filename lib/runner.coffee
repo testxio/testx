@@ -32,10 +32,7 @@ exports.runExcelSheet = (file, sheet, context) =>
 run = (step, context) ->
   ctx = resolver context
   ->
-    args = {}
-    for k, v of step.arguments
-      do =>
-        args[ctx k] = ctx v
+    args = ctx step.arguments
     fullName = step.meta['Full name'].cyan
     row = colors.yellow "row #{step.meta.Row}"
     console.log "Executing step #{fullName} on #{row} with arguments:"

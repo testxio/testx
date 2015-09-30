@@ -3,7 +3,7 @@ _ = require 'lodash'
 camelCase = require('camel-case')
 
 objects = require('./objects')
-objectify = require('./lib/utils').objectify
+{resolver, objectify} = require('./lib/utils')
 
 module.exports =
   runExcelSheet: require('./lib/runner').runExcelSheet
@@ -17,6 +17,7 @@ module.exports =
     keywords = require('./keywords').get()
     wrap = (f, passContext = true) -> (params...) =>
       flow.execute =>
+        params[0] = resolver(context) params[0]
         params.push context if passContext
         f.apply @, params
     context = {}

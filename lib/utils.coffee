@@ -4,12 +4,24 @@ module.exports =
 
   resolver: (context) ->
     (variable) ->
-      variable.replace /(\{\{.+?\}\})/g, (match) ->
-        result = context[match[2...-2]]
-        if typeof result == 'function'
-          result()
-        else
+      resolveOne = (v) ->
+        v.replace /(\{\{.+?\}\})/g, (match) ->
+          result = context[match[2...-2]]
+          if typeof result == 'function'
+            result()
+          else
+            result
+      switch typeof variable
+        when 'string'
+          resolveOne v
+        when 'object'
+          result = {}
+          for key, val of variable
+            do =>
+              result[resolveOne key] = resolveOne val
           result
+        else
+          variable
 
   objectify: (name, f) ->
     obj = {}
