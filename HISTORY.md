@@ -1,3 +1,7 @@
+New in version 1.3.1
+====================
+ - Fix: Wait to appear keyword uses default/action timeout when no timeout is given.
+
 New in version 1.3.0
 ====================
  - Improved reporting of assertion failures - displaying file name, sheet name and row number of failing assertion.
