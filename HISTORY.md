@@ -1,3 +1,7 @@
+New in version 1.3.2
+====================
+ - Using testx-xlsx-parser 0.2.0.
+
 New in version 1.3.1
 ====================
  - Fix: Wait to appear keyword uses default/action timeout when no timeout is given.
