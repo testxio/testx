@@ -5,12 +5,13 @@ module.exports =
   resolver: (context) ->
     (variable) ->
       resolveOne = (v) ->
-        v.replace /(\{\{.+?\}\})/g, (match) ->
+        v.toString().replace /(\{\{.+?\}\})/g, (match) ->
           result = context[match[2...-2]]
           if typeof result == 'function'
             result()
           else
             result
+
       switch typeof variable
         when 'string'
           resolveOne v
