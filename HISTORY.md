@@ -1,4 +1,4 @@
-New in version 1.3.3
+New in version 1.3.4
 ====================
  - Using testx-xlsx-parser 0.2.1.
  - Fix: Variables containing sates were not handled correctly by the context resolver.
