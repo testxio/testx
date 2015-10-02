@@ -1,6 +1,10 @@
+New in version 1.3.5
+====================
+ - Fix: *check ...* keywords fail on non string values.
+
 New in version 1.3.4
 ====================
- - Using testx-xlsx-parser 0.2.1.
+ - Using testx-xlsx-parser 0.2.2
  - Fix: Variables containing sates were not handled correctly by the context resolver.
 
 New in version 1.3.1

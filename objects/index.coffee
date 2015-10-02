@@ -33,7 +33,7 @@ module.exports =
             @getAttribute('type').then (tp) =>
               switch tp
                 when 'radio', 'checkbox'
-                  @isSelected()
+                  @isSelected().then (result) -> result.toString()
                 else
                   @getAttribute 'value'
           when 'textbox'
