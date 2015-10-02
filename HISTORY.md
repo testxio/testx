@@ -1,3 +1,7 @@
+New in version 1.4.0
+====================
+Extended Excel functions and (cross-sheet) reference support with the native Excel parser (via testx-xlsx-parser 0.3.1).
+
 New in version 1.3.5
 ====================
  - Fix: *check ...* keywords fail on non string values.
