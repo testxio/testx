@@ -1,3 +1,8 @@
+New in version 1.4.2
+====================
+ - Fix: Warn (but do not fail) on non-implemented Excel function when using native parsing (via testx-xlsx-parser 0.3.4).
+ - Fix: Handle keywords without arguments correctly when using native parsing (via testx-xlsx-parser 0.3.4).
+
 New in version 1.4.1
 ====================
 Fix: Keep root context when using the native Excel parser (via testx-xlsx-parser 0.3.3).
