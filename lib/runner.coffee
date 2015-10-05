@@ -17,7 +17,7 @@ exports.runExcelSheet = (file, sheet, context) =>
   if stat.isFile()
     flow = protractor.promise.controlFlow()
     flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
-      console.log colors.cyan("====================================================================================================")
+      console.log colors.cyan("\n====================================================================================================")
       console.log colors.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}"
       console.log colors.cyan("====================================================================================================\n")
       console.log JSON.stringify(script, undefined, 2) if browser.params.testx.logScript
@@ -37,7 +37,7 @@ run = (step, context) ->
     row = colors.yellow "row #{step.meta.Row}"
     console.log "Executing step #{fullName} on #{row} with arguments:"
     for k, v of args
-      console.log(colors.grey "  #{k}: #{v}")
+      console.log(colors.grey "  #{k}: #{v or '[CLICK]'}")
     context._meta = _.extend context._meta, step.meta
     protractor.promise.controlFlow().execute ->
       keywords[step.name] args, context

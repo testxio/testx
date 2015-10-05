@@ -1,3 +1,8 @@
+New in version 1.4.3
+====================
+ - Improved date treatment (more Excel-like) when using native parsing (via testx-xlsx-parser 0.3.5).
+ - Improved concatenation support when using native parsing (via testx-xlsx-parser 0.3.5).
+
 New in version 1.4.2
 ====================
  - Fix: Warn (but do not fail) on non-implemented Excel function when using native parsing (via testx-xlsx-parser 0.3.4).
