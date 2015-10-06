@@ -1,3 +1,7 @@
+New in version 1.4.4
+====================
+Using testx-xlsx-parser 0.3.6.
+
 New in version 1.4.3
 ====================
  - Improved date treatment (more Excel-like) when using native parsing (via testx-xlsx-parser 0.3.5).
