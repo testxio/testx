@@ -1,3 +1,7 @@
+New in version 1.4.6
+====================
+Using testx-xlsx-parser 0.4.1.
+
 New in version 1.4.5
 ====================
 Using testx-xlsx-parser 0.4.0.
