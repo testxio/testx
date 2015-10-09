@@ -49,7 +49,7 @@ module.exports =
     el
 
 _by = (key) ->
-  match = /^(.+)\((.*)\)$/.exec key.trim()
+  match = /^([^\(]+)\((.*)\)$/.exec key.trim()
   if match
     [full, func, args] = match
     obj = objects[func]

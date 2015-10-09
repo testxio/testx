@@ -1,3 +1,7 @@
+New in version 1.4.7
+====================
+Fix: Error when object functions arguments contain parentheses.
+
 New in version 1.4.6
 ====================
 Using testx-xlsx-parser 0.4.1.
