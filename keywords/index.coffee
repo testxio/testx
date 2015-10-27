@@ -52,7 +52,7 @@ keywords =
   'check matches': (args, ctx) ->
     for key, val of args
       expect(get key).toMatch val, assertFailedMsg(ctx)
-  'there exists': (args, ctx) ->
+  'check exists': (args, ctx) ->
     for key, val of args
       expect(getAll key).toContain val, assertFailedMsg(ctx)
   'set': (args) ->
