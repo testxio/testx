@@ -1,3 +1,7 @@
+New in version 1.4.8
+====================
+Using testx-xlsx-parser@0.5.0 to implement VLOOKUP Excel function.
+
 New in version 1.4.7
 ====================
 Fix: Error when object functions arguments contain parentheses.
