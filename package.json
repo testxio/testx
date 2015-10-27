@@ -38,7 +38,7 @@
     "q": "~1.0.1",
     "request": "^2.45.0",
     "selenium-webdriver": "^2.43.5",
-    "testx-xlsx-parser": "^0.4.1",
+    "testx-xlsx-parser": "^0.5.0",
     "camel-case": "~1.1.2"
   }
 }
