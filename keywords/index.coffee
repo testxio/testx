@@ -3,6 +3,7 @@ request = require 'request'
 colors = require 'colors'
 
 object = require('../objects').element
+objects = require('../objects').elements
 runner = require '../lib/runner'
 defunc = require('../lib/utils').defunc
 
@@ -11,6 +12,9 @@ DEFAULT_TIMEOUT = -> browser.params.testx.actionTimeout || 5000
 get = (key) ->
   object(key).wait DEFAULT_TIMEOUT()
   object(key).get()
+getAll = (key) ->
+  objects(key).wait DEFAULT_TIMEOUT()
+  objects(key).get()
 set = (key, value) ->
   object(key).wait DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable
   object(key).set value
@@ -48,6 +52,9 @@ keywords =
   'check matches': (args, ctx) ->
     for key, val of args
       expect(get key).toMatch val, assertFailedMsg(ctx)
+  'there exists': (args, ctx) ->
+    for key, val of args
+      expect(getAll key).toContain val, assertFailedMsg(ctx)
   'set': (args) ->
     for key, val of args
       do => set key, val
