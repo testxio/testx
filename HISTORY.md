@@ -1,3 +1,7 @@
+New in version 1.4.9
+====================
+Using testx-xlsx-parser@0.5.1 to fix VLOOKUP Excel function to work with absolute ranges.
+
 New in version 1.4.8
 ====================
 Using testx-xlsx-parser@0.5.0 to implement VLOOKUP Excel function.
