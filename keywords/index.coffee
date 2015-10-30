@@ -16,8 +16,8 @@ getAll = (key) ->
   objects(key).wait DEFAULT_TIMEOUT()
   objects(key).get()
 set = (key, value) ->
-  object(key).wait DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable
-  object(key).set value
+  object(key).wait(DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable).then ->
+    object(key).set value
 
 waitFor = (args, condition = protractor.ExpectedConditions.visibilityOf) ->
   for key, obj of _.omit(args, 'timeout')
@@ -57,6 +57,7 @@ keywords =
       expect(getAll key).toContain val, assertFailedMsg(ctx)
   'set': (args) ->
     for key, val of args
+      console.log 'key,val', key,val
       do => set key, val
   'ignore synchronization': (args) ->
     ignore = if args.ignore in ['true', 'yes', '1'] then true else false
