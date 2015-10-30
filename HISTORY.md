@@ -1,6 +1,10 @@
+New in version 1.4.11
+====================
+Improved the synchronization of 'get'-related keywords (check...) with stronger argument order guarantees.
+
 New in version 1.4.10
 ====================
-set function now guarantees order.
+Improved the synchronization of 'set' keyword with stronger argument order guarantees.
 
 New in version 1.4.9
 ====================

@@ -10,11 +10,9 @@ defunc = require('../lib/utils').defunc
 DEFAULT_TIMEOUT = -> browser.params.testx.actionTimeout || 5000
 
 get = (key) ->
-  object(key).wait DEFAULT_TIMEOUT()
-  object(key).get()
+  object(key).wait(DEFAULT_TIMEOUT()).then -> object(key).get()
 getAll = (key) ->
-  objects(key).wait DEFAULT_TIMEOUT()
-  objects(key).get()
+  objects(key).wait(DEFAULT_TIMEOUT()).then -> objects(key).get()
 set = (key, value) ->
   object(key).wait(DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable).then ->
     object(key).set value
