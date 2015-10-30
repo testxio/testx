@@ -55,7 +55,6 @@ keywords =
       expect(getAll key).toContain val, assertFailedMsg(ctx)
   'set': (args) ->
     for key, val of args
-      console.log 'key,val', key,val
       do => set key, val
   'ignore synchronization': (args) ->
     ignore = if args.ignore in ['true', 'yes', '1'] then true else false

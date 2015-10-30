@@ -1,3 +1,7 @@
+New in version 1.4.12
+====================
+Removed debug output in default set keyword implementation.
+
 New in version 1.4.11
 ====================
 Improved the synchronization of 'get'-related keywords (check...) with stronger argument order guarantees.
