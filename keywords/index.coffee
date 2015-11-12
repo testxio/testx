@@ -83,5 +83,7 @@ keywords =
     result.promise
   'wait to appear': (args) -> waitFor args
   'wait to disappear': (args) -> waitFor args, protractor.ExpectedConditions.invisibilityOf
-  'run': (args) -> runner.runExcelSheet args.file, args.sheet, _.omit(args, ['file', 'sheet'])
+  'run': (args, ctx) ->
+    file = args.file or ctx?._meta?.file
+    runner.runExcelSheet file, args.sheet, _.omit(args, ['file', 'sheet'])
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
