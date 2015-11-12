@@ -1,4 +1,4 @@
-New in version 1.4.13
+New in version 1.4.14
 ====================
  - Removed debug output in default set keyword implementation.
  - You can omit the *file* argument when using the *run* keyword. In that case the current file is going to be used.
