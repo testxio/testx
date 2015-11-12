@@ -85,5 +85,5 @@ keywords =
   'wait to disappear': (args) -> waitFor args, protractor.ExpectedConditions.invisibilityOf
   'run': (args, ctx) ->
     file = args.file or ctx?._meta?.file
-    runner.runExcelSheet file, args.sheet, _.omit(args, ['file', 'sheet'])
+    runner.runExcelSheet(file, args.sheet, _.omit(args, ['file', 'sheet']))
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'

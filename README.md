@@ -207,7 +207,7 @@ Predefined keywords are:
 |                        | *ignorred*    | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
 | run                    ||| Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution ||
-|                        | file          | full file path  || No |
+|                        | file          | full file path  | Optional; Can be omitted, if the sheet is in the current file | No |
 |                        | sheet         | the name of the excel sheet || No |
 |                        | *var name*    | *var value*     || Yes |
 
