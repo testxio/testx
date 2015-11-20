@@ -1,3 +1,7 @@
+New in version 1.4.15
+====================
+ Fixed generic object **set** for running on OSX.
+
 New in version 1.4.14
 ====================
  - Removed debug output in default set keyword implementation.

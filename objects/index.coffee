@@ -29,7 +29,8 @@ _element = (el) ->
     if val == "[CLEAR]"
       @clear()
     else if val
-      @sendKeys protractor.Key.chord(protractor.Key.CONTROL, "a") + val
+      @clear?()
+      @sendKeys val
     else
       @click()
   el.get = ->
