@@ -2,6 +2,7 @@ _ = require 'lodash'
 parse = require 'csv-parse'
 fs = require 'fs'
 defunc = require('../lib/utils').defunc
+defaultBehaviour = require './default-behaviour'
 
 objects = {}
 
@@ -16,48 +17,18 @@ module.exports =
         objects[row[0]] = locator: row[1], value: row[2] for row in data
 
   get: -> objects
-  element: (key) -> _element _find() key
+  element: (key) -> _element() key
   elements: (key) ->
-    el = _element _find(element.all) key
+    el = _element(element.all) key
     el.wait = (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
       # waiting seems not to be supported when using `element.all`, wait on a single element
       browser.wait expCondition.call(protractor.ExpectedConditions, element _by(key)), timeout
     el
 
-_element = (el) ->
-  el.set ?= (val) ->
-    if val == "[CLEAR]"
-      @clear()
-    else if val
-      Key = protractor.Key
-      @sendKeys Key.HOME, Key.chord(Key.SHIFT, Key.END), val
-    else
-      @click()
-  el.get ?= ->
-    @getTagName().then (tag) =>
-      switch tag
-        when 'input'
-          @getAttribute('type').then (tp) =>
-            switch tp
-              when 'radio', 'checkbox'
-                @isSelected().then (result) -> result.toString()
-              else
-                @getAttribute 'value'
-        when 'textbox'
-          @getAttribute 'value'
-        when 'img'
-          @getAttribute 'src'
-        when 'select'
-          @$('option:checked').getText()
-        else
-          @getText()
-  el.wait ?= (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
-    browser.wait expCondition.call(protractor.ExpectedConditions, @), timeout
-  el
-
-_find = (findFunc = element) -> (key) ->
+_element = (findFunc = element) -> (key) ->
   findElement = ->
-    _.extend findFunc(protractor.By[object.locator] object.value), object.behaviour or object.behavior
+    behaviour = _.extend defaultBehaviour(), (object.behaviour or object.behavior)
+    _.extend findFunc(protractor.By[object.locator] object.value), behaviour
 
   match = /^([^\(]+)\((.*)\)$/.exec key.trim()
   if match

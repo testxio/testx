@@ -124,6 +124,24 @@ It can then be used to set an *input* element with arbitrary name like so (in yo
 
 In the example above "name" and "q" will be passed to the object function as the *attr* and *val* parameters and the return value of the function will be used to locate the element. In this example the resulting locator will be "input[name='q']". The only requirement is that the parameters you pass have to be put in quotes. If you want to have a quote (') as part of a parameter you need to escape it using back slash (\\).
 
+#### Behaviours
+**testx** does its magic by augmenting the behaviour to the WebDriver elements. This is done by adding 3 functions to the WebDriver element:
+ - **set** - used to act on element uniformly. Mainly used by the **set** keyword.
+ - **get** - used to get the *perceived value* of the element. Mainly used by the **check ...** keywords.
+ - **wait** - used to wait for element state. Mainly used by the **wait ...** keywords.
+
+As of **testx 1.5.0** it is possible to add custom behaviour to objects in the object map. This is done by adding a *behaviour* attribute to the object definition. The *behaviour* is an object containing **get**, **set** and/or **wait** functions specific to this object. All these are optional - if omitted, the default behaviour will be used instead.
+
+For example
+
+	"query-input":
+		locator: "css"
+		value: "input[name='q']"
+		behaviour:
+			set: (val) -> @sendKeys val
+
+will override the **set** function for only that particular object. The **this (@)** object in the function is the instance of the WebDriver element. The **get** and **wait** functions for this object will take the defaults.
+
 ## API
 TBD
 

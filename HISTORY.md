@@ -1,10 +1,14 @@
+New in version 1.5.0
+====================
+Added the ability to attach custom behaviour to objects in the object map.
+
 New in version 1.4.16
 ====================
- Fixed regression introduced in 1.4.15 - **set** did not work correctly when setting *select* elements.
+Fixed regression introduced in 1.4.15 - **set** did not work correctly when setting *select* elements.
 
 New in version 1.4.15
 ====================
- Fixed generic object **set** for running on OSX.
+Fixed generic object **set** for running on OSX.
 
 New in version 1.4.14
 ====================
