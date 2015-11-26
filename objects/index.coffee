@@ -16,16 +16,16 @@ module.exports =
         objects[row[0]] = locator: row[1], value: row[2] for row in data
 
   get: -> objects
-  element: (key) -> _element() key
+  element: (key) -> _element _find() key
   elements: (key) ->
-    el = _element(element.all) key
+    el = _element _find(element.all) key
     el.wait = (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
       # waiting seems not to be supported when using `element.all`, wait on a single element
       browser.wait expCondition.call(protractor.ExpectedConditions, element _by(key)), timeout
     el
 
-defaultBehaviours =
-  set: (val) ->
+_element = (el) ->
+  el.set ?= (val) ->
     if val == "[CLEAR]"
       @clear()
     else if val
@@ -33,7 +33,7 @@ defaultBehaviours =
       @sendKeys Key.HOME, Key.chord(Key.SHIFT, Key.END), val
     else
       @click()
-  get: ->
+  el.get ?= ->
     @getTagName().then (tag) =>
       switch tag
         when 'input'
@@ -51,13 +51,13 @@ defaultBehaviours =
           @$('option:checked').getText()
         else
           @getText()
-  wait: (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
+  el.wait ?= (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
     browser.wait expCondition.call(protractor.ExpectedConditions, @), timeout
+  el
 
-_element = (findFunc = element) -> (key) ->
+_find = (findFunc = element) -> (key) ->
   findElement = ->
-    augmentedBehaviours = _.extend(defaultBehaviours, object.behaviour or object.behavior)
-    _.extend findFunc(protractor.By[object.locator] object.value), augmentedBehaviours
+    _.extend findFunc(protractor.By[object.locator] object.value), object.behaviour or object.behavior
 
   match = /^([^\(]+)\((.*)\)$/.exec key.trim()
   if match
