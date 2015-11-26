@@ -1,3 +1,7 @@
+New in version 1.4.16
+====================
+ Fixed regression introduced in 1.4.15 - **set** did not work correctly when setting *select* elements.
+
 New in version 1.4.15
 ====================
  Fixed generic object **set** for running on OSX.
