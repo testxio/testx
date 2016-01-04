@@ -1,3 +1,7 @@
+New in version 1.5.1
+====================
+Fixed regression in parameterized objects.
+
 New in version 1.5.0
 ====================
 Added the ability to attach custom behaviour to objects in the object map.

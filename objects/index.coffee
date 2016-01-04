@@ -26,7 +26,7 @@ module.exports =
     el
 
 _element = (findFunc = element) -> (key) ->
-  findElement = ->
+  findElement = (object) ->
     behaviour = _.extend defaultBehaviour(), (object.behaviour or object.behavior)
     _.extend findFunc(protractor.By[object.locator] object.value), behaviour
 
@@ -37,13 +37,12 @@ _element = (findFunc = element) -> (key) ->
     if typeof obj == 'function'
       parsed = eval "[#{args}]"
       if parsed.length == obj.length
-        obj = obj.apply(@, parsed)
-        findElement()
+        findElement obj.apply(@, parsed)
       else
         throw new Error "Object '#{func}' is a function with #{obj.length} argument(s). You are trying to execute it with #{parsed.length} argument(s)."
     else
       throw new Error "Object '#{func}' is not a function."
-  else if object = objects[key]
-    findElement()
+  else if obj = objects[key]
+    findElement obj
   else
     throw new Error "Could not find a locator for object '#{key}'! Is this object defined?"
