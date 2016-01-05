@@ -47,9 +47,15 @@ keywords =
   'check equals': (args, ctx) ->
     for key, val of args
       expect(get key).toEqual val, assertFailedMsg(ctx)
+  'check not equals': (args, ctx) ->
+    for key, val of args
+      expect(get key).not.toEqual val, assertFailedMsg(ctx)
   'check matches': (args, ctx) ->
     for key, val of args
       expect(get key).toMatch val, assertFailedMsg(ctx)
+  'check not matches': (args, ctx) ->
+    for key, val of args
+      expect(get key).not.toMatch val, assertFailedMsg(ctx)
   'check exists': (args, ctx) ->
     for key, val of args
       expect(getAll key).toContain val, assertFailedMsg(ctx)
@@ -87,3 +93,9 @@ keywords =
     file = args.file or ctx?._meta?.file
     runner.runExcelSheet(file, args.sheet, _.omit(args, ['file', 'sheet']))
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
+  'delete cookies': browser.manage().deleteAllCookies()
+  'respond to dialog': (args) ->
+    dialog = browser.switchTo().alert()
+    switch args.response.toLowerCase() # Key should be 'response'
+      when "ok" then dialog.accept()
+      when "cancel" then dialog.dismiss()
