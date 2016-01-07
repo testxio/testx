@@ -93,7 +93,7 @@ keywords =
     file = args.file or ctx?._meta?.file
     runner.runExcelSheet(file, args.sheet, _.omit(args, ['file', 'sheet']))
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
-  'delete cookies': browser.manage().deleteAllCookies()
+  'delete cookies': -> browser.manage().deleteAllCookies()
   'respond to dialog': (args) ->
     dialog = browser.switchTo().alert()
     switch args.response.toLowerCase() # Key should be 'response'
