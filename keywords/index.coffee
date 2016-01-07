@@ -59,6 +59,14 @@ keywords =
   'check exists': (args, ctx) ->
     for key, val of args
       expect(getAll key).toContain val, assertFailedMsg(ctx)
+  'check enabled': (args, ctx) ->
+    for key, val of args
+      expectedValue = val.toLowerCase() == 'true'
+      expect(object(key).isEnabled()).toBe expectedValue, assertFailedMsg(ctx)
+  'check readonly': (args, ctx) ->
+    for key, val of args
+      expectedValue = if val.toLowerCase() == 'true' then 'true' else null # Note: It returns 'true' as string, not as boolean
+      expect(object(key).getAttribute('readonly')).toBe expectedValue, assertFailedMsg(ctx)
   'set': (args) ->
     for key, val of args
       do => set key, val
@@ -99,3 +107,10 @@ keywords =
     switch args.response.toLowerCase() # Key should be 'response'
       when "ok" then dialog.accept()
       when "cancel" then dialog.dismiss()
+  'send keys': (args) ->
+    # Send key strokes to focussed element, supporting specials keys, such as [TAB] and [ENTER].
+    # Documentation: http://selenium.googlecode.com/git/docs/api/javascript/enum_webdriver_Key.html
+    for key, val of args
+      keys = val.replace(/\[\w+\]/g, (match) ->
+        protractor.Key[match.substring(1, match.length-1).toUpperCase()])
+      browser.actions().sendKeys(keys).perform()
