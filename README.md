@@ -143,7 +143,36 @@ For example
 will override the **set** function for only that particular object. The **this (@)** object in the function is the instance of the WebDriver element. The **get** and **wait** functions for this object will take the defaults.
 
 ## API
-TBD
+**testx** exposes the following interface:
+
+- *runExcelSheet(filePath, sheetName, initialContext)* - executes the test on the specified file path and Excel sheet passing initial test context. The parameters are:
+	*filePath* - path to the Excel file, can be absolute or relative to the execution root;
+	*sheetName* - the name of the Excel sheet containing the test script;
+	*initialContext* - the initial context of the run. A JSON object. Attributes in the context must have scalar value. The context can be referenced with the *{{contextVar}}* syntax where *contextVar* is the key of the attribute. The initial context is optional, defaulting to an empty object.
+- *keywords* - the keywords extension end point; this object has two attributes and both are functions
+	- get() - returns the raw keywords object, usually not something you'll need;
+	- add(kwds) - makes the keywords passed as the only argument available to the current test run; adding a keyword with a name that already exists will overwrite the implementation of that keyword; the *kwds* argument can be
+		- object containing custom keywords
+		- parameterless function that returns a keywords object
+- *objects* - the objects extension end point; this object has two attributes and both are functions
+	- get() - returns the raw objects object, usually not something you'll need;
+	- add(objs) - adds the objects passed as the only argument to the object map; adding an object with a name that already exists will overwrite the definition of that object; the *objs* argument can be
+		- object containing custom your objects
+		- parameterless function that returns objects object :-)
+		- string that is assumed to be the path to a **CSV** file with your objects. The format of such a file is:
+
+		"object name", "locator type", "locator"
+
+		for example
+
+		"loginPass", "css", "input.password"
+- *functions* - the functions extension end point; this object has two attributes and both are functions
+	- get() - returns the raw functions object, usually not something you'll need;
+	- add(funcs) - makes the functions passed as the only argument available to the current test run context; adding a function with a name that already exists will overwrite the implementation of that function; the *funcs* argument can be
+		- object containing custom function
+		- parameterless function that returns a functions object
+
+	Functions are invoked using the context resolution syntax, i.e. {{functionName}} (in the Excel sheet) will invoke the function *functionName*. Currently only functions without parameters are supported.
 
 ## Prerequisites
 
