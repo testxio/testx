@@ -1,3 +1,7 @@
+New in version 1.5.2
+====================
+Using testx-xlsx-parser@0.5.2, that fixes a problem with non-existent sheets.
+
 New in version 1.5.1
 ====================
 Fixed regression in parameterized objects.
