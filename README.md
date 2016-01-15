@@ -196,35 +196,48 @@ Predefined keywords are:
 
 | Keyword                | Argument name | Argument value  | Description | Supports repeating arguments |
 | ---------------------- | ------------- | --------------- |------------ | ---------------------------- |
-| check equals           |               || Checks if the value of the object is exactly equal to the expected |            |
+| check equals           |               || Checks if the value of the object is exactly equal to the expected value. |            |
 |                        | *object key*  | *expected*      || Yes |
-| check matches          |               || Checks if the value of the object matches the expected regular expression ||
+| check not equals       |               || Checks if the value of the object doesn't equal to the specified value. |            |
+|                        | *object key*  | *expected*      || Yes |
+| check matches          |               || Checks if the value of the object matches the expected regular expression. ||
 |                        | *object key*  | *expected regex* || Yes |
+| check not matches      |               || Checks if the value of the object doesn't match the specified regular expression. ||
+|                        | *object key*  | *expected regex* || Yes |
+| check enabled          |               || Checks if the object is enabled or not, applicable for input controls. ||
+|                        | *object key*  | true / false  || Yes |
+| check readonly          |               || Checks if the object is readonly or not, applicable for input controls. ||
+|                        | *object key*  | true / false  || Yes |
 | clear local storage    |               |                 | Clears local storage. This keyword has no arguments. ||
-| go back                |               |                 | Simulates pressing of the **Back** browser button |  |
-| go forward             |               |                 | Simulates pressing of the **Fotrward** browser button |  |
-| go to                  |               |                 | Navigate to a (relative to the --baseUrl) url |  |
+| delete cookies		 |               |                 | Deletes all application related cookies. This keyword has no arguments. ||
+| go back                |               |                 | Simulates pressing the **Back** browser button. |  |
+| go forward             |               |                 | Simulates pressing the **Forward** browser button. |  |
+| go to                  |               |                 | Navigate to a (relative to the --baseUrl) url. |  |
 |                        | url           | the url to navigate to || No |
-| ignore synchronization |               |                 | Turn page synchronization for angular apps on or off ||
+| ignore synchronization |               |                 | Turn page synchronization for angular apps on or off. ||
 |                        | ignore        | true / false    || No |
-| refresh page           |               |                 | Simulates pressing of the **Refresh** browser button |  |
-| save                   |               |                 | Save the value of the object to the specified variable. The saved value can then be referred to by putting the variable name in double curly brackets like so *{{varname}}*. This can be done in both argument name and argument value ||
+| refresh page           |               |                 | Simulates pressing the **Refresh** browser button. |  |
+| respond to dialog      |               |                 | Respond to browser dialog window, simulates clicking **Ok** or **Cancel**. ||
+|                        | response  | ok / cancel || Yes |
+| save                   |               |                 | Save the value of the object to the specified variable. The saved value can then be referred to by putting the variable name in double curly brackets like so *{{varname}}*. This can be done in both argument name and argument value. ||
 |                        | *object key*  | *variable name* || Yes |
-| set                    ||| *sets* the value to the object; the exact action depends on the HTML type of the object. For example the value will be filled in an input box. If the value is empty string the action is **click** ||
+| send keys              ||| Send key strokes to focussed element, supporting specials keys, such as [TAB] and [ENTER]. Supported key strokes can be found here: http://selenium.googlecode.com/git/docs/api/javascript/enum_webdriver_Key.html ||
+|                        | *ignored*  | *value*         || Yes |
+| set                    ||| *sets* the value to the object; the exact action depends on the HTML type of the object. For example the value will be filled in an input box. If the value is empty string the action is **click**. ||
 |                        | *object key*  | *value*         || Yes |
-| sleep                  ||| Pause the execution  of the script ||
+| sleep                  ||| Pause the execution of the script. ||
 |                        | seconds       | number of seconds to sleep  || No |
 |                        | milliseconds  | number of milliseconds to sleep  || No |
-| switch to              ||| switches the current action context to a different iframe or window |  |
-|                        | title         | the title of the window you want to switch to| only one of *title* or *frame* can be specified | No |
+| switch to              ||| Switches the current action context to a different iframe or window. |  |
+|                        | title         | title of the window you want to switch to| only one of *title* or *frame* can be specified | No |
 |                        | frame         | *object key* identifying an iframe you want to switch to | only one of *title* or *frame* can be specified | No |
-| wait to appear         ||| Wait for all the specified objects to appear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored ||
+| wait to appear         ||| Wait for all the specified objects to appear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored. ||
 |                        | *ignored*     | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
-| wait to disappear      ||| Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored |            |
+| wait to disappear      ||| Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored. |            |
 |                        | *ignorred*    | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
-| run                    ||| Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution ||
+| run                    ||| Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution. ||
 |                        | file          | full file path  | Optional; Can be omitted, if the sheet is in the current file | No |
 |                        | sheet         | the name of the excel sheet || No |
 |                        | *var name*    | *var value*     || Yes |
