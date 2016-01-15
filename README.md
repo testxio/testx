@@ -173,12 +173,12 @@ To be able to use **testx** you'll need to services external to it.
 One of them is essential - the xls(x) file to test converter,
 and the other one, the reporting service is optional and sending data to it is switched off by default.
 
-All **testx** configuration lives in your protractor configuration file under *params.testx*, for example (in coffeescript)
+All **testx** configuration lives in your protractor configuration file under *params.testx*, for example (in coffeescript):
 
 	params:
 		testx:
-      logScript: true
-      actionTimeout: 4000
+      			logScript: true
+      			actionTimeout: 4000
 
 The available configuration options are
  - **logScript** - if *true* **testx** will log the test script (JSON) on the console before executing it; defaults to *false*.
@@ -187,7 +187,7 @@ The available configuration options are
 ## Core keywords
 
 **testx** comes with a simple set keywords that can be extended/overriden from the project.
-See the **addKeywords** method for details.
+See the **keywords.add** method for details.
 
 Predefined keywords are:
 
@@ -235,10 +235,10 @@ Predefined keywords are:
 |                        | *ignored*     | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
 | wait to disappear      ||| Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored. |            |
-|                        | *ignorred*    | *object key*    || Yes |
+|                        | *ignored*    | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
 | run                    ||| Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution. ||
-|                        | file          | full file path  | Optional; Can be omitted, if the sheet is in the current file | No |
+|                        | file          | full file path  | Optional; Can be omitted if the sheet is in the current file. | No |
 |                        | sheet         | the name of the excel sheet || No |
 |                        | *var name*    | *var value*     || Yes |
 
