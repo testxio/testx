@@ -1,3 +1,14 @@
+New in version 1.6.0
+====================
+New core keywords:
+- check not equals
+- check not matches
+- check enabled
+- check readonly
+- delete cookies
+- respond to dialog
+- send keys
+
 New in version 1.5.2
 ====================
 Using testx-xlsx-parser@0.5.2, that fixes a problem with non-existent sheets.
