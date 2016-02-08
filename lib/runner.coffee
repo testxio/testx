@@ -30,7 +30,8 @@ exports.runExcelSheet = (file, sheet, context) =>
     console.error "#{file} is not a file."
 
 run = (step, context) ->
-  ctx = resolver context
+  ctx = resolver _.extend context,
+    params: browser.params
   ->
     args = ctx step.arguments
     fullName = step.meta['Full name'].cyan
