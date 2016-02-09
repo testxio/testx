@@ -1,10 +1,10 @@
 {
   "name": "testx",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "A library for executing MS Excel based, keyword driven tests with Protractor.",
   "main": "app.coffee",
   "scripts": {
-    "test": "echo \"Warning: no test specified\" && exit 0"
+    "test": "docker run -v `pwd`:/work testx/protractor tests/conf.coffee"
   },
   "repository": {
     "type": "git",

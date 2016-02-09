@@ -1,3 +1,7 @@
+New in version 1.7.1
+====================
+Fixed a regression in the **save** keyword caused by 1.7.0.
+
 New in version 1.7.0
 ====================
 Test run parameters are now available in the excel sheet (run context) via {{params.paramName}} syntax.

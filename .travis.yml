@@ -1,9 +1,9 @@
-sudo: false
+sudo: required
+
 language: node_js
-deploy:
-  provider: npm
-  email: gantcho@greyarch.net
-  api_key:
-    secure: DE/aerePGuky8jyPOVqR48L151CGyuh85wS9w3VfvCitPAOgE0VPau66LyQhZM1OJkbQnmnX7rr+Ptor+PJq2ehuZNdTOaBEpj+l3qo/WT6jMn3De+k8kXKrl9WJoQP7NZpty/n/18TtT3QZpnaWCU1xcO4iNxH5NVtMA28BaHQ=
-  on:
-    tags: true
+
+services:
+  - docker
+
+before_install:
+  - docker pull testx/protractor

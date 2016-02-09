@@ -5,8 +5,8 @@ module.exports =
     if typeof obj == 'function' then obj() else obj
 
   resolver: (context) ->
-    ctx = dotize.convert context
     (variable) ->
+      ctx = dotize.convert context
       resolveOne = (v) ->
         v.toString().replace /(\{\{.+?\}\})/g, (match) ->
           result = ctx[match[2...-2]]
