@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/testxio/testx.svg?branch=master)](https://travis-ci.org/testxio/testx)
+
 testx
 =====
 
