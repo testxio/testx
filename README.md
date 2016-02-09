@@ -275,7 +275,7 @@ Predefined keywords are:
 | Npm package | Description |
 | ----------- | ----------- |
 |[testx-http-keywords](https://www.npmjs.com/package/testx-http-keywords)|Keywords to send simple http requests using the testx library.|
-|[testx-pdf-keywords](https://www.npmjs.com/package/testx-pdf-keywords)|Keywords to test pdf files using the testx library.|
+|[testx-file-keywords](https://www.npmjs.com/package/testx-file-keywords)|Keywords to test file (text and pdf) content using the testx library.|
 |[testx-pop3-keywords](https://www.npmjs.com/package/testx-pop3-keywords)|Keywords to test mailserver using pop3.|
 |[testx-postgres-keywords](https://www.npmjs.com/package/testx-postgres-keywords)|Keywords to test postgres db.|
 |[testx-soap-keywords](https://www.npmjs.com/package/testx-soap-keywords)|Extension for testx to test soap services.|
