@@ -1,3 +1,7 @@
+New in version 1.7.0
+====================
+Test run parameters are now available in the excel sheet (run context) via {{params.paramName}} syntax.
+
 New in version 1.6.0
 ====================
 New core keywords:
