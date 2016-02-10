@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/testx.svg)](https://badge.fury.io/js/testx)
 [![Build Status](https://travis-ci.org/testxio/testx.svg?branch=master)](https://travis-ci.org/testxio/testx)
 
 testx
