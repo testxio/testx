@@ -236,6 +236,8 @@ Predefined keywords are:
 |                        | *object key*  | *expected regex* || Yes |
 | check not matches      |               || Checks if the value of the object doesn't match the specified regular expression. ||
 |                        | *object key*  | *expected regex* || Yes |
+| check exists           |               || Checks if the object is present or not. ||
+|                        | *object key*  | true / false     || Yes |
 | check enabled          |               || Checks if the object is enabled or not, applicable for input controls. ||
 |                        | *object key*  | true / false  || Yes |
 | check readonly          |               || Checks if the object is readonly or not, applicable for input controls. ||
