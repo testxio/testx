@@ -1,5 +1,4 @@
 _ = require 'lodash'
-request = require 'request'
 colors = require 'colors'
 
 object = require('../objects').element

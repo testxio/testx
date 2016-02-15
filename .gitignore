@@ -1,3 +1,4 @@
 node_modules/
 tests/node_modules/
 *.log
+tests/xls/.~lock*

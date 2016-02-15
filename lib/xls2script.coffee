@@ -19,4 +19,4 @@ exports.convert = (xlsFile, sheet) ->
       res.resume()
     deferred.promise
   else
-    xlsx.parse xlsFile, sheet
+    xlsx.parse xlsFile, sheet, browser.params.testx.locale

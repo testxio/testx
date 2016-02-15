@@ -1,3 +1,15 @@
+New in version 1.8.0
+====================
+- Using [testx-xlsx-parser@0.6.0](http://testx.io/testx-xlsx-parser/releases/tag/0.6.0). to add basic cell format internationalization. Set locale in the configuration files or with:
+
+```
+--params.testx.locale=NL
+```
+
+- Removed redundant dependencies.
+- Updated dependency versions to latest.
+- Merged PR for *check exists* documentation.
+
 New in version 1.7.1
 ====================
 Fixed a regression in the **save** keyword caused by 1.7.0.
