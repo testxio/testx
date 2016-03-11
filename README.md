@@ -183,7 +183,7 @@ will override the **set** function for only that particular object. The **this (
 
 ## Installation
 
-Create a protractor project. For a sample project clone https://github.com/testx/testx-quickstart
+Create a protractor project. For a sample project clone https://github.com/testxio/testx-quickstart
 
 Add this module to your project:
 
