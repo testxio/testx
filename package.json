@@ -1,10 +1,10 @@
 {
   "name": "testx",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "A library for executing MS Excel based, keyword driven tests with Protractor.",
   "main": "app.coffee",
   "scripts": {
-    "test": "docker run -v `pwd`:/work testx/protractor tests/conf.coffee"
+    "test": "docker run --rm -v `pwd`:/work testx/protractor -w /work tests/conf.coffee"
   },
   "repository": {
     "type": "git",
@@ -31,12 +31,13 @@
   "dependencies": {
     "camel-case": "^1.2.2",
     "coffee-errors": "^0.8.6",
+    "coffee-script": "^1.10.0",
     "colors": "^1.1.0",
     "csv-parse": "^1.0.1",
     "dotize": "^0.1.26",
     "form-data": "^0.2.0",
     "lodash": "^4.3.0",
     "q": "^1.4.1",
-    "testx-xlsx-parser": "^0.6.0"
+    "testx-xlsx-parser": "^0.6.1"
   }
 }

@@ -1,3 +1,7 @@
+New in version 1.8.1
+====================
+Using testx-xlsx-parser@0.6.1 for a fixed version of MID.
+
 New in version 1.8.0
 ====================
 - Using [testx-xlsx-parser@0.6.0](http://testx.io/testx-xlsx-parser/releases/tag/0.6.0). to add basic cell format internationalization. Set locale in the configuration files or with:
