@@ -1,3 +1,7 @@
+New in version 1.8.2
+====================
+Using testx-xlsx-parser@0.6.2 for a fix for default (non-localized) formats.
+
 New in version 1.8.1
 ====================
 Using testx-xlsx-parser@0.6.1 for a fixed version of MID.
