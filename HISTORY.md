@@ -1,6 +1,6 @@
-New in version 1.8.2
+New in version 1.8.3
 ====================
-Using testx-xlsx-parser@0.6.2 for a fix for default (non-localized) formats.
+Using testx-xlsx-parser@0.6.3 for a fix for default (non-localized) formats.
 
 New in version 1.8.1
 ====================

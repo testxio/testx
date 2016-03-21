@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "1.8.2",
+  "version": "1.8.3",
   "description": "A library for executing MS Excel based, keyword driven tests with Protractor.",
   "main": "app.coffee",
   "scripts": {
@@ -38,6 +38,6 @@
     "form-data": "^0.2.0",
     "lodash": "^4.3.0",
     "q": "^1.4.1",
-    "testx-xlsx-parser": "^0.6.2"
+    "testx-xlsx-parser": "^0.6.3"
   }
 }
