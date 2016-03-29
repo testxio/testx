@@ -1,3 +1,9 @@
+New in version 1.9.0
+====================
+- Using testx-xlsx-parser@0.7.0 for correctly converting OpenOffice line endings.
+- Fix for *getting* multiple elements
+- Fix for **check exists**
+
 New in version 1.8.3
 ====================
 Using testx-xlsx-parser@0.6.3 for a fix for default (non-localized) formats.

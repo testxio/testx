@@ -237,11 +237,11 @@ Predefined keywords are:
 | check not matches      |               || Checks if the value of the object doesn't match the specified regular expression. ||
 |                        | *object key*  | *expected regex* || Yes |
 | check exists           |               || Checks if the object is present or not. ||
-|                        | *object key*  | true / false     || Yes |
+|                        | *object key*  | true / false (string) || Yes |
 | check enabled          |               || Checks if the object is enabled or not, applicable for input controls. ||
 |                        | *object key*  | true / false  || Yes |
 | check readonly          |               || Checks if the object is readonly or not, applicable for input controls. ||
-|                        | *object key*  | true / false  || Yes |
+|                        | *object key*  | true / false (string) || Yes |
 | clear local storage    |               |                 | Clears local storage. This keyword has no arguments. ||
 | delete cookies		 |               |                 | Deletes all application related cookies. This keyword has no arguments. ||
 | go back                |               |                 | Simulates pressing the **Back** browser button. |  |
@@ -249,7 +249,7 @@ Predefined keywords are:
 | go to                  |               |                 | Navigate to a (relative to the --baseUrl) url. |  |
 |                        | url           | the url to navigate to || No |
 | ignore synchronization |               |                 | Turn page synchronization for angular apps on or off. ||
-|                        | ignore        | true / false    || No |
+|                        | ignore        | true / false (string) || No |
 | refresh page           |               |                 | Simulates pressing the **Refresh** browser button. |  |
 | respond to dialog      |               |                 | Respond to browser dialog window, simulates clicking **Ok** or **Cancel**. ||
 |                        | response  | ok / cancel || Yes |

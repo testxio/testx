@@ -57,7 +57,11 @@ keywords =
       expect(get key).not.toMatch val, assertFailedMsg(ctx)
   'check exists': (args, ctx) ->
     for key, val of args
-      expect(getAll key).toContain val, assertFailedMsg(ctx)
+      getAll(key).then (values) ->
+        if val.toLowerCase() is 'true' or val is ''
+          expect(values?.length).toBeTruthy assertFailedMsg(ctx)
+        else
+          expect(values?.length).toBeFalsy assertFailedMsg(ctx)
   'check enabled': (args, ctx) ->
     for key, val of args
       expectedValue = val.toLowerCase() == 'true'

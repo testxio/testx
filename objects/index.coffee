@@ -22,7 +22,7 @@ module.exports =
     el = _element(element.all) key
     el.wait = (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
       # waiting seems not to be supported when using `element.all`, wait on a single element
-      browser.wait expCondition.call(protractor.ExpectedConditions, element _by(key)), timeout
+      browser.wait expCondition.call(protractor.ExpectedConditions, _element()(key)), timeout
     el
 
 _element = (findFunc = element) -> (key) ->
