@@ -1,3 +1,7 @@
+New in version 1.9.1
+====================
+- Trying to handle the infamous *stale element* problem when waiting for an element to disappear.
+
 New in version 1.9.0
 ====================
 - Using testx-xlsx-parser@0.7.0 for correctly converting OpenOffice line endings.

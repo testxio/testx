@@ -99,7 +99,12 @@ keywords =
       browser.switchTo().frame(args.frame).then -> result.resolve true
     result.promise
   'wait to appear': (args) -> waitFor args
-  'wait to disappear': (args) -> waitFor args, protractor.ExpectedConditions.invisibilityOf
+  'wait to disappear': (args) ->
+    # Hack for the 'stale element' exception plague
+    try
+      waitFor args, protractor.ExpectedConditions.invisibilityOf
+    catch ex
+      expect(ex.message).not.toBe('Failed: stale element reference: element is not attached to the page document')
   'run': (args, ctx) ->
     file = args.file or ctx?._meta?.file
     runner.runExcelSheet(file, args.sheet, _.omit(args, ['file', 'sheet']))

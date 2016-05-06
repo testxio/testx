@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "A library for executing MS Excel based, keyword driven tests with Protractor.",
   "main": "app.coffee",
   "scripts": {
