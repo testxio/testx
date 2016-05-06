@@ -104,7 +104,7 @@ keywords =
     try
       waitFor args, protractor.ExpectedConditions.invisibilityOf
     catch ex
-      expect(ex.message).not.toBe('Failed: stale element reference: element is not attached to the page document')
+      expect(ex.name).toBe('StaleElementReferenceError')
   'run': (args, ctx) ->
     file = args.file or ctx?._meta?.file
     runner.runExcelSheet(file, args.sheet, _.omit(args, ['file', 'sheet']))
