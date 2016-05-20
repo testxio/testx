@@ -1,3 +1,7 @@
+New in version 1.9.3
+====================
+- Improved handling of the *stale element* problem when waiting for an element to disappear.
+
 New in version 1.9.2
 ====================
 - Trying to handle the infamous *stale element* problem when waiting for an element to disappear.

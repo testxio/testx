@@ -101,10 +101,9 @@ keywords =
   'wait to appear': (args) -> waitFor args
   'wait to disappear': (args) ->
     # Hack for the 'stale element' exception plague
-    try
-      waitFor args, protractor.ExpectedConditions.invisibilityOf
-    catch ex
-      expect(ex.name).toBe('StaleElementReferenceError')
+    wfs = waitFor(args, protractor.ExpectedConditions.invisibilityOf)
+    for wf in wfs
+      wf.thenCatch (err) -> expect(err.name).toMatch('StaleElementReferenceError|NoSuchElementError')
   'run': (args, ctx) ->
     file = args.file or ctx?._meta?.file
     runner.runExcelSheet(file, args.sheet, _.omit(args, ['file', 'sheet']))
