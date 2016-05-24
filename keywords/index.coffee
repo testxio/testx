@@ -43,6 +43,9 @@ keywords =
     save = (v) -> (value) -> ctx[v] = value
     for key, val of args
       do => (get key).then save(val)
+  'put': (args, ctx) ->
+    for key, val of args
+      do => ctx[key] = val
   'check equals': (args, ctx) ->
     for key, val of args
       expect(get key).toEqual val, assertFailedMsg(ctx)

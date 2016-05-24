@@ -275,6 +275,8 @@ Predefined keywords are:
 |                        | file          | full file path  | Optional; Can be omitted if the sheet is in the current file. | No |
 |                        | sheet         | the name of the excel sheet || No |
 |                        | *var name*    | *var value*     || Yes |
+| put                    ||| Puts the arguments in the test context. Access the *var value* in subsequent steps with *{{var name}}*||
+|                        | *var name*    | *var value*     || Yes |
 
 ## Additional keyword packages
 | Npm package | Description |

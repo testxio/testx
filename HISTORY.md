@@ -1,3 +1,7 @@
+New in version 1.10.0
+====================
+- Added **put** keyword for putting stuff in the test context during test run.
+
 New in version 1.9.4
 ====================
 - Improved handling of the *stale element* problem when waiting for an element to disappear.
