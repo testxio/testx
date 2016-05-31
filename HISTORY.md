@@ -1,3 +1,7 @@
+New in version 1.10.1
+====================
+- Using [testx-xlsx-parser@0.7.1](http://testx.io/testx-xlsx-parser/releases/tag/0.7.1) for fixed version of the **LEFT** formula.
+
 New in version 1.10.0
 ====================
 - Added **put** keyword for putting stuff in the test context during test run.
