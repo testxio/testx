@@ -111,7 +111,8 @@ keywords =
         throw err unless err.name in acceptableErrors
   'run': (args, ctx) ->
     file = args.file or ctx?._meta?.file
-    runner.runExcelSheet(file, args.sheet, _.omit(args, ['file', 'sheet']))
+    context = _.extend {}, ctx, _.omit(args, ['file', 'sheet'])
+    runner.runExcelSheet(file, args.sheet, context)
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
   'delete cookies': -> browser.manage().deleteAllCookies()
   'respond to dialog': (args) ->
