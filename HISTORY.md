@@ -1,3 +1,7 @@
+New in version 1.11.0
+====================
+- Inherit parent context when using the *run* keyword.
+
 New in version 1.10.1
 ====================
 - Using [testx-xlsx-parser@0.7.1](http://testx.io/testx-xlsx-parser/releases/tag/0.7.1) for fixed version of the **LEFT** formula.
