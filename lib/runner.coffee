@@ -7,16 +7,16 @@ keywords = require('../keywords').get()
 functions = require('../functions').get()
 xls2script = require './xls2script'
 
-exports.runScript = runScript = (script, ctx) =>
+exports.runScript = runScript = (script, ctx) ->
   context = _.assign(ctx || {}, functions)
   flow = protractor.promise.controlFlow()
   flow.execute(run(step, context)) for step in script.steps
 
-exports.runExcelSheet = (file, sheet, context) =>
+exports.runExcelSheet = (file, sheet, context) ->
   stat = fs.statSync file
   if stat.isFile()
     flow = protractor.promise.controlFlow()
-    flow.execute(-> xls2script.convert(file, sheet)).then (script) =>
+    flow.execute(-> xls2script.convert(file, sheet)).then (script) ->
       console.log colors.cyan("\n====================================================================================================")
       console.log colors.bold "Executing script on sheet #{colors.cyan(sheet)} in file #{colors.cyan(file)}"
       console.log colors.cyan("====================================================================================================\n")
