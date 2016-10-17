@@ -1,6 +1,6 @@
 runner = require '../../'
 
-describe 'Google search 1', ->
-  it 'should display relevant results 11', ->
+describe 'Google search', ->
+  it 'should display relevant results', ->
     runner.runExcelSheet 'tests/xls/sample.xlsx', 'Test',
       fromSpec: 'New York'
