@@ -1,16 +1,17 @@
 {
   "name": "testx",
-  "version": "1.11.0",
-  "description": "A library for executing MS Excel based, keyword driven tests with Protractor.",
-  "main": "app.coffee",
+  "version": "2.0.0",
+  "description": "A library for executing keyword driven tests with Protractor.",
+  "main": "index.coffee",
   "scripts": {
     "test": "docker run --rm -v `pwd`:/work testx/protractor -w /work tests/conf.coffee"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/greyarch/testx.git"
+    "url": "https://github.com/testxio/testx.git"
   },
   "keywords": [
+    "protractor",
     "selenium",
     "webdriver",
     "testing",
@@ -19,15 +20,17 @@
     "functional testing",
     "regression testing",
     "excel",
+    "yaml",
     "keyword",
+    "keyword driven",
     "keyword-driven"
   ],
   "author": "Greyarch BV",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/greyarch/testx/issues"
+    "url": "https://github.com/testxio/testx/issues"
   },
-  "homepage": "https://github.com/greyarch/testx",
+  "homepage": "http://testx.io",
   "dependencies": {
     "camel-case": "^1.2.2",
     "coffee-errors": "^0.8.6",
@@ -38,6 +41,7 @@
     "form-data": "^0.2.0",
     "lodash": "^4.3.0",
     "q": "^1.4.1",
-    "testx-xlsx-parser": "^0.7.1"
+    "testx-xlsx-parser": "^1.0.0",
+    "testx-yaml-parser": "^1.2.0"
   }
 }

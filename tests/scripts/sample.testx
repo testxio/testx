@@ -1,0 +1,7 @@
+- go to:
+    url: /
+- set:
+    searchBox: new york city
+    searchBtn: ''
+- check matches:
+    resultLink: '{{match}}'

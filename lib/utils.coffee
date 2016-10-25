@@ -1,6 +1,15 @@
 dotize = require 'dotize'
 
 module.exports =
+  printable: (obj, delimiter = ', ') ->
+    ("#{k}: '#{v}'" for k, v of obj).join delimiter
+
+  acquire: (pkg) ->
+    if typeof pkg is 'string'
+      require pkg
+    else
+      pkg
+
   defunc: (obj) ->
     if typeof obj == 'function' then obj() else obj
 
@@ -20,9 +29,7 @@ module.exports =
           resolveOne v.trim()
         when 'object'
           result = {}
-          for key, val of variable
-            do =>
-              result[resolveOne key] = resolveOne val
+          result[resolveOne key] = resolveOne val for key, val of variable
           result
         else
           variable

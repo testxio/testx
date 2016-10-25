@@ -1,32 +1,32 @@
+path = require 'path'
+fs = require 'fs'
+
 _ = require 'lodash'
 colors = require 'colors'
 
-object = require('../objects').element
-objects = require('../objects').elements
-runner = require '../lib/runner'
-defunc = require('../lib/utils').defunc
+{defunc, printable} = require '../lib/utils'
 
 DEFAULT_TIMEOUT = -> browser.params.testx.actionTimeout || 5000
 
 get = (key) ->
-  object(key).wait(DEFAULT_TIMEOUT()).then -> object(key).get()
+  testx.element(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()
 getAll = (key) ->
-  objects(key).wait(DEFAULT_TIMEOUT()).then -> objects(key).get()
+  testx.elements(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()
 set = (key, value) ->
-  object(key).wait(DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable).then ->
-    object(key).set value
+  testx.element(key).wait(DEFAULT_TIMEOUT(), protractor.ExpectedConditions.elementToBeClickable).then ->
+    testx.element(key).set value
 
 waitFor = (args, condition = protractor.ExpectedConditions.visibilityOf) ->
   for key, obj of _.omit(args, 'timeout')
-    do =>
-      (object obj).wait (parseInt(args.timeout) or DEFAULT_TIMEOUT()), condition
+    do ->
+      (testx.element obj).wait (parseInt(args.timeout) or DEFAULT_TIMEOUT()), condition
 
 module.exports =
   add: (kw) -> _.assign keywords, defunc(kw)
   get: -> keywords
 
 assertFailedMsg = (ctx) ->
-  "Assertion failure at: file '#{ctx?._meta?.file}', sheet '#{ctx?._meta?.sheet}', row #{ctx?._meta?.Row}"
+  "Assertion failure at #{printable _.pick(ctx._meta, 'file', 'sheet', 'Row')}"
 
 keywords =
   'get': (keys...) ->
@@ -42,10 +42,10 @@ keywords =
   'save': (args, ctx) ->
     save = (v) -> (value) -> ctx[v] = value
     for key, val of args
-      do => (get key).then save(val)
+      do -> (get key).then save(val)
   'put': (args, ctx) ->
     for key, val of args
-      do => ctx[key] = val
+      do -> ctx[key] = val
   'check equals': (args, ctx) ->
     for key, val of args
       expect(get key).toEqual val, assertFailedMsg(ctx)
@@ -68,14 +68,14 @@ keywords =
   'check enabled': (args, ctx) ->
     for key, val of args
       expectedValue = val.toLowerCase() == 'true'
-      expect(object(key).isEnabled()).toBe expectedValue, assertFailedMsg(ctx)
+      expect(testx.element(key).isEnabled()).toBe expectedValue, assertFailedMsg(ctx)
   'check readonly': (args, ctx) ->
     for key, val of args
       expectedValue = if val.toLowerCase() == 'true' then 'true' else null # Note: It returns 'true' as string, not as boolean
-      expect(object(key).getAttribute('readonly')).toBe expectedValue, assertFailedMsg(ctx)
+      expect(testx.element(key).getAttribute('readonly')).toBe expectedValue, assertFailedMsg(ctx)
   'set': (args) ->
     for key, val of args
-      do => set key, val
+      do -> set key, val
   'ignore synchronization': (args) ->
     ignore = if args.ignore in ['true', 'yes', '1'] then true else false
     browser.ignoreSynchronization = ignore
@@ -85,12 +85,12 @@ keywords =
     result = q.defer()
     if args.title
       q.all browser.getAllWindowHandles().then (handles) ->
-        _.map handles, (wh) =>
-          browser.switchTo().window(wh).then =>
+        _.map handles, (wh) ->
+          browser.switchTo().window(wh).then ->
             browser.getTitle().then (t) ->
               title: t
               handle: wh
-      .then (titles) =>
+      .then (titles) ->
         ttls = (t.title for t in titles)
         if args.title not in ttls
           result.reject new Error("Could not find a window with title '#{args.title}'! Known windows are [#{ttls}].")
@@ -110,9 +110,9 @@ keywords =
       wf.thenCatch (err) ->
         throw err unless err.name in acceptableErrors
   'run': (args, ctx) ->
-    file = args.file or ctx?._meta?.file
+    args.file = if args.file then args.file else ctx?._meta?.file
     context = _.extend {}, ctx, _.omit(args, ['file', 'sheet'])
-    runner.runExcelSheet(file, args.sheet, context)
+    testx.run args, context
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
   'delete cookies': -> browser.manage().deleteAllCookies()
   'respond to dialog': (args) ->

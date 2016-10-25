@@ -1,4 +1,4 @@
-testx = require '../'
+require '../'
 
 exports.config =
   directConnect: true
@@ -17,7 +17,6 @@ exports.config =
     includeStackTrace: false
 
   baseUrl: 'http://google.com'
-  rootElement: 'html' # change to the root element of the angular.js app
 
   params:
     testx:
