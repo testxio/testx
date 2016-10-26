@@ -4,19 +4,40 @@
 testx
 =====
 
-A library for executing MS Excel based, keyword driven tests with Protractor.
+A library for executing keyword driven tests with Protractor.
 
-- [Migrating to testx 1.x](#migrating-to-testx-1.x)
+- [Migrating from testx 1.x to 2.x](#migrating-from-testx-1.x-to-2.x)
+- [Migrating from testx 0.x to 1.x](#migrating-from-testx-0.x-to-1.x)
 - [How does it work](#how-does-it-work)
-- [Prerequisites](#prerequisites)
 - [API](#api)
+- [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Run](#run)
 - [Configuration](#configuration)
 - [Core keywords](#core-keywords)
 - [Additional keyword packages](#additional-keyword-packages)
 
-## Migrating to testx 1.x
+## Migrating from testx 1.x to 2.x
+**testx 2.0** introduces the concept of **parsers** as first class citizens in the **testx** ecosystem. This was motivated by the (surprising) success of the [testx-yaml-parser](http://testx.io/yaml-parser).
+
+In order to make **parsers** easy to integrate with the rest of system, **testx** has changed in several potentially breaking ways. As usual I tried to contain the changes to such, that will not require changing of test scripts.
+
+#### Possibly breaking changes
+- *runExcelSheet* method is deprecated in favor of the more idiomatic *run* method. The signature remains the same so for all intents and purposes it is just renaming. *runExcelSheet* will be removed in the next major **testx** version.
+- **testx@2.0** drops integrated support for the external **xls2test** parsing service. This service adds too much hassle and was not really used. Please, create an issue if you still want to use it.
+
+#### New and exciting stuff
+- **testx** will now try to guess how to parse a script file based on its extension. This means, that you can now just have
+```
+testx.run 'scripts/some-test.testx'
+```
+and **testx** will automagically know how to parse it and run it.
+- **testx** is now a singleton object and is globally available via the *testx* variable. This means that you only need to require **testx** once, usually at the beginning of your config file and then you can use the *testx* variable anywhere.
+- The **run** core keyword is now completely agnostic of the file (type) in which it is used and can target all supported file types.
+- [testx-yaml-parser](http://testx.io/yaml-parser) is now bundled with **testx**, so you do not need to install and require it anymore. Files with the *testx*, *yaml* and *yml* extensions will be parsed using this parser.
+
+
+## Migrating from testx 0.x to 1.x
 There are a few breaking changes in **testx 1.0** compared to **testx 0.x**, but you should only need to change your configuration file and not your tests.
 
 ### Reporting
@@ -46,12 +67,23 @@ You will now do
 ## How does it work
 **testx** aims to make web application testing easier by using keyword driven testing.
 
-**testx** uses MS Excel sheets as a platform for writing tests.
-Essentially you write your tests in MS Excel, utilizing the computational power of MS Excel.
-This will free you from having to implement all the things like generating random data, referring to values in other test steps. formatting dates, etc.
+**testx** uses MS Excel sheets or YAML files as a platform for writing tests. Both file types have their pros and cons.
 
-It is possible to use **testx** without MS Excel as well, but then it looses a lot of its usefulness.
-Of course if you don't want to shell out for MS Excel you can use any of the numerous copies like LibreOffice (OpenOffice) Calc, etc.
+- **MS Excel** (*.xlsx, .xls*):
+	- Pros - Essentially you write your tests in MS Excel, utilizing the computational power of MS Excel.
+This will free you from having to implement all the things like generating random data, referring to values in other test steps. formatting dates, etc.
+	- Cons
+		- Version management is quite a hassle, especially if more people are working on the same test at the same time and a merge is required;
+		- Script files are pretty big.
+
+- **YAML** (*.testx, .yaml, .yml*):
+	- Pros
+		- Simple text based format. Version management is a breeze.
+		- Syntax highlighting and auto-complete support (at least for the core keywords) via an [Atom plugin](http://testx.io/atom-language-testx) if you use *.testx* file extension.
+	- Cons
+		- No logic in the script itself. For example, if you need a random string, you have to implement it via a function or pass it through the initial test context.
+
+However it is perfectly acceptable to mix and match between YAML and MS Excel based scripts. It is also possible to run a YAML based script from an MS Excel based one and vice versa. This is done with the [run](#core-keywords) core keyword.
 
 ### Test structure
 The tests consist of *steps*. Each step consists of a *keyword* and *arguments*.
@@ -148,7 +180,8 @@ will override the **set** function for only that particular object. The **this (
 ## API
 **testx** exposes the following interface:
 
-- *runExcelSheet(filePath, sheetName, initialContext)* - executes the test on the specified file path and Excel sheet passing initial test context. The parameters are:
+- *run(scriptLocation..., initialContext)* - executes the test on the specified file path (and possibly Excel sheet) with the specified initial context.
+- *runExcelSheet(filePath, sheetName, initialContext)* - **deprecated, use run instead**, executes the test on the specified file path and Excel sheet passing initial test context. The parameters are:
 	*filePath* - path to the Excel file, can be absolute or relative to the execution root;
 	*sheetName* - the name of the Excel sheet containing the test script;
 	*initialContext* - the initial context of the run. A JSON object. Attributes in the context must have scalar value. The context can be referenced with the *{{contextVar}}* syntax where *contextVar* is the key of the attribute. The initial context is optional, defaulting to an empty object.
@@ -174,6 +207,14 @@ will override the **set** function for only that particular object. The **this (
 	- add(funcs) - makes the functions passed as the only argument available to the current test run context; adding a function with a name that already exists will overwrite the implementation of that function; the *funcs* argument can be
 		- object containing custom function
 		- parameterless function that returns a functions object
+- *parsers* - the functions extension end point; this object has two attributes and both are functions
+	- get(fileExtension) - returns the parser object associated with this file extension; if no *fileExtension* is passed the raw parsers object is returned;
+	- add(parser, [extensions]) - adds (installs) a parser for the given (an optional) array of file extensions. If extensions parameter is present the parser will be associated with these file extensions as well as the file extensions declared by the parser itself (see parser interface below). The parser object has to implement the following properties:
+		- parse(script) - parse the script (string) and return an executable **test** script (JSON object);
+		- parseFile(scriptFile) - parse the script file (string) and return an executable **test** script (JSON object);
+		- name - string; name of the parser;
+		- version - string; version of the parser;
+		- extensions - array of strings; supported extensions by this parser.
 
 	Functions are invoked using the context resolution syntax, i.e. {{functionName}} (in the Excel sheet) will invoke the function *functionName*. Currently only functions without parameters are supported.
 
