@@ -1,4 +1,6 @@
 describe 'TestX', ->
+  it 'should be able to run an Excel without initial context', ->
+    testx.run 'tests/scripts/sample.xlsx', 'static'
   it 'should be able to run an Excel sheet using the deprecated runExcelSheet', ->
     testx.runExcelSheet 'tests/scripts/sample.xlsx', 'Test',
       fromSpec: 'New York'

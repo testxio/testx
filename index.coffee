@@ -30,7 +30,7 @@ class TestX
     @run file, sheet, context
 
   run: (args...) ->
-    context = if args.length > 1 and typeof args[-1..] is 'object' then args.pop()
+    context = if args.length > 1 and typeof args[-1..][0] is 'object' then args.pop()
     @runScript (@parseFile.apply @, args), context
 
   parseFile: (file, sheet) ->
