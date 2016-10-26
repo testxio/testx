@@ -3,10 +3,7 @@ describe 'Google search', ->
     testx.runExcelSheet 'tests/scripts/sample.xlsx', 'Test',
       fromSpec: 'New York'
   it 'should display relevant results (run xlsx)', ->
-    testx.run
-      file: 'tests/scripts/sample.xlsx'
-      sheet: 'Test'
-    ,
+    testx.run 'tests/scripts/sample.xlsx', 'Test',
       fromSpec: 'New York'
   it 'should display relevant results (run testx)', ->
     testx.run 'tests/scripts/sample.testx',

@@ -5,6 +5,7 @@ fs = require 'fs'
 
 _ = require 'lodash'
 camelCase = require 'camel-case'
+colors = require 'colors'
 
 xlsx = require 'testx-xlsx-parser'
 
@@ -22,20 +23,17 @@ class TestX
     @runScript = @runner.runScript
 
   runExcelSheet: (file, sheet, context) ->
-    source =
-      file: file
-      sheet: sheet
-    context = _.merge {}, context,
-      _meta:
-        file: file
-        sheet: sheet
-    @run source, context
+    console.log colors.red """
+    #{colors.bold('testx.runExcelSheet')} is deprecated and will be removed in the next major release.
+    Please, use #{colors.bold('testx.run')} instead.
+    """
+    @run file, sheet, context
 
-  run: (source, context) ->
-    @runScript (@parseFile source), context
+  run: (args...) ->
+    context = if args.length > 1 and typeof args[-1..] is 'object' then args.pop()
+    @runScript (@parseFile.apply @, args), context
 
-  parseFile: (source) ->
-    file = if typeof source is 'string' then source else source.file
+  parseFile: (file, sheet) ->
     stat = fs.statSync file
     if stat.isFile()
       extension = path.extname file
@@ -46,7 +44,7 @@ class TestX
         else
           parser.parse fs.readFileSync(file, 'utf8')
       else # assume this is an MS Excel file for backwards compatibility
-        xlsx.parse file, source.sheet, browser.params.testx.locale
+        xlsx.parse file, sheet, browser.params.testx.locale
     else
       console.error "'#{file}' is not a file."
 
