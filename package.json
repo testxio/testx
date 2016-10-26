@@ -34,12 +34,12 @@
   "dependencies": {
     "camel-case": "^1.2.2",
     "coffee-errors": "^0.8.6",
-    "coffee-script": "^1.10.0",
-    "colors": "^1.1.0",
-    "csv-parse": "^1.0.1",
+    "coffee-script": "^1.11.1",
+    "colors": "^1.1.2",
+    "csv-parse": "^1.1.7",
     "dotize": "^0.1.26",
     "form-data": "^0.2.0",
-    "lodash": "^4.3.0",
+    "lodash": "^4.16.4",
     "q": "^1.4.1",
     "testx-xlsx-parser": "^1.0.0",
     "testx-yaml-parser": "^1.2.0"
