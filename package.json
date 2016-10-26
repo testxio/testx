@@ -41,7 +41,7 @@
     "form-data": "^0.2.0",
     "lodash": "^4.16.4",
     "q": "^1.4.1",
-    "testx-xlsx-parser": "^1.0.0",
+    "testx-xlsx-parser": "^1.0.1",
     "testx-yaml-parser": "^1.2.0"
   }
 }
