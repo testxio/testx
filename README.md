@@ -6,6 +6,7 @@ testx
 
 A library for executing keyword driven tests with Protractor.
 
+- [New and exciting stuff in testx 2.x](#new-and-exciting-stuff-in-testx-2.x)
 - [Migrating from testx 1.x to 2.x](#migrating-from-testx-1.x-to-2.x)
 - [Migrating from testx 0.x to 1.x](#migrating-from-testx-0.x-to-1.x)
 - [How does it work](#how-does-it-work)
@@ -17,25 +18,22 @@ A library for executing keyword driven tests with Protractor.
 - [Core keywords](#core-keywords)
 - [Additional keyword packages](#additional-keyword-packages)
 
-## Migrating from testx 1.x to 2.x
-**testx 2.0** introduces the concept of **parsers** as first class citizens in the **testx** ecosystem. This was motivated by the (surprising) success of the [testx-yaml-parser](http://testx.io/yaml-parser).
+## New and exciting stuff in testx 2.x
+- **testx 2.0** introduces the concept of **parsers** as first class citizens in the **testx** ecosystem. This was motivated by the (surprising) success of the [testx-yaml-parser](http://testx.io/yaml-parser). **testx** will now try to guess how to parse a script file based on its extension. This means, that you can now just have ```testx.run 'scripts/some-test.testx'``` and **testx** will automagically know how to parse it and run it.
 
-In order to make **parsers** easy to integrate with the rest of system, **testx** has changed in several potentially breaking ways. As usual I tried to contain the changes to such, that will not require changing of test scripts.
-
-#### Possibly breaking changes
-- *runExcelSheet* method is deprecated in favor of the more idiomatic *run* method. The signature remains the same so for all intents and purposes it is just renaming. *runExcelSheet* will be removed in the next major **testx** version.
-- **testx@2.0** drops integrated support for the external **xls2test** parsing service. This service adds too much hassle and was not really used. Please, create an issue if you still want to use it.
-
-#### New and exciting stuff
-- **testx** will now try to guess how to parse a script file based on its extension. This means, that you can now just have
-```
-testx.run 'scripts/some-test.testx'
-```
-and **testx** will automagically know how to parse it and run it.
 - **testx** is now a singleton object and is globally available via the *testx* variable. This means that you only need to require **testx** once, usually at the beginning of your config file and then you can use the *testx* variable anywhere.
 - The **run** core keyword is now completely agnostic of the file (type) in which it is used and can target all supported file types.
 - [testx-yaml-parser](http://testx.io/yaml-parser) is now bundled with **testx**, so you do not need to install and require it anymore. Files with the *testx*, *yaml* and *yml* extensions will be parsed using this parser.
 
+## Migrating from testx 1.x to 2.x
+
+In order to make **parsers** easy to integrate with the rest of system, **testx** has changed in several potentially breaking ways. As usual I tried to contain the changes to such, that will not require changing of test scripts.
+
+### runExcelSheet method is deprecated
+*runExcelSheet* method is deprecated in favor of the more idiomatic *run* method. The signature remains the same so for all intents and purposes it is just renaming. *runExcelSheet* will be removed in the next major **testx** version.
+
+### xls2test external parser is no longer support
+**testx@2.0** drops integrated support for the external **xls2test** parsing service. This service adds too much hassle and was not really used. Please, create an issue if you still want to use it.
 
 ## Migrating from testx 0.x to 1.x
 There are a few breaking changes in **testx 1.0** compared to **testx 0.x**, but you should only need to change your configuration file and not your tests.
@@ -137,14 +135,16 @@ And in *objects/index.coffee* you'll have something like:
 	    locator: "css"
 	    value: "li.g a"
 
-Objects can also be read from CSV file. The file looks like this:
+Objects can also be read from a CSV file like that ```testx.objects.add ./path/to/file.csv```.  The file looks like this:
 
 	query-input,css,"input[name='q']"
 	search-btn,css,"button[name='btnG']"
 	result-link,css,"li.g a"
 
 
-As of **testx 0.7.0** objects ini the object map can be functions as well. This gives you the ability to parameterize object. This is easiest to explain with an example. Let's say you have this object definition:
+You can mix and match these object maps and can add as many as you like.
+
+As of **testx 0.7.0** objects in the object map can be functions as well. This gives you the ability to parameterize object. This is easiest to explain with an example. Let's say you have this object definition:
 
 	module.exports =
 	  "query-input": (attr, val) ->
@@ -242,10 +242,6 @@ From within the test project directory:
 
 ## Configuration
 
-To be able to use **testx** you'll need to services external to it.
-One of them is essential - the xls(x) file to test converter,
-and the other one, the reporting service is optional and sending data to it is switched off by default.
-
 All **testx** configuration lives in your protractor configuration file under *params.testx*, for example (in coffeescript):
 
 	params:
@@ -312,9 +308,9 @@ Predefined keywords are:
 | wait to disappear      ||| Wait for all the specified objects to disappear and fail if this does not happen before the timeout. Argument names must be unique (for this instance of the keyword), but are otherwise ignored. |            |
 |                        | *ignored*    | *object key*    || Yes |
 |                        | timeout       | the timeout in milliseconds || No |
-| run                    ||| Execute the test script in the specified file and sheet passing the remaining arguments as variables to that execution. ||
+| run                    ||| Execute the test script in the specified file (and sheet) passing the remaining arguments as variables to that execution. ||
 |                        | file          | full file path  | Optional; Can be omitted if the sheet is in the current file. | No |
-|                        | sheet         | the name of the excel sheet || No |
+|                        | sheet         | the name of the Excel sheet |Optional; Only required when the script is in an Excel file| No |
 |                        | *var name*    | *var value*     || Yes |
 | put                    ||| Puts the arguments in the test context. Access the *var value* in subsequent steps with *{{var name}}*||
 |                        | *var name*    | *var value*     || Yes |
