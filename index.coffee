@@ -2,6 +2,7 @@ require 'coffee-errors'
 
 path = require 'path'
 fs = require 'fs'
+EventEmitter = require 'events'
 
 _ = require 'lodash'
 camelCase = require 'camel-case'
@@ -21,12 +22,16 @@ class TestX
     @functions = require './functions'
     @runner = require('./lib/runner') @keywords.get(), @functions.get()
     @runScript = @runner.runScript
+    @events = new EventEmitter
+    require('./lib/logger') @events
+
 
   runExcelSheet: (file, sheet, context) ->
-    console.log colors.red """
+    console.log colors.red """\n\n
+    ====================================================================================================
     #{colors.bold('testx.runExcelSheet')} is deprecated and will be removed in the next major release.
     Please, use #{colors.bold('testx.run')} instead.
-    """
+    ===================================================================================================="""
     @run file, sheet, context
 
   run: (args...) ->
