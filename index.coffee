@@ -3,6 +3,7 @@ require 'coffee-errors'
 path = require 'path'
 fs = require 'fs'
 EventEmitter = require 'events'
+deprecate = require('util').deprecate
 
 _ = require 'lodash'
 camelCase = require 'camel-case'
@@ -25,14 +26,9 @@ class TestX
     @events = new EventEmitter
     require('./lib/logger') @events
 
-
-  runExcelSheet: (file, sheet, context) ->
-    console.log colors.red """\n\n
-    ====================================================================================================
-    #{colors.bold('testx.runExcelSheet')} is deprecated and will be removed in the next major release.
-    Please, use #{colors.bold('testx.run')} instead.
-    ===================================================================================================="""
+  runExcelSheet: deprecate (file, sheet, context) ->
     @run file, sheet, context
+  , colors.red """ #{colors.bold('testx.runExcelSheet')} is deprecated and will be removed in the next major release. Please, use #{colors.bold('testx.run')} instead."""
 
   run: (args...) ->
     context = if args.length > 1 and typeof args[-1..][0] is 'object' then args.pop()
@@ -61,16 +57,16 @@ class TestX
         params[0] = resolver(context) params[0]
         params.push context if passContext
         f.apply @, params
-        context = {}
-        kwrds = _.extend _.extend.apply(@, (objectify(camelCase(k), wrap(v)) for k, v of keywords)),
-        get: (params...) ->
-          wrap(keywords.get, false)
-          .apply(@, params)
-          .then (values) ->(v.value_ for v in values)
-          log: wrap(console.log, false)
-          do: (f) -> (wrap.call kwrds, f)()
+    context = {}
+    kwrds = _.extend _.extend.apply(@, (objectify(camelCase(k), wrap(v)) for k, v of keywords)),
+    get: (params...) ->
+      wrap(keywords.get, false)
+      .apply(@, params)
+      .then (values) ->(v.value_ for v in values)
+    log: wrap(console.log, false)
+    do: (f) -> (wrap.call kwrds, f)()
 
-          f.bind(kwrds)
+    f.bind(kwrds)
 
 global.testx = new TestX
 
