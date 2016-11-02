@@ -13,8 +13,8 @@ module.exports = (keywords, functions) ->
       protractor.promise.controlFlow().execute ->
         keywords[step.name] (ctx step.arguments), context
 
-  runScript: runScript = (script, ctx) ->
-    testx.events.emit 'test:start', script
+  runScript: (script, ctx) ->
+    testx.events.emit 'test:start', script, ctx
 
     context = _.merge {}, ctx, functions,
       _meta: script.source
