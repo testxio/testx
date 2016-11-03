@@ -2,7 +2,6 @@ require 'coffee-errors'
 
 path = require 'path'
 fs = require 'fs'
-EventEmitter = require 'events'
 deprecate = require('util').deprecate
 
 _ = require 'lodash'
@@ -11,7 +10,7 @@ colors = require 'colors'
 
 xlsx = require 'testx-xlsx-parser'
 
-{resolver, objectify} = require './lib/utils'
+{resolver, objectify, defer} = require './lib/utils'
 
 class TestX
   constructor: ->
@@ -23,8 +22,9 @@ class TestX
     @functions = require './functions'
     @runner = require('./lib/runner') @keywords.get(), @functions.get()
     @runScript = @runner.runScript
-    @events = new EventEmitter
+    @events = require './lib/events'
     require('./lib/logger') @events
+    defer => @events.emit 'loaded'
 
   runExcelSheet: deprecate (file, sheet, context) ->
     @run file, sheet, context

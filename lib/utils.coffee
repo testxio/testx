@@ -1,6 +1,7 @@
 dotize = require 'dotize'
 
 module.exports =
+  defer: (fn) -> setTimeout fn, 0
   printable: (obj, delimiter = ', ') ->
     ("#{k}: '#{v}'" for k, v of obj).join delimiter
 

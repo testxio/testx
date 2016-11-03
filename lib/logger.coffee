@@ -4,6 +4,7 @@ colors = require 'colors'
 module.exports = (eventEmitter) ->
   eventEmitter.on 'test:start', logScriptStart
   eventEmitter.on 'step:start', logStepStart
+  eventEmitter.on 'spec:done', -> console.log '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 
 
 logScriptStart = (script) ->

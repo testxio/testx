@@ -1,5 +1,3 @@
-require '../'
-
 exports.config =
   directConnect: true
   specs: ['spec/*']
@@ -24,5 +22,7 @@ exports.config =
       actionTimeout: 4000
 
   onPrepare: ->
+    require '../'
+    require('testx-logstash-logger')('logstashUrl') testx.events
     testx.objects.add 'tests/objects.csv'
     beforeEach -> browser.ignoreSynchronization = true
