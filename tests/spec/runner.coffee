@@ -26,4 +26,4 @@ describe 'Runner', ->
       searchBox: 'new york city'
       searchBtn: ''
     @checkMatches
-        resultLink: 'New York'
+      resultLink: 'New York'
