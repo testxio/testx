@@ -38,10 +38,7 @@ _element = (findFunc = element) -> (key) ->
     obj = objects[func]
     if typeof obj == 'function'
       parsed = eval "[#{args}]"
-      if parsed.length == obj.length
-        findElement obj.apply(@, parsed)
-      else
-        throw new Error "Object '#{func}' is a function with #{obj.length} argument(s). You are trying to execute it with #{parsed.length} argument(s)."
+      findElement obj.apply(@, parsed)
     else
       throw new Error "Object '#{func}' is not a function."
   else if obj = objects[key]
