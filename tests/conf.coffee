@@ -23,6 +23,6 @@ exports.config =
 
   onPrepare: ->
     require '../'
-    require('testx-logstash-logger')('logstashUrl') testx.events
     testx.objects.add 'tests/objects.csv'
-    beforeEach -> browser.ignoreSynchronization = true
+    beforeEach ->
+      browser.ignoreSynchronization = true
