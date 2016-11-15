@@ -1,5 +1,3 @@
-require '../'
-
 exports.config =
   directConnect: true
   specs: ['spec/*']
@@ -24,9 +22,7 @@ exports.config =
       actionTimeout: 4000
 
   onPrepare: ->
+    require '../'
     testx.objects.add 'tests/objects.csv'
-    testx.objects.add
-      resultLink:
-        locator: 'cssContainingText'
-        value: ['h3.r a', 'New York']
-    beforeEach -> browser.ignoreSynchronization = true
+    beforeEach ->
+      browser.ignoreSynchronization = true

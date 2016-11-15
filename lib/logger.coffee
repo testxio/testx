@@ -2,8 +2,8 @@ colors = require 'colors'
 {printable} = require './utils'
 
 module.exports = (eventEmitter) ->
-  eventEmitter.on 'test:start', logScriptStart
-  eventEmitter.on 'step:start', logStepStart
+  eventEmitter.on 'script/start', logScriptStart
+  eventEmitter.on 'step/start', logStepStart
 
 
 logScriptStart = (script) ->

@@ -18,12 +18,19 @@ describe 'Runner', ->
         file: 'tests/scripts/sample.xlsx'
         sheet: 'Test'
         fromSpec: 'New York'
+    - run:
+        file: 'tests/scripts/sample.testx'
+        match: 'New York'
     '''
-  it 'should be able to run in-line CoffeeScript based tests', testx.with ->
+  it 'should be able to run in-line CoffeeScript tests', testx.with ->
+    match = 'New York'
     @goTo
       url: '/'
     @set
       searchBox: 'new york city'
       searchBtn: ''
     @checkMatches
-      resultLink: 'New York'
+      resultLink: match
+    @run
+      file: 'tests/scripts/sample.testx'
+      match: match
