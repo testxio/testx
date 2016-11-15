@@ -217,6 +217,17 @@ will override the **set** function for only that particular object. The **this (
 		- extensions - array of strings; supported extensions by this parser.
 
 	Functions are invoked using the context resolution syntax, i.e. {{functionName}} (in the Excel sheet) will invoke the function *functionName*. Currently only functions without parameters are supported.
+- *events* - the **testx** event emitter. This is a [Node.js EventEmitter object](https://nodejs.org/api/events.html). Available events are
+	- testx/loaded - fired when *testx* is loaded; The handler function takes 1 argument - the **protractor.params** object the tests were started with;
+	- script/start - fired before a *testx* script starts; The handler function takes 2 arguments - the script and the context;
+	- script/done - fired after a *testx* script ends; The handler function takes 2 arguments - the script and the context;
+	- specs/loaded - fired when Jasmine has loaded all specs, but before the execution has started; The handler function takes 1 argument - the Jasmine suite info object;
+	- suite/start - fired when a **describe** starts to run; The handler function takes 1 argument - the result object containing meta data about the suite;
+	- suite/done - fired when all of the child suites and specs are finished; The handler function takes 1 argument - the result object;
+	- spec/start - fired when an **it** starts to run; The handler function takes 1 argument - the result object containing meta data about the spec;
+	- spec/done - fired when an **it** (and associated *afterEach* function) is finished; The handler function takes 1 argument - the spec result object;
+
+The Jasmine related events are implemented as a [custom Jasmine reporter](https://jasmine.github.io/2.1/custom_reporter.html).
 
 ## Prerequisites
 
