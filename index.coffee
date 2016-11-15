@@ -14,6 +14,7 @@ xlsx = require 'testx-xlsx-parser'
 
 class TestX
   constructor: ->
+    @params = browser.params.testx
     @parsers = (require './lib/parsers').add 'testx-yaml-parser'
     @keywords = require './keywords'
     @objects = require './objects'
@@ -24,7 +25,7 @@ class TestX
     @runScript = @runner.runScript
     @events = require './lib/events'
     require('./lib/logger') @events
-    defer => @events.emit 'loaded'
+    defer => @events.emit 'testx/loaded', @params
 
   runExcelSheet: deprecate (file, sheet, context) ->
     @run file, sheet, context
