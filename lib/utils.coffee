@@ -18,16 +18,18 @@ module.exports =
     (variable) ->
       ctx = dotize.convert context
       resolveOne = (v) ->
-        v.toString().replace /(\{\{.+?\}\})/g, (match) ->
-          result = ctx[match[2...-2]]
-          if typeof result == 'function'
-            result()
-          else
-            result
+        if v
+          v.toString().replace /(\{\{.+?\}\})/g, (match) ->
+            result = ctx[match[2...-2]]
+            if typeof result == 'function'
+              result()
+            else
+              result
+        else ''
 
       switch typeof variable
         when 'string'
-          resolveOne v.trim()
+          resolveOne v?.trim() or ''
         when 'object'
           result = {}
           result[resolveOne key] = resolveOne val for key, val of variable
