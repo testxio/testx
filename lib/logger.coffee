@@ -19,7 +19,7 @@ logScriptStart = (script) ->
 
   """
 
-  if browser.params.testx.logScript
+  if testx.params.logScript
     console.log 'SCRIPT:', JSON.stringify(script, null, 2)
 
 logStepStart = (step, context) ->

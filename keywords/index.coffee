@@ -6,7 +6,7 @@ colors = require 'colors'
 
 {defunc, printable} = require '../lib/utils'
 
-DEFAULT_TIMEOUT = -> browser.params.testx.actionTimeout || 5000
+DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000
 
 get = (key) ->
   testx.element(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()

@@ -1,7 +1,6 @@
 path = require 'path'
 fs = require 'fs'
 deprecate = require('util').deprecate
-
 _ = require 'lodash'
 camelCase = require 'camel-case'
 colors = require 'colors'
@@ -12,7 +11,7 @@ xlsx = require 'testx-xlsx-parser'
 
 module.exports = class TestX
   constructor: ->
-    @params = browser.params.testx
+    @params = require './params'
     @parsers = (require './parsers').add 'testx-yaml-parser'
     @keywords = require '../keywords'
     @objects = require '../objects'
@@ -44,7 +43,7 @@ module.exports = class TestX
         else
           parser.parse fs.readFileSync(file, 'utf8')
       else # assume this is an MS Excel file for backwards compatibility
-        xlsx.parse file, sheet, browser.params.testx.locale
+        xlsx.parse file, sheet, testx.params.locale
     else
       console.error "'#{file}' is not a file."
 
