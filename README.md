@@ -264,6 +264,19 @@ The available configuration options are
  - **logScript** - if *true* **testx** will log the test script (JSON) on the console before executing it; defaults to *false*.
  - **actionTimeout** - the timeout in milliseconds before a *get* or *set* action will fail, for example because the target element is not visible; defaults to 5000.
 
+It is also possible (since testx@2.4.0) to provide configuration directly in your *package.json* file. In this case you need to add the **testx** parameters under a *testx* field in your *package.json*, for example:
+
+```
+...
+"testx": {
+	"logScript": true
+	"actionTimeout": 4000
+}
+...
+```
+
+The configuration parameters specified in the protractor configuration (config file or command line) take precedence over the ones specified in *package.json*.
+
 ## Core keywords
 
 **testx** comes with a simple set keywords that can be extended/overriden from the project.
