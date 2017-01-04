@@ -19,23 +19,25 @@ module.exports =
       ctx = dotize.convert context
       resolveOne = (v) ->
         if v
-          v.toString().replace /(\{\{.+?\}\})/g, (match) ->
-            result = ctx[match[2...-2]]
-            if typeof result == 'function'
-              result()
-            else
-              result
+          switch typeof v
+            when 'string'
+              v.replace /(\{\{.+?\}\})/g, (match) ->
+                result = ctx[match[2...-2]]
+                if typeof result == 'function'
+                  result()
+                else
+                  result
+            when 'object'
+              if Array.isArray v
+                resolveOne val for val in v
+              else
+                result = {}
+                result[resolveOne key] = resolveOne val for key, val of v
+                result
+            else v
         else ''
 
-      switch typeof variable
-        when 'string'
-          resolveOne v?.trim() or ''
-        when 'object'
-          result = {}
-          result[resolveOne key] = resolveOne val for key, val of variable
-          result
-        else
-          variable
+      resolveOne variable
 
   objectify: (name, f) ->
     obj = {}

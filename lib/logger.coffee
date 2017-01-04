@@ -28,4 +28,4 @@ logStepStart = (step, context) ->
   row = colors.yellow "row #{step.meta.Row}"
   console.log "Executing step #{fullName} on #{row} with arguments:"
   for k, v of args
-    console.log(colors.grey "  #{k}: #{v}")
+    console.log(colors.grey "  #{k}: #{JSON.stringify v, null, 4}")
