@@ -42,5 +42,9 @@
     "q": "^1.4.1",
     "testx-xlsx-parser": "^1.0.1",
     "testx-yaml-parser": "^1.2.0"
+  },
+  "testx": {
+    "logScript": true,
+    "actionTimeout": 4000
   }
 }

@@ -16,11 +16,6 @@ exports.config =
 
   baseUrl: 'http://google.com'
 
-  params:
-    testx:
-      logScript: false
-      actionTimeout: 4000
-
   onPrepare: ->
     require '../'
     testx.objects.add 'tests/objects.csv'
