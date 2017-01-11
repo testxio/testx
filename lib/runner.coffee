@@ -4,14 +4,15 @@ _ = require 'lodash'
 
 module.exports = (keywords, functions) ->
   run = (step, context) ->
-    ctx = resolver _.merge context,
+    mergedContext = _.merge context,
       params: browser.params
-    ->
-      testx.events.emit 'step/start', step, ctx
 
-      context._meta = _.merge context._meta, step.meta
+    ->
+      ctx = resolver mergedContext
+      testx.events.emit 'step/start', step, ctx
+      mergedContext._meta = _.merge mergedContext._meta, step.meta
       protractor.promise.controlFlow().execute ->
-        keywords[step.name] (ctx step.arguments), context
+        keywords[step.name] (ctx step.arguments), mergedContext
         testx.events.emit 'step/done', step, ctx
 
   runScript: (script, ctx) ->

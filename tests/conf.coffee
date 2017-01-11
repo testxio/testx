@@ -19,5 +19,6 @@ exports.config =
   onPrepare: ->
     require '../'
     testx.objects.add 'tests/objects.csv'
+    testx.keywords.add require './keywords'
     beforeEach ->
       browser.ignoreSynchronization = true

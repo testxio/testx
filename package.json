@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "A library for executing keyword driven tests with Protractor.",
   "main": "index.coffee",
   "scripts": {
@@ -37,14 +37,13 @@
     "coffee-script": "^1.11.1",
     "colors": "^1.1.2",
     "csv-parse": "^1.1.7",
-    "dotize": "^0.1.26",
     "lodash": "^4.16.4",
     "q": "^1.4.1",
     "testx-xlsx-parser": "^1.0.1",
     "testx-yaml-parser": "^1.2.0"
   },
   "testx": {
-    "logScript": true,
+    "logScript": false,
     "actionTimeout": 4000
   }
 }

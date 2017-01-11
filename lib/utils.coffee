@@ -1,5 +1,3 @@
-dotize = require 'dotize'
-
 module.exports =
   defer: (fn) -> setTimeout fn, 0
   printable: (obj, delimiter = ', ') ->
@@ -14,25 +12,30 @@ module.exports =
   defunc: (obj) ->
     if typeof obj == 'function' then obj() else obj
 
-  resolver: (context) ->
+  resolver: (ctx) ->
     (variable) ->
-      ctx = dotize.convert context
       resolveOne = (v) ->
         if v
           switch typeof v
             when 'string'
-              v.replace /(\{\{.+?\}\})/g, (match) ->
-                result = ctx[match[2...-2]]
-                if typeof result == 'function'
-                  result()
-                else
-                  result
+              if m = v.match /(\{\{(.+?)\}\})/
+                [full, withCurlies, varname] = m
+                result = ctx[varname]
+                switch typeof result
+                  when 'string'
+                    result
+                  when 'function'
+                    resolveOne result()
+                  else
+                    resolveOne result
+              else v
             when 'object'
               if Array.isArray v
                 resolveOne val for val in v
               else
                 result = {}
-                result[resolveOne key] = resolveOne val for key, val of v
+                for key, val of v
+                  result[resolveOne key] = resolveOne val
                 result
             else v
         else ''

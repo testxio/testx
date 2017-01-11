@@ -1,0 +1,13 @@
+- put:
+    some:
+      one: two
+      three:
+        - four
+        - five
+- compare:
+    expected:
+      one: two
+      three:
+        - four
+        - five
+    actual: '{{some}}'
