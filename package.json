@@ -4,7 +4,7 @@
   "description": "A library for executing keyword driven tests with Protractor.",
   "main": "index.coffee",
   "scripts": {
-    "test": "docker run -e DBUS_SESSION_BUS_ADDRESS=/dev/null --rm -it -v `pwd`:/work testx/protractor -w /work tests/conf.coffee"
+    "test": "docker run -e DBUS_SESSION_BUS_ADDRESS=/dev/null --rm -it -v `pwd`:/work testx/protractor tests/conf.coffee"
   },
   "repository": {
     "type": "git",
