@@ -25,7 +25,7 @@ module.exports =
                   when 'string'
                     result
                   when 'function'
-                    resolveOne result()
+                    resolveOne result(ctx)
                   else
                     resolveOne result
               else v
