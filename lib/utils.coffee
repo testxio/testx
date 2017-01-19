@@ -23,7 +23,7 @@ module.exports =
                 result = ctx[varname]
                 switch typeof result
                   when 'string'
-                    result
+                    resolveOne v.replace withCurlies, result
                   when 'function'
                     resolveOne result(ctx)
                   else
@@ -41,6 +41,7 @@ module.exports =
         else ''
 
       resolveOne variable
+
 
   objectify: (name, f) ->
     obj = {}

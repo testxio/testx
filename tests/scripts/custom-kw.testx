@@ -10,4 +10,4 @@
       three:
         - four
         - five
-    actual: '{{getSome}}'
+    actual: get('{{getSome}}')

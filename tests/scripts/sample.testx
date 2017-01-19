@@ -3,5 +3,7 @@
 - set:
     searchBox: new york city
     searchBtn: ''
+- wait to appear:
+    element1: resLink('{{match}}')
 - check matches:
     resultLink: '{{match}}'
