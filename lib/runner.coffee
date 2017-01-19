@@ -8,12 +8,13 @@ module.exports = (keywords, functions) ->
       params: browser.params
 
     ->
-      ctx = resolver mergedContext
-      testx.events.emit 'step/start', step, ctx
-      mergedContext._meta = _.merge mergedContext._meta, step.meta
       protractor.promise.controlFlow().execute ->
-        keywords[step.name] (ctx step.arguments), mergedContext
-        testx.events.emit 'step/done', step, ctx
+        mergedContext._meta = _.merge mergedContext._meta, step.meta
+        ctx = resolver mergedContext
+        step.arguments = ctx step.arguments
+        testx.events.emit 'step/start', step, mergedContext
+        keywords[step.name] step.arguments, mergedContext
+        testx.events.emit 'step/done', step, mergedContext
 
   runScript: (script, ctx) ->
     context = _.merge {}, ctx, functions,
