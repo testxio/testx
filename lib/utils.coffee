@@ -21,13 +21,17 @@ module.exports =
               if m = v.match /(\{\{(.+?)\}\})/
                 [full, withCurlies, varname] = m
                 result = ctx[varname]
-                switch typeof result
+                result = switch typeof result
                   when 'string'
-                    resolveOne v.replace withCurlies, result
+                    result
                   when 'function'
-                    resolveOne result(ctx)
+                    result ctx
                   else
                     resolveOne result
+                if withCurlies is v
+                  resolveOne result
+                else
+                  resolveOne v.replace withCurlies, result
               else v
             when 'object'
               if Array.isArray v

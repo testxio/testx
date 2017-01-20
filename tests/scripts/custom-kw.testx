@@ -3,11 +3,11 @@
       one: two
       three:
         - four
-        - five
+        - and five more
 - compare:
     expected:
       one: two
       three:
         - four
-        - five
-    actual: get('{{getSome}}')
+        - 'and {{five}} more'
+    actual: '{{getSome}}'
