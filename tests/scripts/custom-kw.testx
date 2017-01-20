@@ -4,10 +4,15 @@
       three:
         - four
         - and five more
+      six: 'seven nine,ten'
+    eight:
+      - nine
+      - ten
 - compare:
     expected:
       one: two
       three:
         - four
         - 'and {{five}} more'
+      six: 'seven {{eight}}'
     actual: '{{getSome}}'
