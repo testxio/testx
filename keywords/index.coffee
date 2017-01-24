@@ -107,7 +107,7 @@ keywords =
     acceptableErrors = ['StaleElementReferenceError', 'NoSuchElementError']
     wfs = waitFor(args, protractor.ExpectedConditions.invisibilityOf)
     for wf in wfs
-      wf.thenCatch (err) ->
+      wf.catch (err) ->
         throw err unless err.name in acceptableErrors
   'run': (args, ctx) ->
     context = _.extend {}, ctx, _.omit(args, ['file', 'sheet'])
