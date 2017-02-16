@@ -291,6 +291,7 @@ Predefined keywords are:
 | ---------------------- | ------------- | --------------- |------------ | ---------------------------- |
 | check equals           |               || Checks if the value of the object is exactly equal to the expected value. |            |
 |                        | *object key*  | *expected*      || Yes |
+|						 | 				 | selected / not selected (string)| check if the object is selected, useful for checkboxes and radio buttons|
 | check not equals       |               || Checks if the value of the object doesn't equal to the specified value. |            |
 |                        | *object key*  | *expected*      || Yes |
 | check matches          |               || Checks if the value of the object matches the expected regular expression. ||
@@ -303,8 +304,6 @@ Predefined keywords are:
 |                        | *object key*  | true / false  || Yes |
 | check readonly          |               || Checks if the object is readonly or not, applicable for input controls. ||
 |                        | *object key*  | true / false (string) || Yes |
-| check selected		 | 				 || Checks if the object is selected or not, suitable for checkboxes and radio buttons.||
-|						 |*object key*   | true / false (string) ||
 | clear local storage    |               |                 | Clears local storage. This keyword has no arguments. ||
 | delete cookies		 |               |                 | Deletes all application related cookies. This keyword has no arguments. ||
 | go back                |               |                 | Simulates pressing the **Back** browser button. |  |
