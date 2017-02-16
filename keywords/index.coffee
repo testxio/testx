@@ -73,6 +73,10 @@ keywords =
     for key, val of args
       expectedValue = if val.toLowerCase() == 'true' then 'true' else null # Note: It returns 'true' as string, not as boolean
       expect(testx.element(key).getAttribute('readonly')).toBe expectedValue, assertFailedMsg(ctx)
+  'check selected': (args, ctx) ->
+    for key, val of args
+      expectedValue = val.toLowerCase() == 'true'
+      expect(testx.element(key).isSelected()).toBe expectedValue, "Assertion failure at element: #{key}"
   'set': (args) ->
     for key, val of args
       do -> set key, val
