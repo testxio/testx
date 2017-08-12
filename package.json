@@ -1,10 +1,12 @@
 {
   "name": "testx",
-  "version": "2.6.3",
+  "version": "3.0.0",
   "description": "A library for executing keyword driven tests with Protractor.",
-  "main": "index.coffee",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "docker run --rm -it -v `pwd`:/work testx/protractor tests/conf.coffee"
+    "build": "coffee  -o lib/ -c src/",
+    "prepublish": "npm run build",
+    "test": "npm run build && docker run --rm -it -v `pwd`:/work testx/protractor tests/conf.coffee"
   },
   "repository": {
     "type": "git",
@@ -33,13 +35,16 @@
   "homepage": "http://testx.io",
   "dependencies": {
     "camel-case": "^1.2.2",
-    "coffee-errors": "^0.8.6",
-    "coffee-script": "^1.11.1",
     "colors": "^1.1.2",
     "csv-parse": "^1.1.7",
     "lodash": "^4.16.4",
     "testx-xlsx-parser": "^1.0.1",
-    "testx-yaml-parser": "^1.2.0"
+    "testx-yaml-parser": "^2.0.0"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.11.1",
+    "coffee-errors": "^0.8.6",
+    "protractor": "^5.1.1"
   },
   "testx": {
     "logScript": false,

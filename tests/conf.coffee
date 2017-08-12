@@ -17,7 +17,7 @@ exports.config =
   baseUrl: 'http://google.com'
 
   onPrepare: ->
-    require '../'
+    require '../lib'
     testx.objects.add 'tests/objects.csv'
     testx.objects.add require './objects'
     testx.functions.add require './functions'

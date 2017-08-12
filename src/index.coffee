@@ -1,6 +1,6 @@
 require 'coffee-errors'
 
-TestX = require './lib/testx'
+TestX = require './libs/testx'
 
 global.testx ?= new TestX
 
