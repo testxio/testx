@@ -15,7 +15,7 @@ describe 'Runner', ->
     @goTo
       url: '/'
     @set
-      searchBox: "new york city\n"
+      searchBox: 'new york city\n'
     @checkMatches
       resultLink: match
     @run
