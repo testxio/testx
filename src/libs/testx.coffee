@@ -5,8 +5,6 @@ _ = require 'lodash'
 camelCase = require 'camel-case'
 colors = require 'colors'
 
-xlsx = require 'testx-xlsx-parser'
-
 {resolver, objectify, defer} = require './utils'
 
 module.exports = class TestX
@@ -24,15 +22,11 @@ module.exports = class TestX
     require('./logger') @events
     defer => @events.emit 'testx/loaded', @params
 
-  runExcelSheet: deprecate (file, sheet, context) ->
-    @run file, sheet, context
-  , colors.red """ #{colors.bold('testx.runExcelSheet')} is deprecated and will be removed in the next major release. Please, use #{colors.bold('testx.run')} instead."""
-
   run: (args...) ->
     context = if args.length > 1 and typeof args[-1..][0] is 'object' then args.pop()
     @runScript (@parseFile.apply @, args), context
 
-  parseFile: (file, sheet) ->
+  parseFile: (file) ->
     stat = fs.statSync file
     if stat.isFile()
       extension = path.extname file
@@ -42,8 +36,11 @@ module.exports = class TestX
           parser.parseFile file
         else
           parser.parse fs.readFileSync(file, 'utf8')
-      else # assume this is an MS Excel file for backwards compatibility
-        xlsx.parse file, sheet, testx.params.locale
+      else
+        console.error """Error while trying to parse #{file}.
+                         Unknown file extension '#{extension}'.
+                         Did you install a parser for it?
+                         """
     else
       console.error "'#{file}' is not a file."
 
