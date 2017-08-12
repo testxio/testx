@@ -110,12 +110,8 @@ keywords =
       wf.catch (err) ->
         throw err unless err.name in acceptableErrors
   'run': (args, ctx) ->
-    context = _.extend {}, ctx, _.omit(args, ['file', 'sheet'])
-    if args.sheet
-      file = if args.file then args.file else ctx?._meta?.file
-      testx.run file, args.sheet, context
-    else
-      testx.run args.file, context
+    context = _.extend {}, ctx, _.omit(args, ['file'])
+    testx.run args.file, context
   'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
   'delete cookies': -> browser.manage().deleteAllCookies()
   'respond to dialog': (args) ->
