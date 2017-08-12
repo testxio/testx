@@ -1,7 +1,7 @@
 _ = require 'lodash'
 parse = require 'csv-parse'
 fs = require 'fs'
-defunc = require('../lib/utils').defunc
+defunc = require('../libs/utils').defunc
 defaultBehaviour = require './default-behaviour'
 
 objects = {}

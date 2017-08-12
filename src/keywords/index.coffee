@@ -4,7 +4,7 @@ fs = require 'fs'
 _ = require 'lodash'
 colors = require 'colors'
 
-{defunc, printable} = require '../lib/utils'
+{defunc, printable} = require '../libs/utils'
 
 DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000
 
