@@ -1,8 +1,10 @@
 - go to:
     url: /
 - set:
-    searchBox: "new york city\n"
+    searchBox: "testx.io\n"
 - wait to appear:
     element1: resLink('{{match}}')
+- set:
+    resLink('{{match}}'):
 - check matches:
-    resultLink: '{{match}}'
+    orgName: '{{match}}'

@@ -1,12 +1,10 @@
 module.exports = ->
   set: (val) ->
-    if val == "[CLEAR]"
-      @clear()
-    else if val
+    if val is undefined or val is null
+      @click()
+    else
       Key = protractor.Key
       @sendKeys Key.HOME, Key.chord(Key.SHIFT, Key.END), val
-    else
-      @click()
   get: ->
     @getTagName().then (tag) =>
       switch tag
