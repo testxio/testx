@@ -42,7 +42,7 @@ module.exports =
                   result[resolveOne key] = resolveOne val
                 result
             else v
-        else ''
+        else v
 
       resolveOne variable
 
