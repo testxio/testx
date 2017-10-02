@@ -1,8 +1,7 @@
 - go to:
     url: /
 - set:
-    searchBox: new york city
-    searchBtn: ''
+    searchBox: "new york city\n"
 - wait to appear:
     element1: resLink('{{match}}')
 - check matches:
