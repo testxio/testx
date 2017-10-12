@@ -16,3 +16,11 @@
         - 'and {{five}} more'
       six: 'seven {{eight}}'
     actual: '{{getSome}}'
+- compare:
+    expected:
+      one: two
+      three:
+        - four
+        - 'and {{identity(five)}} more'
+      six: 'seven {{eight}}'
+    actual: '{{getSome}}'

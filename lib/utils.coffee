@@ -1,3 +1,5 @@
+evalWithContext = require './eval.js'
+
 module.exports =
   defer: (fn) -> setTimeout fn, 0
   printable: (obj, delimiter = ', ') ->
@@ -20,7 +22,7 @@ module.exports =
             when 'string'
               if m = v.match /(\{\{(.+?)\}\})/
                 [full, withCurlies, varname] = m
-                result = ctx[varname]
+                result = evalWithContext ctx, varname
                 result = switch typeof result
                   when 'string'
                     result
