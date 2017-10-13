@@ -13,9 +13,9 @@
       one: two
       three:
         - four
-        - 'and {{five}} more'
+        - 'and ${five} more'
       six: 'seven {{eight}}'
-    actual: '{{getSome}}'
+    actual: ${getSome}
 - compare:
     expected:
       one: two
@@ -37,11 +37,11 @@
     actual: '{{complex[1]}}'
 - compare:
     expected:
-      - one: '{{identity(complex)[0].one}}'
-        two: '{{complex[0].two}}'
+      - one: ${identity(complex)[0].one}
+        two: ${complex[0].two}
       - three: '{{identity(3)}}'
         four: '{{identity("four")}}'
     actual: '{{complex}}'
 - compare:
     expected: 1
-    actual: '{{complex[0].one}}'
+    actual: ${complex[0].one}
