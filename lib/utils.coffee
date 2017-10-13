@@ -23,13 +23,10 @@ module.exports =
               if m = v.match /(\{\{(.+?)\}\})/
                 [full, withCurlies, varname] = m
                 result = evalWithContext ctx, varname
-                result = switch typeof result
-                  when 'string'
-                    result
-                  when 'function'
-                    result ctx
-                  else
-                    resolveOne result
+                result = if typeof result is 'function'
+                  result ctx
+                else
+                  resolveOne result
                 if withCurlies is v
                   resolveOne result
                 else
