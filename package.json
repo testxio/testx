@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "2.7.1",
+  "version": "2.8.0",
   "description":
     "A library for executing keyword driven tests with Protractor.",
   "main": "index.coffee",
@@ -34,6 +34,7 @@
   },
   "homepage": "http://testx.io",
   "dependencies": {
+    "@testx/eval": "^1.0.0",
     "camel-case": "^1.2.2",
     "coffee-errors": "^0.8.6",
     "coffee-script": "^1.11.1",

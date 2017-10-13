@@ -1,4 +1,4 @@
-evalWithContext = require './eval.js'
+evalWithContext = require '@testx/eval'
 
 module.exports =
   defer: (fn) -> setTimeout fn, 0
@@ -20,7 +20,7 @@ module.exports =
         if v
           switch typeof v
             when 'string'
-              if m = v.match /(\{\{(.+?)\}\})/
+              if m = v.match(/(\{\{(.+?)\}\})/) or v.match(/(\$\{(.+?)\})/)
                 [full, withCurlies, varname] = m
                 result = evalWithContext ctx, varname
                 result = if typeof result is 'function'
