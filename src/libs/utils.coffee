@@ -1,4 +1,4 @@
-evalWithContext = require './eval.js'
+evalWithContext = require '@testx/eval'
 
 module.exports =
   defer: (fn) -> setTimeout fn, 0
