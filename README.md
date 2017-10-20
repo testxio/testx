@@ -6,6 +6,7 @@ testx
 
 A library for executing keyword driven tests with Protractor.
 
+- [What is testx?](#what-is-testx)
 - [New and exciting stuff in testx 2.x](#new-and-exciting-stuff-in-testx-2.x)
 - [Migrating from testx 1.x to 2.x](#migrating-from-testx-1.x-to-2.x)
 - [Migrating from testx 0.x to 1.x](#migrating-from-testx-0.x-to-1.x)
@@ -17,6 +18,30 @@ A library for executing keyword driven tests with Protractor.
 - [Configuration](#configuration)
 - [Core keywords](#core-keywords)
 - [Additional keyword packages](#additional-keyword-packages)
+
+## What is testx?
+Testx is a library for executing keyword driven tests with Protractor. It provides a abstract level of your test executions to make it reader-friendly. For example:
+
+in Protractor you do:
+
+```javascript
+browser.get('https://www.google.com');
+element(by.name('q')).sendKeys('testx.io');
+element(by.css("button[name='btnG']")).click();
+expect(element(by.linkText('testxio · GitHub')).elementIsVisible).toBeTruthy();
+```
+in testx you do this instead:
+```
+- go to:
+    url: 'https://www.google.com'
+- set:
+    name('q'): testx.io
+    css("button[name='btnG']"):
+- wait to appear:
+    el1: resultLink
+```
+*Explatination*:
+By using pre-defined **testx keywords** such as ```go to```, testx parses the provide url to the Protractor and executes ```browser.get()``` function. The `set` keyword will execute ```element(by.)``` function depending on the parameters used. In the example above it first executes ```element(by.name())```, because a string is provided ```testx.io``` it will also run ```sendKeys()``` and parse the provided string to the function. Without providing string it will run ```click.()``` on the element. 
 
 ## New and exciting stuff in testx 2.x
 - **testx 2.0** introduces the concept of **parsers** as first class citizens in the **testx** ecosystem. This was motivated by the (surprising) success of the [testx-yaml-parser](http://testx.io/yaml-parser). **testx** will now try to guess how to parse a script file based on its extension. This means, that you can now just have ```testx.run 'scripts/some-test.testx'``` and **testx** will automagically know how to parse it and run it.
