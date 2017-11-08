@@ -16,7 +16,7 @@ A library for executing keyword driven tests with Protractor.
 - [Additional keyword packages](#additional-keyword-packages)
 
 ## What is testx?
-Testx is a library for executing keyword driven tests with Protractor. It provides a abstract level of your test executions to make it reader-friendly. For example:
+Testx is a library for executing keyword driven tests with Protractor. It provides a very simple abstraction for writing logicless test scripts. A **testx** test script is just a list of steps, that are executed in sequence. Each step performs an action and/or checks the state of the application under test against expected conditions. This intuitive concept makes the tests easy to write and read. While **testx** is built on top of Protractor it does not require programming knowledge. For example:
 
 in Protractor you do:
 
