@@ -37,13 +37,13 @@ in testx you do this instead:
     el1: resultLink
 ```
 *Explaination*:
-By using build-in core **testx keywords** `go to`, testx parses the provide url to the Protractor and executes `browser.get()`function. The `set` keyword will execute `element(by...)` function depending on the parameters used. In this case it first executes `element(by.name())`, because a string is provided `testx.io`it will also run `sendKeys()` and parse the provided string to the function. Leave it emply, `set` keyword it will run `click.()` on the element. 
+By using build-in core **testx keywords** `go to`, testx passes the provided *url* to Protractor's `browser.get()` function. The `set` keyword will execute `element(by...)` function depending on the parameters used. In this case it first executes `element(by.name())`, because a string is provided `testx.io`it will also run `sendKeys()` and parse the provided string to the function. Leave it emply, `set` keyword it will run `click.()` on the element. 
 
 
 ## How does it work
 **testx** aims to make web application testing easier by using keyword driven testing.
 
-**testx** uses ~~MS Excel sheets or~~ YAML files as a platform for writing tests. 
+**testx** uses YAML files as a platform for writing tests. 
 
 - **YAML** (*.testx, .yaml, .yml*):
 	- Pros
