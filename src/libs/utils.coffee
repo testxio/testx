@@ -1,3 +1,5 @@
+evalWithContext = require '@testx/eval'
+
 module.exports =
   defer: (fn) -> setTimeout fn, 0
   printable: (obj, delimiter = ', ') ->
@@ -18,16 +20,13 @@ module.exports =
         if v
           switch typeof v
             when 'string'
-              if m = v.match /(\{\{(.+?)\}\})/
+              if m = v.match(/(\{\{(.+?)\}\})/) or v.match(/(\$\{(.+?)\})/)
                 [full, withCurlies, varname] = m
-                result = ctx[varname]
-                result = switch typeof result
-                  when 'string'
-                    result
-                  when 'function'
-                    result ctx
-                  else
-                    resolveOne result
+                result = evalWithContext ctx, varname
+                result = if typeof result is 'function'
+                  result ctx
+                else
+                  resolveOne result
                 if withCurlies is v
                   resolveOne result
                 else
@@ -42,7 +41,7 @@ module.exports =
                   result[resolveOne key] = resolveOne val
                 result
             else v
-        else ''
+        else v
 
       resolveOne variable
 

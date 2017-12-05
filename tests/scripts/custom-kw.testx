@@ -13,6 +13,35 @@
       one: two
       three:
         - four
-        - 'and {{five}} more'
+        - 'and ${five} more'
+      six: 'seven {{eight}}'
+    actual: ${getSome}
+- compare:
+    expected:
+      one: two
+      three:
+        - four
+        - 'and {{identity(five)}} more'
       six: 'seven {{eight}}'
     actual: '{{getSome}}'
+- put:
+    complex:
+      - one: 1
+        two: 2
+      - three: 3
+        four: four
+- compare:
+    expected:
+      three: 3
+      four: four
+    actual: '{{complex[1]}}'
+- compare:
+    expected:
+      - one: ${identity(complex)[0].one}
+        two: ${complex[0].two}
+      - three: '{{identity(3)}}'
+        four: '{{identity("four")}}'
+    actual: '{{complex}}'
+- compare:
+    expected: 1
+    actual: ${complex[0].one}

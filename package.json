@@ -34,6 +34,7 @@
   },
   "homepage": "http://testx.io",
   "dependencies": {
+    "@testx/eval": "^1.0.0",
     "camel-case": "^1.2.2",
     "colors": "^1.1.2",
     "csv-parse": "^1.1.7",
