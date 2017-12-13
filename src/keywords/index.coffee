@@ -4,36 +4,18 @@ fs = require 'fs'
 _ = require 'lodash'
 colors = require 'colors'
 
-{defunc, printable, timeout} = require '../libs/utils'
-
-cond  = protractor.ExpectedConditions
-DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000
+{defunc, printable} = require '../libs/utils'
+{get, getAll, set, wait, convertSimpleArgs} = require './api'
 
 assertFailedMsg = (ctx) ->
   "Assertion failure at #{printable _.pick(ctx._meta, 'file', 'sheet', 'Row')}"
 
-get = (key) ->
-  testx.element(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()
-getAll = (key) ->
-  testx.elements(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()
-set = (key, value) ->
-  wait {objects: [key]}, cond.elementToBeClickable
-  testx.element(key).set value
-
-wait = (args, condition = cond.visibilityOf) ->
-  for obj in args.objects
-    (testx.element obj).wait timeout(args.timeout, DEFAULT_TIMEOUT()), condition
-
-convertSimpleArgs = (args, defaultArg) ->
-  if Array.isArray args or typeof args isnt 'object'
-    arg = args
-    args = {}
-    args[defaultArg] = arg
-  args
-
 module.exports =
   add: (kw) -> _.merge keywords, defunc(kw)
-  get: -> _.merge keywords, require('./navigate')
+  get: ->
+    navigates = require './navigate'
+    waits = require './wait'
+    _.merge keywords, navigates, waits
 
 keywords =
   'get': (keys...) ->
@@ -100,25 +82,6 @@ keywords =
     if args.frame
       browser.switchTo().frame(args.frame).then -> result.resolve true
     result.promise
-  wait: (args, ctx) ->
-    args = convertSimpleArgs args, 'objects'
-    args.to ?= 'appear'
-    if args.to is 'appear'
-      wait args
-    else if args.to is 'disappear'
-      # Hack for the 'stale element' exception plague
-      acceptableErrors = ['StaleElementReferenceError', 'NoSuchElementError']
-      wfs = wait args, cond.invisibilityOf
-      for wf in wfs
-        wf.catch (err) -> throw err unless err.name in acceptableErrors
-    else
-      throw
-        new Error "Uknown wait condition '#{args.to}'. #{assertFailedMsg ctx}"
-  'wait to appear': (args) -> @wait args
-  'wait to disappear': (args) ->
-    args = convertSimpleArgs args, 'objects'
-    args.to = 'disappear'
-    @wait args
   'run': (args, ctx) ->
     context = _.extend {}, ctx, _.omit(args, ['file'])
     testx.run args.file, context
