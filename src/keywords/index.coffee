@@ -32,21 +32,12 @@ convertSimpleArgs = (args, defaultArg) ->
   args
 
 module.exports =
-  add: (kw) -> _.assign keywords, defunc(kw)
-  get: -> keywords
+  add: (kw) -> _.merge keywords, defunc(kw)
+  get: -> _.merge keywords, require('./navigate')
 
 keywords =
   'get': (keys...) ->
     (get key for key in keys)
-  'go to': (args) ->
-    # args = convertSimpleArgs args, 'url'
-    browser.get args.url
-  'go forward': ->
-    browser.navigate().forward()
-  'go back': ->
-    browser.navigate().back()
-  'refresh page': ->
-    browser.navigate().refresh()
   'save': (args, ctx) ->
     save = (v) -> (value) -> ctx[v] = value
     for key, val of args

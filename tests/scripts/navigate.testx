@@ -1,0 +1,11 @@
+- go to:
+    url: /
+- wait:
+    - googleBigLogo
+- refresh page
+- wait:
+    - googleBigLogo
+- go back
+- go forward
+- wait:
+    - googleBigLogo
