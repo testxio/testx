@@ -7,7 +7,6 @@ exports.config =
     shardTestFiles: false
     maxInstances: 5
 
-
   framework: 'jasmine'
   jasmineNodeOpts:
     silent: true
@@ -18,7 +17,7 @@ exports.config =
 
   onPrepare: ->
     require '../lib'
-    testx.objects.add 'tests/objects.csv'
+    testx.objects.add 'tests/objects/objects.csv'
     testx.objects.add require './objects'
     testx.functions.add require './functions'
     testx.keywords.add require './keywords'

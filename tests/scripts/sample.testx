@@ -2,8 +2,8 @@
     url: /
 - set:
     searchBox: "testx.io\n"
-- wait to appear:
-    element1: resLink('{{match}}')
+- wait:
+    - resLink('{{match}}')
 - set:
     resLink('{{match}}'):
 - check matches:

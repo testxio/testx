@@ -1,0 +1,27 @@
+- go to:
+    url: /
+- set:
+    searchBox: "testx.io\n"
+- wait:
+    - resLink('{{match}}')
+    - googleLogo
+- wait:
+    to: appear
+    objects:
+      - resLink('{{match}}')
+- wait to appear:
+    - resLink('{{match}}')
+- wait to appear:
+    timeout: 2s
+    objects:
+      - resLink('{{match}}')
+- wait:
+    to: disappear
+    objects:
+      - resLink('no such thing')
+- wait to disappear:
+    - resLink('no such thing, really')
+- set:
+    resLink('{{match}}'):
+- check matches:
+    orgName: '{{match}}'

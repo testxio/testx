@@ -1,3 +1,4 @@
+googleLogo,id,logo
 resultLink,css,h3.r a
 searchBox,css,input[name='q']
 searchBtn,css,button[name='btnG']
