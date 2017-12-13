@@ -5,7 +5,8 @@ _ = require 'lodash'
 camelCase = require 'camel-case'
 colors = require 'colors'
 
-{resolver, objectify, defer} = require './utils'
+resolver = require './resolver'
+{objectify, defer} = require './utils'
 
 module.exports = class TestX
   constructor: ->

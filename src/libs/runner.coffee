@@ -1,6 +1,7 @@
 _ = require 'lodash'
 
-{resolver, defer} = require './utils'
+{defer} = require './utils'
+resolver = require './resolver'
 
 module.exports = (keywords, functions) ->
   run = (step, context) ->
