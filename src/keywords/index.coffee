@@ -4,11 +4,8 @@ fs = require 'fs'
 _ = require 'lodash'
 colors = require 'colors'
 
-{defunc, printable} = require '../libs/utils'
-{get, getAll, set, wait, convertSimpleArgs} = require './api'
-
-assertFailedMsg = (ctx) ->
-  "Assertion failure at #{printable _.pick(ctx._meta, 'file', 'sheet', 'Row')}"
+{defunc} = require '../libs/utils'
+{get, getAll, set, wait, convertSimpleArgs, assertFailedMsg} = require './api'
 
 module.exports =
   add: (kw) -> _.merge keywords, defunc(kw)
