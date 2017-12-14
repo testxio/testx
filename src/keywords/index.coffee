@@ -82,8 +82,6 @@ keywords =
   'run': (args, ctx) ->
     context = _.extend {}, ctx, _.omit(args, ['file'])
     testx.run args.file, context
-  'clear local storage': -> browser.executeScript 'window.localStorage.clear();'
-  'delete cookies': -> browser.manage().deleteAllCookies()
   'respond to dialog': (args) ->
     dialog = browser.switchTo().alert()
     switch args.response.toLowerCase() # Key should be 'response'
