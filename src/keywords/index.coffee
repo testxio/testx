@@ -10,9 +10,10 @@ colors = require 'colors'
 module.exports =
   add: (kw) -> _.merge keywords, defunc(kw)
   get: ->
+    checks = require './check'
     navigates = require './navigate'
     waits = require './wait'
-    _.merge keywords, navigates, waits
+    _.merge keywords, checks, navigates, waits
 
 keywords =
   'get': (keys...) ->
@@ -24,33 +25,6 @@ keywords =
   'put': (args, ctx) ->
     for key, val of args
       do -> ctx[key] = val
-  'check equals': (args, ctx) ->
-    for key, val of args
-      expect(get key).toEqual val, assertFailedMsg(ctx)
-  'check not equals': (args, ctx) ->
-    for key, val of args
-      expect(get key).not.toEqual val, assertFailedMsg(ctx)
-  'check matches': (args, ctx) ->
-    for key, val of args
-      expect(get key).toMatch val, assertFailedMsg(ctx)
-  'check not matches': (args, ctx) ->
-    for key, val of args
-      expect(get key).not.toMatch val, assertFailedMsg(ctx)
-  'check exists': (args, ctx) ->
-    for key, val of args
-      getAll(key).then (values) ->
-        if val.toLowerCase() is 'true' or val is ''
-          expect(values?.length).toBeTruthy assertFailedMsg(ctx)
-        else
-          expect(values?.length).toBeFalsy assertFailedMsg(ctx)
-  'check enabled': (args, ctx) ->
-    for key, val of args
-      expectedValue = val.toLowerCase() == 'true'
-      expect(testx.element(key).isEnabled()).toBe expectedValue, assertFailedMsg(ctx)
-  'check readonly': (args, ctx) ->
-    for key, val of args
-      expectedValue = if val.toLowerCase() == 'true' then 'true' else null # Note: It returns 'true' as string, not as boolean
-      expect(testx.element(key).getAttribute('readonly')).toBe expectedValue, assertFailedMsg(ctx)
   'set': (args) ->
     for key, val of args
       do -> set key, val

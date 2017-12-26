@@ -1,0 +1,27 @@
+- go to:
+    url: /
+- set:
+    searchBox: "testx.io\n"
+- wait:
+    - googleLogo
+- check equals:
+    searchBox: testx.io
+    resLink('testxio'): testxio · GitHub
+- check not equals:
+    searchBox: testx1111.io
+    resLink('testxio'): test..o
+- check matches:
+    searchBox: test[x|z]\.io
+    resLink('testxio'): test..o
+- check not matches:
+    searchBox: testx1111\.io
+    resLink('testxio'): test11o
+- check exists:
+    resLink('testxio'): true
+    resLink('no such thing'): false
+- check enabled:
+    resLink('testxio'): true
+    searchBox: true
+- check readonly:
+    resLink('testxio'): false
+    searchBox: false

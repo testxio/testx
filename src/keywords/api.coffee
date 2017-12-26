@@ -7,7 +7,13 @@ DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000
 get = (key) ->
   testx.element(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()
 getAll = (key) ->
-  testx.elements(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()
+  els = testx.elements key
+  els.count().then (e) ->
+    console.log key, e
+    if e is 0
+      Promise.resolve []
+    else
+      els.wait(DEFAULT_TIMEOUT()).then -> els
 set = (key, value) ->
   wait {objects: [key]}, cond.elementToBeClickable
   testx.element(key).set value
