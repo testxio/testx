@@ -44,22 +44,3 @@ module.exports = class TestX
                          """
     else
       console.error "'#{file}' is not a file."
-
-  with: (f) ->
-    flow = protractor.promise.controlFlow()
-    keywords = @keywords.get()
-    wrap = (f, passContext = true) -> (params...) =>
-      flow.execute =>
-        params[0] = resolver(context) params[0]
-        params.push context if passContext
-        f.apply @, params
-    context = {}
-    kwrds = _.extend _.extend.apply(@, (objectify(camelCase(k), wrap(v)) for k, v of keywords)),
-    get: (params...) ->
-      wrap(keywords.get, false)
-      .apply(@, params)
-      .then (values) ->(v.value_ for v in values)
-    log: wrap(console.log, false)
-    do: (f) -> (wrap.call kwrds, f)()
-
-    f.bind(kwrds)

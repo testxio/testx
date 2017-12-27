@@ -10,14 +10,3 @@ describe 'Runner', ->
         file: 'tests/scripts/sample.testx'
         match: 'testxio'
     '''
-  it 'should be able to run in-line CoffeeScript tests', testx.with ->
-    match = 'New York'
-    @goTo
-      url: '/'
-    @set
-      searchBox: 'new york city\n'
-    @checkMatches
-      resultLink: match
-    @run
-      file: 'tests/scripts/sample.testx'
-      match: 'testxio'
