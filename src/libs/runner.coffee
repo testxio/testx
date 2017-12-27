@@ -1,7 +1,7 @@
 _ = require 'lodash'
+resolver = require '@testx/context-resolver'
 
 {defer} = require './utils'
-resolver = require './resolver'
 
 module.exports = (keywords, functions) ->
   run = (step, context) ->
