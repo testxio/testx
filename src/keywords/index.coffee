@@ -16,18 +16,20 @@ module.exports =
     _.merge keywords, checks, navigates, waits
 
 keywords =
-  'get': (keys...) ->
-    (get key for key in keys)
+  'get': (keys) ->
+    for key in keys
+      get(key)
   'save': (args, ctx) ->
     save = (v) -> (value) -> ctx[v] = value
     for key, val of args
-      do -> (get key).then save(val)
+      (get key).then save(val)
   'put': (args, ctx) ->
     for key, val of args
-      do -> ctx[key] = val
+      ctx[key] = val
   'set': (args) ->
     for key, val of args
-      do -> set key, val
+      set key, val
+      val
   'ignore synchronization': (args) ->
     ignore = if args.ignore in ['true', 'yes', '1'] then true else false
     browser.ignoreSynchronization = ignore
