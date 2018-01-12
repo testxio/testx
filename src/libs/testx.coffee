@@ -3,8 +3,8 @@ fs = require 'fs'
 deprecate = require('util').deprecate
 _ = require 'lodash'
 camelCase = require 'camel-case'
-colors = require 'colors'
 
+logger = require '@testx/logger-default'
 resolver = require '@testx/context-resolver'
 
 {objectify, defer} = require './utils'
@@ -21,7 +21,7 @@ module.exports = class TestX
     @runner = require('./runner') @keywords.get(), @functions.get()
     @runScript = @runner.runScript
     @events = require './events'
-    require('./logger') @events
+    logger @events
     defer => @events.emit 'testx/loaded', @params
 
   run: (args...) ->

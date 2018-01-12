@@ -2,7 +2,6 @@ path = require 'path'
 fs = require 'fs'
 
 _ = require 'lodash'
-colors = require 'colors'
 
 {defunc} = require '../libs/utils'
 {get, getAll, set, wait, convertSimpleArgs, assertFailedMsg} = require './api'
