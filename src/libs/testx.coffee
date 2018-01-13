@@ -2,7 +2,6 @@ path = require 'path'
 fs = require 'fs'
 deprecate = require('util').deprecate
 _ = require 'lodash'
-camelCase = require 'camel-case'
 
 logger = require '@testx/logger-default'
 resolver = require '@testx/context-resolver'
