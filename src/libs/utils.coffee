@@ -26,8 +26,3 @@ module.exports =
 
   defunc: (obj) ->
     if typeof obj == 'function' then obj() else obj
-
-  objectify: (name, f) ->
-    obj = {}
-    obj[name] = f
-    obj

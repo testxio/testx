@@ -1,12 +1,9 @@
 path = require 'path'
 fs = require 'fs'
-deprecate = require('util').deprecate
-_ = require 'lodash'
-
 logger = require '@testx/logger-default'
 resolver = require '@testx/context-resolver'
 
-{objectify, defer} = require './utils'
+{defer} = require './utils'
 
 module.exports = class TestX
   constructor: ->
@@ -24,8 +21,8 @@ module.exports = class TestX
     defer => @events.emit 'testx/loaded', @params
 
   run: (args...) ->
-    context = if args.length > 1 and typeof args[-1..][0] is 'object' then args.pop()
-    @runScript (@parseFile.apply @, args), context
+    ctx = args.pop() if args.length > 1 and typeof args[-1..][0] is 'object'
+    @runScript (@parseFile.apply @, args), ctx
 
   parseFile: (file) ->
     stat = fs.statSync file
