@@ -37,10 +37,10 @@
     "@testx/context-resolver": "^1.0.0",
     "@testx/eval": "^1.0.0",
     "@testx/logger-default": "^1.0.0",
+    "@testx/parser-yaml": "^3.0.0",
     "csv-parse": "^1.1.7",
     "duration-js": "^4.0.0",
-    "lodash": "^4.16.4",
-    "testx-yaml-parser": "^2.0.0"
+    "lodash": "^4.16.4"
   },
   "devDependencies": {
     "coffee-errors": "^0.8.6",

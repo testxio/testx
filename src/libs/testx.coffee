@@ -11,7 +11,7 @@ resolver = require '@testx/context-resolver'
 module.exports = class TestX
   constructor: ->
     @params = require './params'
-    @parsers = (require './parsers').add 'testx-yaml-parser'
+    @parsers = (require './parsers').add '@testx/parser-yaml'
     @keywords = require '../keywords'
     @objects = require '../objects'
     @element = @objects.element
