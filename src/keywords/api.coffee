@@ -9,7 +9,6 @@ get = (key) ->
 getAll = (key) ->
   els = testx.elements key
   els.count().then (e) ->
-    console.log key, e
     if e is 0
       Promise.resolve []
     else
