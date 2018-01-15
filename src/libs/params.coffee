@@ -18,7 +18,7 @@ fileExists = (file) ->
   try
     fs.statSync(filePath).isFile()
   catch e
-  false
+    false
 
 module.exports = do ->
   _.extend {}, require(getPackageJson())?.testx, browser.params.testx
