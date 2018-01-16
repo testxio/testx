@@ -25,3 +25,8 @@
 - check readonly:
     resLink('testxio'): false
     searchBox: false
+- put:
+    $result: test123
+- check result:
+    equals: test123
+    matches: test.23

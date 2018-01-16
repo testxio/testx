@@ -8,7 +8,14 @@ check = (condition, positive = true) -> (args, ctx) ->
     cond = cond.not if not positive
     cond[condition] val, assertFailedMsg ctx
 
+checkResult = (args, ctx) ->
+  checkOne = (method, exp) -> (actual) ->
+    expect(exp)[method] actual, assertFailedMsg ctx
+  if eq = args.equals then ctx.$result.map checkOne('toEqual', eq)
+  if mt = args.matches then ctx.$result.map checkOne('toMatch', eq)
+
 module.exports =
+  'check result': checkResult
   'check equals': check 'toEqual'
   'check not equals': check 'toEqual', false
   'check matches': check 'toMatch'
