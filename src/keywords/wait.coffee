@@ -13,8 +13,7 @@ module.exports =
       for wf in wfs
         wf.catch (err) -> throw err unless err.name in acceptableErrors
     else
-      throw
-        new Error "Uknown wait condition '#{args.to}'. #{assertFailedMsg ctx}"
+      throw new Error "Uknown wait condition '#{args.to}'. #{assertFailedMsg ctx}"
   'wait to appear': (args) -> @wait args
   'wait to disappear': (args) ->
     args = convertSimpleArgs args, 'objects'

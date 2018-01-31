@@ -7,7 +7,7 @@
     "build": "coffee  -o lib/ -c src/",
     "prepublish": "npm run build",
     "pretest": "webdriver-manager update; npm run build",
-    "test": "protractor tests/conf.coffee"
+    "test": "protractor tests/conf.js"
   },
   "repository": {
     "type": "git",
@@ -43,12 +43,11 @@
     "lodash": "^4.16.4"
   },
   "devDependencies": {
-    "coffee-errors": "^0.8.6",
-    "coffee-script": "^1.12.7",
+    "coffeescript": "^2.1.1",
     "protractor": "^5.1.1"
   },
   "testx": {
     "logScript": false,
-    "actionTimeout": 4000
+    "actionTimeout": 5000
   }
 }
