@@ -5,7 +5,9 @@ cond  = protractor.ExpectedConditions
 DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000
 
 get = (key) ->
-  testx.element(key).wait(DEFAULT_TIMEOUT()).then -> testx.element(key).get()
+  testx.element(key).wait(DEFAULT_TIMEOUT()).get()
+getAttribute = (key, attribute) ->
+  testx.element(key).wait(DEFAULT_TIMEOUT()).getAttribute(attribute)
 getAll = (key) ->
   els = testx.elements key
   els.count().then (e) ->
@@ -24,6 +26,7 @@ wait = (args, condition = cond.visibilityOf) ->
 module.exports =
   get: get
   getAll: getAll
+  getAttribute: getAttribute
   set: set
   wait: wait
   convertSimpleArgs: (args, defaultArg) ->

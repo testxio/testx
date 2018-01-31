@@ -1,4 +1,4 @@
-{get, getAll, assertFailedMsg} = require './api'
+{get, getAll, getAttribute, assertFailedMsg} = require './api'
 
 map = (args, cb) -> Object.entries(args).map ([key, val]) -> cb key, val
 
@@ -20,6 +20,10 @@ module.exports =
   'check not equals': check 'toEqual', false
   'check matches': check 'toMatch'
   'check not matches': check 'toMatch', false
+  'check attribute': (args, ctx) ->
+    {object, attribute} = args
+    getAttribute(object, attribute).then (attr) ->
+      expect(args['to equal']).toEqual attr
   'check exists': (args, ctx) ->
     map args, (key, val) ->
       getAll(key).then (values) ->

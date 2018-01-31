@@ -4,6 +4,10 @@
     searchBox: "testx.io\n"
 - wait:
     - googleLogo
+- check attribute:
+    object: resLink('testxio')
+    attribute: href
+    to equal: http://testx.io/
 - check equals:
     searchBox: testx.io
     resLink('testxio'): testxio · GitHub
