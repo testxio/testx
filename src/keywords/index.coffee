@@ -62,10 +62,3 @@ keywords =
     switch args.response.toLowerCase() # Key should be 'response'
       when "ok" then dialog.accept()
       when "cancel" then dialog.dismiss()
-  'send keys': (args) ->
-    # Send key strokes to focussed element, supporting specials keys, such as [TAB] and [ENTER].
-    # Documentation: http://selenium.googlecode.com/git/docs/api/javascript/enum_webdriver_Key.html
-    for key, val of args
-      keys = val.replace(/\[\w+\]/g, (match) ->
-        protractor.Key[match.substring(1, match.length-1).toUpperCase()])
-      browser.actions().sendKeys(keys).perform()
