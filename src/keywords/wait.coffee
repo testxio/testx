@@ -7,13 +7,10 @@ module.exports =
     if args.to is 'appear'
       wait args
     else if args.to is 'disappear'
-      # Hack for the 'stale element' exception plague
-      acceptableErrors = ['StaleElementReferenceError', 'NoSuchElementError']
-      wfs = wait args, protractor.ExpectedConditions.invisibilityOf
-      for wf in wfs
-        wf.catch (err) -> throw err unless err.name in acceptableErrors
+      wait args, protractor.ExpectedConditions.invisibilityOf
     else
-      throw new Error "Uknown wait condition '#{args.to}'. #{assertFailedMsg ctx}"
+      failMsg = assertFailedMsg ctx
+      throw new Error "Uknown wait condition '#{args.to}'. #{failMsg}"
   'wait to appear': (args) -> @wait args
   'wait to disappear': (args) ->
     args = convertSimpleArgs args, 'objects'

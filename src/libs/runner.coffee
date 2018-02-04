@@ -1,32 +1,31 @@
 _ = require 'lodash'
 resolver = require '@testx/context-resolver'
 
-{defer} = require './utils'
-
 module.exports = (keywords, functions) ->
-  run = (step, context) ->
-    mergedContext = _.merge context,
-      params: browser.params
-    ->
-      mergedContext._meta = _.merge mergedContext._meta, step.meta
-      ctx = resolver mergedContext
-      step.arguments = ctx step.arguments
-      testx.events.emit 'step/start', step, mergedContext
-      result = keywords[step.name] step.arguments, mergedContext
-      if result and Array.isArray result
-        Promise.all(result).then (data) ->
-          context.$result = data
-      else
-        Promise.resolve(result).then (data) ->
-          context.$result = data
-      testx.events.emit 'step/done', step, mergedContext
-
+  assert = (expecteds, actual) ->
+    for cond, expected of expecteds
+      switch cond
+        when 'to equal' then expect(actual).toEqual expected
+        when 'to match' then expect(actual).toMatch expected
+        when 'not to equal' then expect(actual).not.toEqual expected
+        when 'not to match' then expect(actual).not.toMatch expected
 
   runScript: (script, ctx) ->
     context = _.merge {}, ctx, functions,
       _meta: script.source
-    flow = protractor.promise.controlFlow()
-    flow.execute -> testx.events.emit 'script/start', script, context
+      params: browser.params
+    testx.events.emit 'script/start', script, context
     for step in script.steps
-      flow.execute run(step, context)
-    flow.execute -> testx.events.emit 'script/done', script, context
+      context._meta = _.merge context._meta, step.meta
+      ctx = resolver context
+      step.arguments = ctx step.arguments
+      testx.events.emit 'step/start', step, ctx
+      if step.arguments.hasOwnProperty 'expect result'
+        expecteds = step.arguments['expect result']
+        step.arguments = _.omit step.arguments, ['expect result']
+        context.$result = await keywords[step.name] step.arguments, context
+        assert expecteds, context.$result
+      else
+        context.$result = await keywords[step.name] step.arguments, context
+      testx.events.emit 'step/done', step, ctx
+    testx.events.emit 'script/done', script, context

@@ -1,5 +1,5 @@
 exports.config = {
-  // SELENIUM_PROMISE_MANAGER: false,
+  SELENIUM_PROMISE_MANAGER: true,
   directConnect: true,
   specs: ["spec/*"],
   capabilities: {

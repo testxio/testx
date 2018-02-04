@@ -1,0 +1,14 @@
+- go to:
+    url: /
+    expect result:
+      to equal: /
+      not to equal: f
+      to match: .
+      not to match: d
+- id:
+    test: test123
+    expect result:
+      to equal:
+        test: test123
+      not to equal:
+        test: sdaf
