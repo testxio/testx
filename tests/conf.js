@@ -10,7 +10,7 @@ exports.config = {
     shardTestFiles: false,
     maxInstances: 5
   },
-  framework: "jasmine",
+  framework: "jasmine2",
   jasmineNodeOpts: {
     silent: true,
     defaultTimeoutInterval: 300000,
