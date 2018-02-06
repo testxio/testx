@@ -1,6 +1,5 @@
 EventEmitter = require 'events'
 
-
 createJasmineReporter = (emitter) ->
   emit = (eventType) -> (data) -> emitter.emit eventType, data
 
