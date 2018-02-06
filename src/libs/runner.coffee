@@ -27,6 +27,7 @@ module.exports = (keywords, functions) ->
       ctx = resolver context
       step.arguments = ctx step.arguments
       testx.events.emit 'step/start', step, ctx
+      origExpect = global.expect
       global.expect = since(-> assertFailedMsg step, context, @message).expect
       if step.arguments.hasOwnProperty 'expect result'
         expecteds = step.arguments['expect result']
@@ -35,5 +36,6 @@ module.exports = (keywords, functions) ->
         assert expecteds, context.$result
       else
         context.$result = await keywords[step.name] step.arguments, context
+      global.expect = origExpect
       testx.events.emit 'step/done', step, ctx
     testx.events.emit 'script/done', script, context
