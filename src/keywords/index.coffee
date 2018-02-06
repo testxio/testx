@@ -3,7 +3,7 @@ fs = require 'fs'
 
 _ = require 'lodash'
 
-{defunc} = require '../libs/utils'
+{defunc} = require '../utils'
 {get, getAll, set, wait, convertSimpleArgs} = require './api'
 
 module.exports =

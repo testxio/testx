@@ -3,12 +3,12 @@ fs = require 'fs'
 logger = require '@testx/logger-default'
 resolver = require '@testx/context-resolver'
 
-{defer} = require './utils'
+{defer} = require '../utils'
 
 module.exports = class TestX
   constructor: ->
     @params = require './params'
-    @parsers = (require './parsers').add '@testx/parser-yaml'
+    @parsers = (require '../parsers').add '@testx/parser-yaml'
     @keywords = require '../keywords'
     @objects = require '../objects'
     @element = @objects.element
@@ -16,7 +16,7 @@ module.exports = class TestX
     @functions = require '../functions'
     @runner = require('./runner') @keywords.get(), @functions.get()
     @runScript = @runner.runScript
-    @events = require './events'
+    @events = require '../events'
     logger @events
     defer => @events.emit 'testx/loaded', @params
 

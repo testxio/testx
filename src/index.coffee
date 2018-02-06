@@ -1,4 +1,4 @@
-TestX = require './libs/testx'
+TestX = require './core'
 
 global.testx ?= new TestX
 

@@ -2,7 +2,7 @@ _ = require 'lodash'
 since = require 'jasmine2-custom-message'
 resolver = require '@testx/context-resolver'
 
-{assertFailedMsg} = require './utils'
+{assertFailedMsg} = require '../utils'
 
 module.exports = (keywords, functions) ->
   assert = (expecteds, actual) ->

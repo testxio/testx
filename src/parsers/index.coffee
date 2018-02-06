@@ -1,4 +1,4 @@
-{acquire} = require './utils'
+{acquire} = require '../utils'
 
 parsers = {}
 

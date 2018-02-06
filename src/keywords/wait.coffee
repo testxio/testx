@@ -1,5 +1,5 @@
 {wait, convertSimpleArgs} = require './api'
-{assertFailedMsg} = require '../libs/utils'
+{assertFailedMsg} = require '../utils'
 
 module.exports =
   wait: (args, ctx) ->

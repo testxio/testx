@@ -1,5 +1,5 @@
 _ = require 'lodash'
-{timeout} = require '../libs/utils'
+{timeout} = require '../utils'
 
 cond  = protractor.ExpectedConditions
 DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000

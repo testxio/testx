@@ -17,14 +17,12 @@ exports.config = {
     includeStackTrace: false
   },
   baseUrl: "http://google.com",
-  onPrepare: function() {
+  onPrepare: () => {
     require("../lib");
     testx.objects.add("tests/objects/objects.csv");
     testx.objects.add(require("./objects"));
     testx.functions.add(require("./functions"));
     testx.keywords.add(require("./keywords"));
-    return beforeEach(function() {
-      return (browser.ignoreSynchronization = true);
-    });
+    beforeEach(() => (browser.ignoreSynchronization = true));
   }
 };

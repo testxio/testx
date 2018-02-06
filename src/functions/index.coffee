@@ -1,5 +1,5 @@
 _ = require 'lodash'
-defunc = require('../libs/utils').defunc
+{defunc} = require '../utils'
 
 functions = {}
 
