@@ -2,11 +2,7 @@ _ = require 'lodash'
 since = require 'jasmine2-custom-message'
 resolver = require '@testx/context-resolver'
 
-{printable} = require './utils'
-assertFailedMsg = (step, ctx, origMsg) ->
-  location = printable _.pick ctx._meta, 'file', 'sheet', 'Row'
-  """Failed expectation at #{location.toLowerCase()}, keyword: '#{step.name}'.
-  #{origMsg}"""
+{assertFailedMsg} = require './utils'
 
 module.exports = (keywords, functions) ->
   assert = (expecteds, actual) ->
@@ -28,7 +24,7 @@ module.exports = (keywords, functions) ->
       step.arguments = ctx step.arguments
       testx.events.emit 'step/start', step, ctx
       origExpect = global.expect
-      global.expect = since(-> assertFailedMsg step, context, @message).expect
+      global.expect = since(-> assertFailedMsg context, step, @message).expect
       if step.arguments.hasOwnProperty 'expect result'
         expecteds = step.arguments['expect result']
         step.arguments = _.omit step.arguments, ['expect result']

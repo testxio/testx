@@ -1,5 +1,5 @@
 _ = require 'lodash'
-{timeout, printable} = require '../libs/utils'
+{timeout} = require '../libs/utils'
 
 cond  = protractor.ExpectedConditions
 DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000
@@ -35,6 +35,3 @@ module.exports =
       args = {}
       args[defaultArg] = arg
     args
-  assertFailedMsg: (ctx) ->
-    location = printable _.pick ctx._meta, 'file', 'sheet', 'Row'
-    "Assertion failure at #{location}"

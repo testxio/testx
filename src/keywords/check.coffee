@@ -1,4 +1,4 @@
-{get, getAll, getAttribute, assertFailedMsg} = require './api'
+{get, getAll, getAttribute} = require './api'
 
 map = (args, cb) -> Object.entries(args).map ([key, val]) -> cb key, val
 
@@ -6,7 +6,7 @@ check = (condition, positive = true) -> (args, ctx) ->
   map args, (key, val) ->
     cond = expect get key
     cond = cond.not if not positive
-    cond[condition] val, assertFailedMsg ctx
+    cond[condition] val
 
 module.exports =
   'check equals': check 'toEqual'
@@ -21,14 +21,14 @@ module.exports =
     map args, (key, val) ->
       getAll(key).then (values) ->
         if val or val is ''
-          expect(values?.length).toBeTruthy assertFailedMsg ctx
+          expect(values?.length).toBeTruthy()
         else
-          expect(values?.length).toBeFalsy assertFailedMsg ctx
+          expect(values?.length).toBeFalsy()
   'check enabled': (args, ctx) ->
     map args, (key, val) ->
-      expect(testx.element(key).isEnabled()).toBe val, assertFailedMsg ctx
+      expect(testx.element(key).isEnabled()).toBe val
   'check readonly': (args, ctx) ->
     map args, (key, val) ->
       expected = if val then val else null
       actual = testx.element(key).getAttribute('readonly')
-      expect(actual).toBe expected, assertFailedMsg ctx
+      expect(actual).toBe expected

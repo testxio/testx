@@ -1,5 +1,6 @@
+_ = require 'lodash'
+Duration = require 'duration-js'
 evalWithContext = require '@testx/eval'
-Duration = require "duration-js"
 
 module.exports =
   timeout: (tmt, defaultTmt, defaultUnit = 'ms') ->
@@ -15,7 +16,7 @@ module.exports =
 
   defer: (fn) -> setTimeout fn, 0
 
-  printable: (obj, delimiter = ', ') ->
+  printable: pr = (obj, delimiter = ', ') ->
     ("#{k}: '#{v}'" for k, v of obj).join delimiter
 
   acquire: (pkg) ->
@@ -26,3 +27,11 @@ module.exports =
 
   defunc: (obj) ->
     if typeof obj == 'function' then obj() else obj
+
+  assertFailedMsg: (ctx, step, origMsg) ->
+    location = pr(_.pick ctx._meta, 'file', 'sheet', 'Row').toLowerCase()
+    msg = "Failed expectation at #{location}"
+    msg = "#{msg}, keyword: '#{step.name}'" if step
+    msg = "#{msg}."
+    msg = "#{msg}\n#{origMsg}" if origMsg
+    msg

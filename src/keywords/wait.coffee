@@ -1,4 +1,5 @@
 {wait, convertSimpleArgs} = require './api'
+{assertFailedMsg} = require '../libs/utils'
 
 module.exports =
   wait: (args, ctx) ->
@@ -9,8 +10,7 @@ module.exports =
     else if args.to is 'disappear'
       wait args, protractor.ExpectedConditions.invisibilityOf
     else
-      failMsg = assertFailedMsg ctx
-      throw new Error "Uknown wait condition '#{args.to}'. #{failMsg}"
+      throw new Error "Uknown wait condition '#{args.to}'. #{assertFailedMsg ctx}"
   'wait to appear': (args) -> @wait args
   'wait to disappear': (args) ->
     args = convertSimpleArgs args, 'objects'
