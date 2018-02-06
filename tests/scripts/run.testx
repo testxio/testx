@@ -1,0 +1,3 @@
+- run:
+    file: 'tests/scripts/sample.testx'
+    match: 'testxio'
