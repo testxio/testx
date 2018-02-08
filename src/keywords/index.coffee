@@ -12,7 +12,8 @@ module.exports =
     checks = require './check'
     navigates = require './navigate'
     waits = require './wait'
-    _.merge keywords, checks, navigates, waits
+    expects = require './expect'
+    _.merge keywords, checks, navigates, waits, expects
 
 keywords =
   'get': (keys) ->

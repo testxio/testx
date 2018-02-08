@@ -12,3 +12,14 @@
         test: test123
       not to equal:
         test: sdaf
+- expect:
+    ${$result.test}:
+      to equal: test123
+      not to equal: something else
+      to match: \w{4}\d{3}
+      not to match: completely different
+- id:
+    test: test123
+- expect result:
+    to equal:
+      test: test123
