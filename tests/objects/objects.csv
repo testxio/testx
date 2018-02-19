@@ -1,6 +1,6 @@
-googleLogo,id,logo
+googleSearchForm,css,form.tsf
 googleBigLogo,id,hplogo
 resultLink,css,h3.r a
-searchBox,css,input[name='q']
+searchBox,id,lst-ib
 searchBtn,css,button[name='btnG']
 luckyBtn,css,button[name='btnI']

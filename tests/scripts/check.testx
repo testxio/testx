@@ -3,7 +3,7 @@
 - set:
     searchBox: "testx.io\n"
 - wait:
-    - googleLogo
+    - googleSearchForm
 - check attribute:
     object: resLink('testxio')
     attribute: href
