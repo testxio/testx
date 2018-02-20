@@ -5,6 +5,9 @@ resolver = require '@testx/context-resolver'
 {assertFailedMsg} = require '../utils'
 assert = require '../assert'
 
+augmentedWait = (originalWait, msg) -> (condition, timeout) ->
+  originalWait condition, timeout, msg
+
 module.exports = (keywords, functions) ->
   runScript: (script, ctx) ->
     context = _.merge {}, ctx, functions,
@@ -18,6 +21,8 @@ module.exports = (keywords, functions) ->
       testx.events.emit 'step/start', step, ctx
       origExpect = global.expect
       global.expect = since(-> assertFailedMsg context, step, @message).expect
+      origWait = browser.wait
+      browser.wait = augmentedWait origWait, assertFailedMsg context, step
       if step.arguments.hasOwnProperty 'expect result'
         expecteds = step.arguments['expect result']
         step.arguments = _.omit step.arguments, ['expect result']
@@ -26,5 +31,6 @@ module.exports = (keywords, functions) ->
       else
         context.$result = await keywords[step.name] step.arguments, context
       global.expect = origExpect
+      browser.wait = origWait
       testx.events.emit 'step/done', step, ctx
     testx.events.emit 'script/done', script, context
