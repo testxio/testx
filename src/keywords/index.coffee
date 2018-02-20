@@ -4,7 +4,7 @@ fs = require 'fs'
 _ = require 'lodash'
 
 {defunc} = require '../utils'
-{get, getAll, set, wait, convertSimpleArgs} = require './api'
+{get, set} = require './api'
 
 module.exports =
   add: (kw) -> _.merge keywords, defunc(kw)
