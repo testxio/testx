@@ -1,6 +1,6 @@
 module.exports =
   'go to': (args) ->
-    browser.get args.url
+    await browser.get args.url
     args.url
   'go forward': ->
     browser.navigate().forward()

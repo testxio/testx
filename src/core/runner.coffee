@@ -5,9 +5,6 @@ resolver = require '@testx/context-resolver'
 {assertFailedMsg} = require '../utils'
 assert = require '../assert'
 
-augmentedWait = (originalWait, msg) -> (condition, timeout) ->
-  originalWait condition, timeout, msg
-
 module.exports = (keywords, functions) ->
   runScript: (script, ctx) ->
     context = _.merge {}, ctx, functions,
@@ -20,17 +17,19 @@ module.exports = (keywords, functions) ->
       step.arguments = ctx step.arguments
       testx.events.emit 'step/start', step, ctx
       origExpect = global.expect
-      global.expect = since(-> assertFailedMsg context, step, @message).expect
-      origWait = browser.wait
-      browser.wait = augmentedWait origWait, assertFailedMsg context, step
-      if step.arguments.hasOwnProperty 'expect result'
-        expecteds = step.arguments['expect result']
-        step.arguments = _.omit step.arguments, ['expect result']
-        context.$result = await keywords[step.name] step.arguments, context
-        assert expecteds, context.$result
-      else
-        context.$result = await keywords[step.name] step.arguments, context
-      global.expect = origExpect
-      browser.wait = origWait
+      try
+        global.expect = since(-> assertFailedMsg context, step, @message).expect
+        if step.arguments.hasOwnProperty 'expect result'
+          expecteds = step.arguments['expect result']
+          step.arguments = _.omit step.arguments, ['expect result']
+          context.$result = await keywords[step.name] step.arguments, context
+          assert expecteds, context.$result
+        else
+          context.$result = await keywords[step.name] step.arguments, context
+      catch e
+        throw new Error """#{assertFailedMsg context, step}
+        #{e}"""
+      finally
+        global.expect = origExpect
       testx.events.emit 'step/done', step, ctx
     testx.events.emit 'script/done', script, context

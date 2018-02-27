@@ -24,5 +24,6 @@ module.exports = ->
         else
           @getText()
   wait: (timeout, expCondition = protractor.ExpectedConditions.visibilityOf) ->
-    browser.wait(expCondition.call(protractor.ExpectedConditions, @), timeout)
+    cond = expCondition.call protractor.ExpectedConditions, @
+    await browser.wait cond, timeout
     @

@@ -19,16 +19,18 @@ module.exports =
       expect(args['to equal']).toEqual attr
   'check exists': (args, ctx) ->
     map args, (key, val) ->
-      getAll(key).then (values) ->
-        if val or val is ''
-          expect(values?.length).toBeTruthy()
-        else
-          expect(values?.length).toBeFalsy()
+      values = await getAll key
+      if val or val is ''
+        expect(values?.length).toBeTruthy()
+      else
+        expect(values?.length).toBeFalsy()
   'check enabled': (args, ctx) ->
     map args, (key, val) ->
-      expect(testx.element(key).isEnabled()).toBe val
+      el = await testx.element key
+      expect(el.isEnabled()).toBe val
   'check readonly': (args, ctx) ->
     map args, (key, val) ->
       expected = if val then val else null
-      actual = testx.element(key).getAttribute('readonly')
+      el = await testx.element key
+      actual = await el.getAttribute('readonly')
       expect(actual).toBe expected
