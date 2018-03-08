@@ -26,10 +26,9 @@ module.exports =
 
 _element = (findFunc = element) -> (key) ->
   findElement = (object) ->
-    behaviour = _.extend defaultBehaviour(), (object.behaviour or object.behavior)
+    behaviour = _.merge {}, defaultBehaviour(), (object.behaviour or object.behavior)
     value = if Array.isArray(object.value) then object.value else [object.value]
     _.extend findFunc(protractor.By[object.locator].apply @, value), behaviour
-
 
   match = /^([^\(]+)\((.*)\)$/.exec key.trim()
   if match
@@ -41,6 +40,6 @@ _element = (findFunc = element) -> (key) ->
     else
       throw new Error "Object '#{func}' is not a function."
   else if obj = objects[key]
-    findElement obj
+    findElement defunc obj
   else
     throw new Error "Could not find a locator for object '#{key}'! Is this object defined?"
