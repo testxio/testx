@@ -9,12 +9,11 @@ module.exports = ->
     @getTagName().then (tag) =>
       switch tag
         when 'input'
-          @getAttribute('type').then (tp) =>
-            switch tp
-              when 'radio', 'checkbox'
-                @isSelected().then (result) -> result.toString()
-              else
-                @getAttribute 'value'
+          switch await @getAttribute('type')
+            when 'radio', 'checkbox'
+              @isSelected()
+            else
+              @getAttribute 'value'
         when 'textbox'
           @getAttribute 'value'
         when 'img'
