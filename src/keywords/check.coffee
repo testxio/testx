@@ -15,8 +15,8 @@ module.exports =
   'check not matches': check 'toMatch', false
   'check attribute': (args, ctx) ->
     {object, attribute} = args
-    getAttribute(object, attribute).then (attr) ->
-      expect(args['to equal']).toEqual attr
+    attr = await getAttribute object, attribute
+    expect(args['to equal']).toEqual attr
   'check exists': (args, ctx) ->
     map args, (key, val) ->
       values = await getAll key
