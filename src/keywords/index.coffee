@@ -1,6 +1,8 @@
 path = require 'path'
 fs = require 'fs'
 
+Duration = require 'duration-js'
+
 _ = require 'lodash'
 
 {defunc} = require '../utils'
@@ -34,7 +36,7 @@ keywords =
     ignore = if args.ignore in ['true', 'yes', '1'] then true else false
     browser.ignoreSynchronization = ignore
   'sleep': (args) ->
-    browser.sleep (args.milliseconds || 0) + 1000 * (args.seconds || 0)
+    browser.sleep new Duration(args).milliseconds()
   'switch to': (args) ->
     result = q.defer()
     if args.title
