@@ -1,8 +1,6 @@
 path = require 'path'
 fs = require 'fs'
 
-Duration = require 'duration-js'
-
 _ = require 'lodash'
 
 {defunc} = require '../utils'
@@ -15,7 +13,8 @@ module.exports =
     navigates = require './navigate'
     waits = require './wait'
     expects = require './expect'
-    _.merge keywords, checks, navigates, waits, expects
+    misc = require './misc'
+    _.merge keywords, checks, navigates, waits, expects, misc
 
 keywords =
   'get': (keys) ->
@@ -32,11 +31,6 @@ keywords =
     for key, val of args
       set key, val
       val
-  'ignore synchronization': (args) ->
-    ignore = if args.ignore in ['true', 'yes', '1'] then true else false
-    browser.ignoreSynchronization = ignore
-  'sleep': (args) ->
-    browser.sleep new Duration(args).milliseconds()
   'switch to': (args) ->
     result = q.defer()
     if args.title
