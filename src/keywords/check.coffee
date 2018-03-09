@@ -1,4 +1,6 @@
+_ = require 'lodash'
 {get, getAll, getAttribute} = require './api'
+assert = require '../assert'
 
 map = (args, cb) -> Object.entries(args).map ([key, val]) -> cb key, val
 
@@ -16,7 +18,7 @@ module.exports =
   'check attribute': (args, ctx) ->
     {object, attribute} = args
     attr = await getAttribute object, attribute
-    expect(args['to equal']).toEqual attr
+    assert _.omit(args, 'object', 'attribute'), attr
   'check exists': (args, ctx) ->
     map args, (key, val) ->
       values = await getAll key

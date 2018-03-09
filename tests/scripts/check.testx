@@ -8,6 +8,7 @@
     object: resLink('testxio')
     attribute: href
     to equal: http://testx.io/
+    to match: http:..testx\.../
 - check equals:
     searchBox: testx.io
     resLink('testxio'): testxio · GitHub
