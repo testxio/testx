@@ -1,6 +1,6 @@
 googleSearchForm,css,form.tsf
 googleBigLogo,id,hplogo
-resultLink,css,h3.r a
+resultLink,xpath,(//h3[@class='r']/a)[1]
 searchBox,id,lst-ib
 searchBtn,css,button[name='btnG']
 luckyBtn,css,button[name='btnI']
