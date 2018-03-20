@@ -1,11 +1,6 @@
 sudo: required
-
+addons:
+  chrome: stable
 language: node_js
 node_js:
-  - "6"
-
-services:
-  - docker
-
-before_install:
-  - docker pull testx/protractor
+  - "8"
