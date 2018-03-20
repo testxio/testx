@@ -1,10 +1,21 @@
 module.exports = ->
   set: (val) ->
-    if val == "[CLEAR]"
-      @clear()
-    else if val
+    type = =>
       Key = protractor.Key
       @sendKeys Key.HOME, Key.chord(Key.SHIFT, Key.END), val
+    if val == "[CLEAR]"
+      @clear()
+    else if val isnt undefined or val isnt null
+      @getTagName().then (tag) =>
+        switch tag
+          when 'input'
+            @getAttribute('type').then (tp) =>
+              switch tp
+                when 'radio', 'checkbox'
+                  @isSelected().then (result) =>
+                    @click() if result isnt val
+                else type()
+          else type()
     else
       @click()
   get: ->

@@ -2,3 +2,7 @@ resultLink,css,h3.r a
 searchBox,css,input[name='q']
 searchBtn,css,button[name='btnG']
 luckyBtn,css,button[name='btnI']
+radioChecked,id,f3
+radioUnchecked,id,f4
+checkboxChecked,id,f5
+checkboxUnchecked,id,f6

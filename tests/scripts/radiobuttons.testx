@@ -1,0 +1,31 @@
+- go to:
+    url: http://jkorpela.fi/www/testel.html
+- check equals:
+    radioChecked: 'false'
+    radioUnchecked: 'true'
+- set:
+    radioChecked: false
+    radioUnchecked: true
+- check equals:
+    radioChecked: 'false'
+    radioUnchecked: 'true'
+- set:
+    radioChecked: true
+- check equals:
+    radioChecked: 'true'
+    radioUnchecked: 'false'
+- set:
+    radioUnchecked: true
+- check equals:
+    radioChecked: 'false'
+    radioUnchecked: 'true'
+- set:
+    radioChecked:
+- check equals:
+    radioChecked: 'true'
+    radioUnchecked: 'false'
+- set:
+    radioUnchecked:
+- check equals:
+    radioChecked: 'false'
+    radioUnchecked: 'true'
