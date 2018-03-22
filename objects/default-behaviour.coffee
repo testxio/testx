@@ -5,7 +5,9 @@ module.exports = ->
       @sendKeys Key.HOME, Key.chord(Key.SHIFT, Key.END), val
     if val == "[CLEAR]"
       @clear()
-    else if val isnt undefined or val isnt null
+    else if val is undefined or val is null
+      @click()
+    else
       @getTagName().then (tag) =>
         switch tag
           when 'input'
@@ -16,8 +18,6 @@ module.exports = ->
                     @click() if result isnt val
                 else type()
           else type()
-    else
-      @click()
   get: ->
     @getTagName().then (tag) =>
       switch tag
