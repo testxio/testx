@@ -5,11 +5,11 @@ cond  = protractor.ExpectedConditions
 DEFAULT_TIMEOUT = -> testx.params.actionTimeout || 5000
 
 get = (key) ->
-  testx.element(key).wait(DEFAULT_TIMEOUT()).then (el) ->
-    await el.get()
+  el = await testx.element(key).wait(DEFAULT_TIMEOUT())
+  await el.get()
 getAttribute = (key, attribute) ->
-  testx.element(key).wait( DEFAULT_TIMEOUT()).then (el) ->
-    await el.getAttribute(attribute)
+  el = await testx.element(key).wait( DEFAULT_TIMEOUT())
+  await el.getAttribute(attribute)
 getAll = (key) ->
   await testx.elements key
 set = (key, value) ->

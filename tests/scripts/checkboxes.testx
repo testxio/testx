@@ -1,0 +1,23 @@
+- go to:
+    url: http://jkorpela.fi/www/testel.html
+- check equals:
+    checkboxChecked: false
+    checkboxUnchecked: true
+- set:
+    checkboxChecked: false
+    checkboxUnchecked: true
+- check equals:
+    checkboxChecked: false
+    checkboxUnchecked: true
+- set:
+    checkboxChecked: true
+    checkboxUnchecked: false
+- check equals:
+    checkboxChecked: true
+    checkboxUnchecked: false
+- set:
+    checkboxChecked:
+    checkboxUnchecked:
+- check equals:
+    checkboxChecked: false
+    checkboxUnchecked: true

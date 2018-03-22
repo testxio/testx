@@ -2,13 +2,11 @@ _ = require 'lodash'
 {get, getAll, getAttribute} = require './api'
 assert = require '../assert'
 
-map = (args, cb) -> Object.entries(args).map ([key, val]) -> cb key, val
-
 check = (condition, positive = true) -> (args, ctx) ->
-  map args, (key, val) ->
-    cond = expect get key
+  for key, val of args
+    cond = expect await get key
     cond = cond.not if not positive
-    cond[condition] val
+    await cond[condition] val
 
 module.exports =
   'check equals': check 'toEqual'
@@ -20,18 +18,18 @@ module.exports =
     attr = await getAttribute object, attribute
     assert _.omit(args, 'object', 'attribute'), attr
   'check exists': (args, ctx) ->
-    map args, (key, val) ->
+    for key, val of args
       values = await getAll key
       if val or val is ''
         expect(values?.length).toBeTruthy()
       else
         expect(values?.length).toBeFalsy()
   'check enabled': (args, ctx) ->
-    map args, (key, val) ->
+    for key, val of args
       el = await testx.element key
-      expect(el.isEnabled()).toBe val
+      expect(await el.isEnabled()).toBe val
   'check readonly': (args, ctx) ->
-    map args, (key, val) ->
+    for key, val of args
       expected = if val then val else null
       el = await testx.element key
       actual = await el.getAttribute('readonly')

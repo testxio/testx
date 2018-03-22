@@ -4,3 +4,7 @@ resultLink,xpath,(//h3[@class='r']/a)[1]
 searchBox,id,lst-ib
 searchBtn,css,button[name='btnG']
 luckyBtn,css,button[name='btnI']
+radioChecked,id,f3
+radioUnchecked,id,f4
+checkboxChecked,id,f5
+checkboxUnchecked,id,f6
