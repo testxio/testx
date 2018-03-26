@@ -25,9 +25,9 @@ exec = (keywords, step, context) ->
 
 module.exports = (keywords, functions) ->
   runScript: (script, ctx) ->
-    context = _.merge {}, ctx, functions,
+    base =
       _meta: script.source
-      params: browser.params
+    context = _.merge {}, functions, base, testx.params, ctx
     testx.events.emit 'script/start', script, context
     for step in script.steps
       context._meta = _.merge context._meta, step.meta
