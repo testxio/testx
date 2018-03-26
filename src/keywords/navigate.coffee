@@ -1,5 +1,8 @@
+{convertSimpleArgs} = require './api'
+
 module.exports =
   'go to': (args) ->
+    args = convertSimpleArgs args, 'url'
     await browser.get args.url
     args.url
   'go forward': ->

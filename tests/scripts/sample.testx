@@ -1,7 +1,6 @@
-- go to:
-    url: /
+- go to: /
 - set:
-    searchBox: "testx.io\n"
+    searchBox: "testxio\n"
 - wait:
     - resLink('{{match}}')
 - set:
