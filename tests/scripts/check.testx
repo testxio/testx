@@ -1,23 +1,23 @@
 - go to:
     url: /
 - set:
-    searchBox: "testx.io\n"
+    searchBox: "testxio\n"
 - wait:
     - googleSearchForm
 - check attribute:
     object: resLink('testxio')
     attribute: href
-    to equal: http://testx.io/
-    to match: http:..testx\.../
+    to equal: https://github.com/testxio
+    to match: github\.com/\w{4}xio
 - check equals:
-    searchBox: testx.io
+    searchBox: testxio
     resLink('testxio'): testxio · GitHub
 - check not equals:
     searchBox: testx1111.io
-    resLink('testxio'): test..o
+    resLink('testxio'): something else
 - check matches:
-    searchBox: test[x|z]\.io
-    resLink('testxio'): test..o
+    searchBox: test[x|z].o
+    resLink('testxio'): tx\w{2} · GitHub
 - check not matches:
     searchBox: testx1111\.io
     resLink('testxio'): test11o

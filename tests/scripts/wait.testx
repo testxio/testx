@@ -1,7 +1,7 @@
 - go to:
     url: /
 - set:
-    searchBox: "testx.io\n"
+    searchBox: "testxio\n"
 - wait:
     - resLink('{{match}}')
     - googleSearchForm

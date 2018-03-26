@@ -1,6 +1,6 @@
 - go to:
     url: /
 - set:
-    searchBox: "testx.io\n"
+    searchBox: "testxio\n"
 - check matches:
     resultLink: 'testxio · GitHub'
