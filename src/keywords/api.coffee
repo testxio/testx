@@ -29,7 +29,7 @@ module.exports =
   set: set
   wait: wait
   convertSimpleArgs: (args, defaultArg) ->
-    if Array.isArray args or typeof args isnt 'object'
+    if typeof args isnt 'object' or Array.isArray args
       arg = args
       args = {}
       args[defaultArg] = arg
