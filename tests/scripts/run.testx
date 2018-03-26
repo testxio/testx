@@ -1,3 +1,4 @@
 - run:
-    file: 'tests/scripts/sample.testx'
-    match: 'testxio'
+    file: tests/scripts/sample.testx
+    match: testxio
+- run: tests/scripts/no-context.testx
