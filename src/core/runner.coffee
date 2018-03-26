@@ -30,10 +30,10 @@ module.exports = (keywords, functions) ->
       params: browser.params
     testx.events.emit 'script/start', script, context
     for step in script.steps
-      testx.events.emit 'step/start', step, context
       context._meta = _.merge context._meta, step.meta
       ctx = resolver context
       step.arguments = ctx step.arguments
+      testx.events.emit 'step/start', step, context
       await exec keywords, step, context
       testx.events.emit 'step/done', step, context
     await testx.events.emit 'script/done', script, context
