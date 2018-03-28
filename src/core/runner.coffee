@@ -27,7 +27,7 @@ module.exports = (keywords, functions) ->
   runScript: (script, ctx) ->
     base =
       _meta: script.source
-    context = _.merge {}, functions, base, testx.params, ctx
+    context = _.merge {}, functions, base, ctx, testx.params.context
     testx.events.emit 'script/start', script, context
     for step in script.steps
       context._meta = _.merge context._meta, step.meta
