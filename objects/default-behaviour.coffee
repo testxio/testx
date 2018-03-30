@@ -28,7 +28,7 @@ module.exports = ->
                 @isSelected().then (result) -> result.toString()
               else
                 @getAttribute 'value'
-        when 'textbox'
+        when 'textarea'
           @getAttribute 'value'
         when 'img'
           @getAttribute 'src'
