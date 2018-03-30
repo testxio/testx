@@ -42,8 +42,8 @@ describe("My first", () =>
     testx.run("tests/scripts/my-first-test.testx")));
 ```
 All the rest of it is in the **testx** script file.
-### Scripts
-Each **testx** script is just a list of steps. These steps are synchronous and are executed in sequence. By default the scripts are encoded it *.testx* files, that are just YAML files. Every step has single key - the name of the keyword to be executed at this step. The value of assigned to this key is the parameter of the keyword. In general the steps are just actions/checks performed on objects (elements). Simple!
+### Scripts and steps
+Each **testx** script is just a list of **steps**. These steps are synchronous and are executed in sequence. By default a script are encoded in a *.testx* file. By default it is a YAML file. Every step consists of two things - the keyword to be executed at this step, and the parameters of the execution. In general the steps are just actions/checks performed on objects (elements). Simple!
 
 Here is an example:
 ```YAML
@@ -53,13 +53,23 @@ Here is an example:
 - check matches:
     orgName: 'testxio'
 ```
-There are 3 steps in this script - **go to**, **set** and **check matches**.
+There are 3 **steps** in this script - **go to**, **set** and **check matches**.
 - The **go to** keyword is responsible for taking us to a URL - "/" is a URL relative to whatever *baseUrl* (test run parameter) is.
 - The **set** keyword types "testxio" in the "searchBox" object (it happens to be an input box, we'll talk about objects later) and presses the Enter key ("\n").
 - The **check matches** checks that the content of the "orgName" object (an H1 html element in this case) RegEx match the text "testxio".
 
 ### Keywords
+Keywords tell **testx** what action do you want to perform the the parameters of the keyword tell it to which element (for example) you want to target. The combination of these two concepts represents a **step**. The type of action can be a click on a button or a link, typing something into an input box, etc. Keywords usually target (do something with) objects - the elements in the browser - or the test context. The core keywords, the ones that come with **testx**, are generally about actions, that a user will perform in the browser. A [list of all core action](#core-keywords) is available further in this documentation.
+
 ### Objects
+Objects in **testx** are an abstraction of the HTML elements in the browser. You can think of an object as **the name of a particular, actionable element**. They are discovered by **testx** with a **locator**.
+
+You need this sort of abstraction to shield you from changes in the exact HTML structure of the application under test. With an object map like that, whenever a "logical" element on the screen changes you'll just change its locator and that's it, you don't need to change any of your scripts.
+
+Locators are organized into what we refer to as **the object map**, but this is just a fancy name for a JSON object, where keys are the name of the object and the values are the locators.
+
+The names of the object (in the object map) is how you will refer to this object in your **testx** scripts.
+
 #### Default behaviour
 #### Custom behaviour
 ### Test context
