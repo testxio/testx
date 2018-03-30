@@ -22,7 +22,7 @@ module.exports = ->
             @isSelected()
           else
             @getAttribute 'value'
-      when 'textbox'
+      when 'textarea'
         @getAttribute 'value'
       when 'img'
         @getAttribute 'src'
