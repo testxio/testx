@@ -36,7 +36,6 @@
   "homepage": "http://testx.io",
   "dependencies": {
     "@testx/context-resolver": "^1.0.0",
-    "@testx/eval": "^1.0.0",
     "@testx/logger-default": "^1.1.0",
     "@testx/parser-yaml": "^3.0.0",
     "csv-parse": "^1.1.7",
