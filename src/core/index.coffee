@@ -20,6 +20,4 @@ module.exports = class TestX
     logger @events
     defer => @events.emit 'testx/loaded', @params
 
-  run: (args...) ->
-    ctx = args.pop() if args.length > 1 and typeof args[-1..][0] is 'object'
-    @runScript (parsers.parseFile.apply @, args), ctx
+  run: (file, ctx) -> @runScript parsers.parseFile(file), ctx
