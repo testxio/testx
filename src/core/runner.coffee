@@ -17,9 +17,6 @@ exec = (keywords, step, context) ->
       assert expecteds, context.$result
     else
       context.$result = await keywords[step.name](step.arguments, context)
-  catch e
-    throw new Error """#{assertFailedMsg context, step}
-    #{e}"""
   finally
     global.expect = origExpect
 
@@ -30,10 +27,14 @@ module.exports = (keywords, functions) ->
     context = _.merge {}, functions, base, ctx, testx.params.context
     testx.events.emit 'script/start', script, context
     for step in script.steps
-      context._meta = _.merge context._meta, step.meta
-      ctx = resolver context
-      step.arguments = ctx step.arguments
-      testx.events.emit 'step/start', step, context
-      await exec keywords, step, context
-      testx.events.emit 'step/done', step, context
+      try
+        context._meta = _.merge context._meta, step.meta
+        ctx = resolver context
+        step.arguments = ctx step.arguments
+        testx.events.emit 'step/start', step, context
+        await exec keywords, step, context
+        testx.events.emit 'step/done', step, context
+      catch e
+        throw new Error """#{assertFailedMsg context, step}
+        #{e}"""
     await testx.events.emit 'script/done', script, context
