@@ -1,6 +1,5 @@
 _ = require 'lodash'
 Duration = require 'duration-js'
-evalWithContext = require '@testx/eval'
 
 module.exports =
   timeout: (tmt, defaultTmt, defaultUnit = 'ms') ->
