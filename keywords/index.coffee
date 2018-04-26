@@ -54,7 +54,12 @@ keywords =
       expect(get key).not.toEqual val, assertFailedMsg(ctx)
   'check matches': (args, ctx) ->
     for key, val of args
-      expect(get key).toMatch val, assertFailedMsg(ctx)
+      if typeof val == 'string'
+        expect(get key).toMatch val, assertFailedMsg(ctx)
+      else
+        for attrKey, attrVal of val
+          expect(testx.element(key).getAttribute(attrKey)).toMatch attrVal, assertFailedMsg(ctx)
+
   'check not matches': (args, ctx) ->
     for key, val of args
       expect(get key).not.toMatch val, assertFailedMsg(ctx)
