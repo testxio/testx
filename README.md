@@ -211,9 +211,9 @@ Predefined keywords are:
 |                        | *object key*  | *expected*      || Yes |
 | check not equals       |               || Checks if the value of the object doesn't equal to the specified value. |            |
 |                        | *object key*  | *expected*      || Yes |
-| check matches          |               || Checks if the value or attributes of the object matches the expected regular expression. ||
+| check matches          |               || Checks if the value or attributes (given as key-value pairs) of the object matches the expected regular expression. ||
 |                        | *object key*  | *expected regex* || Yes |
-|                        | *object key*  | *dictionary of atttibute: regex* || Yes |
+|                        | *object key*  | *dictionary of atttibute: regex* | e.g.: `alt: Something nice` or `height: ^\d+$` | Yes |
 | check not matches      |               || Checks if the value of the object doesn't match the specified regular expression. ||
 |                        | *object key*  | *expected regex* || Yes |
 | check exists           |               || Checks if the object is present or not. ||

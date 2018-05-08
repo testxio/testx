@@ -1,0 +1,7 @@
+- go to:
+    url: /
+- check matches:
+    googleImg:
+      alt: Google
+      width: 272
+      height: ^\d+$

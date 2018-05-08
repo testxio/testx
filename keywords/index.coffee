@@ -58,7 +58,7 @@ keywords =
         expect(get key).toMatch val, assertFailedMsg(ctx)
       else
         for attrKey, attrVal of val
-          expect(testx.element(key).getAttribute(attrKey)).toMatch attrVal, assertFailedMsg(ctx)
+          expect(testx.element(key).getAttribute(attrKey)).toMatch attrVal.toString(), assertFailedMsg(ctx)
 
   'check not matches': (args, ctx) ->
     for key, val of args
