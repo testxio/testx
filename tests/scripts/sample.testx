@@ -3,6 +3,6 @@
 - set:
     searchBox: "new york city\n"
 - wait to appear:
-    element1: resLink('{{match}}')
+    element1: test.resLink('{{match}}')
 - check matches:
     resultLink: '{{match}}'

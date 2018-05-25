@@ -20,7 +20,7 @@ exports.config =
   onPrepare: ->
     require '../'
     testx.objects.add 'tests/objects.csv'
-    testx.objects.add require './objects'
+    testx.objects.add (require './objects'), 'test.'
     testx.functions.add require './functions'
     testx.keywords.add require './keywords'
     beforeEach ->

@@ -1,5 +1,5 @@
 _ = require 'lodash'
-parse = require 'csv-parse'
+parse = require 'csv-parse/lib/sync'
 fs = require 'fs'
 defunc = require('../lib/utils').defunc
 defaultBehaviour = require './default-behaviour'
@@ -7,14 +7,15 @@ defaultBehaviour = require './default-behaviour'
 objects = {}
 
 module.exports =
-  add: (objs) ->
+  add: (objs, prefix) ->
     objs = defunc objs
-    if typeof objs == "object"
-      _.assign(objects, objs)
-    else # if the argument is not an object we assume it is a CSV file path
-      fs.createReadStream(objs).pipe parse {delimiter: ','}, (err, data) ->
-        throw new Error(err) if err
-        objects[row[0]] = locator: row[1], value: row[2] for row in data
+    pref = prefix or ''
+    unless typeof objs is 'object'
+      contents = fs.readFileSync(objs)
+      rows = parse contents, {delimiter: ','}
+      objs = {}
+      (objs[row[0]] = locator: row[1], value: row[2]) for row in rows
+    (objects[pref + k] = v) for k, v of objs
 
   get: -> objects
   element: (key) -> _element() key
