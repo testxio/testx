@@ -71,15 +71,85 @@ Locators are organized into what we refer to as **the object map**, but this is 
 The names of the object (in the object map) is how you will refer to this object in your **testx** scripts.
 
 #### Default behaviour
+TBA
 #### Custom behaviour
+TBA
 ### Test context
-	Functions?
+TBA
 ### Parsers
+TBA
 ### Reporters
+TBA
 
 ## API
 ### **testx** API
+TBA
+
 ### Core keywords
+These are the default keywords that come with **testx**.
+
+#### Set
+**Set** performs an action on an element. It is polymorphic, meaning that the action depends on the type of the element. For example a **set** on an *input* will fill it in, while a **set** on a *button* will click it.
+```YAML
+- set:
+    myInput: this text goes in
+    myButton: null
+```
+
+In this example *myInput* is the reference (the name) of an *input* element and "this text goes in" will be "typed" in the input element. On the other hand *myButton* is a button that will be clicked. Actions on the elements are ordered, in this example the text will be typed in the input box firs and only then the button gets clicked.
+
+Passing **null** as the action means **click**. So
+```YAML
+- set:
+    myInput: null
+```
+will cause **testx** to only click in the input box *myInput*.
+
+Default actions per element type are: **TBA**
+
+#### Check
+Check text, attribute value, existence, enabled or readonly properties of an object.
+- check equals
+- check not equals
+- check matches
+- check not matches
+- check exists
+- check enabled
+- check readonly
+
+#### Wait
+Wait for the (dis)appearance of an object.
+- wait
+- wait to appear
+- wait to disappear
+
+#### Navigational keywords
+- go to
+- go forward
+- go back
+- refresh page
+
+#### Expect
+- expect
+- expect result
+
+#### Run
+- run
+
+#### Context keywords
+- put
+- save
+
+#### Browser keywords
+- clear local storage
+- delete cookies
+- ignore synchronization
+- switch to
+- respond to dialog
+
+#### Debugging
+- sleep
+
 
 ## Plugins
 
