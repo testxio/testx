@@ -28,9 +28,9 @@ module.exports =
   getAttribute: getAttribute
   set: set
   wait: wait
-  convertSimpleArgs: (args, defaultArg) ->
+  convertSimpleArgs: (args, defaultArg, toArray = false) ->
     if typeof args isnt 'object' or Array.isArray args
       arg = args
       args = {}
-      args[defaultArg] = arg
+      args[defaultArg] = if toArray then [arg] else arg
     args

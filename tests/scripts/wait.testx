@@ -2,6 +2,8 @@
     url: /
 - set:
     searchBox: "testxio\n"
+- wait: googleSearchForm
+- wait to appear: googleSearchForm
 - wait:
     - resLink('{{match}}')
     - googleSearchForm
@@ -19,9 +21,6 @@
     to: disappear
     objects:
       - resLink('no such thing')
+- wait to disappear: resLink('no such thing, really')
 - wait to disappear:
     - resLink('no such thing, really')
-- set:
-    resLink('{{match}}'):
-- check matches:
-    orgName: '{{match}}'
