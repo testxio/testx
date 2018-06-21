@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "A library for executing keyword driven tests with Protractor.",
   "main": "lib/index.js",
   "scripts": {

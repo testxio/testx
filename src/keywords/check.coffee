@@ -4,19 +4,21 @@ assert = require '../assert'
 
 check = (condition, positive = true) -> (args, ctx) ->
   for key, val of args
-    cond = expect await get key
-    cond = cond.not if not positive
-    await cond[condition] val
+    if typeof val is 'object'
+      for attr, expected of val
+        cond = expect await getAttribute key, attr
+        cond = cond.not if not positive
+        await cond[condition] expected
+    else
+      cond = expect await get key
+      cond = cond.not if not positive
+      await cond[condition] val
 
 module.exports =
   'check equals': check 'toEqual'
   'check not equals': check 'toEqual', false
   'check matches': check 'toMatch'
   'check not matches': check 'toMatch', false
-  'check attribute': (args, ctx) ->
-    {object, attribute} = args
-    attr = await getAttribute object, attribute
-    assert _.omit(args, 'object', 'attribute'), attr
   'check exists': (args, ctx) ->
     for key, val of args
       values = await getAll key

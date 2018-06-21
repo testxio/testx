@@ -4,11 +4,16 @@
     searchBox: "testxio\n"
 - wait:
     - googleSearchForm
-- check attribute:
-    object: resLink('testxio')
-    attribute: href
-    to equal: https://github.com/testxio
-    to match: github\.com/\w{4}xio
+- check equals:
+    resLink('testxio'):
+      href: https://github.com/testxio
+      host: github.com
+      isConnected: 'true'
+      nodeType: '1'
+- check matches:
+    resLink('testxio'):
+      href: github\.com/\w{4}xio
+      localName: \w
 - check equals:
     searchBox: testxio
     resLink('testxio'): testxio · GitHub
