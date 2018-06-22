@@ -6,7 +6,7 @@ module.exports =
   'delete cookies': ->
     browser.manage().deleteAllCookies()
   'ignore synchronization': (args) ->
-    ignore = if args.ignore in ['true', 'yes', '1'] then true else false
+    ignore = if args in [true, 'true', 'yes', '1'] then true else false
     browser.ignoreSynchronization = ignore
   'sleep': (args) ->
     browser.sleep new Duration(args).milliseconds()
