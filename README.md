@@ -109,47 +109,157 @@ Default actions per element type are: **TBA**
 
 #### Check
 Check text, attribute value, existence, enabled or readonly properties of an object.
-- check equals
-- check not equals
-- check matches
-- check not matches
-- check exists
-- check enabled
-- check readonly
+```YAML
+- check equals:
+    resLink('testxio'):
+      href: https://github.com/testxio
+      host: github.com
+      isConnected: 'true'
+      nodeType: '1'
+- check matches:
+    resLink('testxio'):
+      href: github\.com/\w{4}xio
+      localName: \w
+- check equals:
+    searchBox: testxio
+    resLink('testxio'): testxio · GitHub
+- check not equals:
+    searchBox: testx1111.io
+    resLink('testxio'): something else
+- check matches:
+    searchBox: test[x|z].o
+    resLink('testxio'): tx\w{2} · GitHub
+- check not matches:
+    searchBox: testx1111\.io
+    resLink('testxio'): test11o
+- check exists:
+    resLink('testxio'): true
+    resLink('no such thing'): false
+- check enabled:
+    resLink('testxio'): true
+    searchBox: true
+- check readonly:
+    resLink('testxio'): false
+    searchBox: false
+```
 
 #### Wait
 Wait for the (dis)appearance of an object.
-- wait
-- wait to appear
-- wait to disappear
+```YAML
+- wait: googleSearchForm
+- wait to appear: googleSearchForm
+- wait:
+    - resLink('{{match}}')
+    - googleSearchForm
+- wait:
+    to: appear
+    objects:
+      - resLink('{{match}}')
+- wait to appear:
+    - resLink('{{match}}')
+- wait to appear:
+    timeout: 2s
+    objects:
+      - resLink('{{match}}')
+- wait:
+    to: disappear
+    objects:
+      - resLink('no such thing')
+- wait to disappear: resLink('no such thing, really')
+- wait to disappear:
+    - resLink('no such thing, really')
+```
 
 #### Navigational keywords
-- go to
-- go forward
+```YAML
+- go to:
+    url: / # go to a path relative to the baseUrl
+- go to: /test/index.html # shortcut to the version above
+- go to: http://testx.io
 - go back
+- go forward
 - refresh page
+```
 
 #### Expect
-- expect
-- expect result
+Assertions. **expect result** checks the result of the keyword executed before it. It can be used as a keyword, but it can be passed as a parameter to any other keyword as well. In the example below the **id** is a custom keyword that just returns its parameters, i.e. they are the result of the keyword.
+
+These are useful when you want to do some processing of a text you get off the screen and cannot check directly. Use the **check** keywords when wanting to directly assert values of objects. 
+```YAML
+- go to:
+    url: /
+    expect result:
+      to equal: /
+      not to equal: f
+      to match: .
+      not to match: d
+- id:
+    test: test123
+    expect result:
+      to equal:
+        test: test123
+      not to equal:
+        test: sdaf
+- expect:
+    ${$result.test}:
+      to equal: test123
+      not to equal: something else
+      to match: \w{4}\d{3}
+      not to match: completely different
+- put:
+    someVar: 1
+- expect:
+    ${someVar}:
+      to equal: 1
+- id:
+    test: test123
+- expect result:
+    to equal:
+      test: test123
+```
 
 #### Run
-- run
+Run another **testx** script, optionally passing a context:
+```YAML
+- run:
+    file: tests/scripts/sample.testx # the script to run
+    myVar: myVal # this goes in the testx context
+- run: tests/scripts/no-context.testx # no context shortcut
+```
 
 #### Context keywords
-- put
-- save
+```YAML
+- put: # put stuff in the test context
+    some:
+      one: two
+      three:
+        - four
+        - and five more
+      six: 'seven nine,ten'
+    eight:
+      - nine
+      - ten
+- save # save the current value of an object to the test context
+    myElement: myContextVar
+```
 
 #### Browser keywords
+```YAML
 - clear local storage
 - delete cookies
-- ignore synchronization
+- ignore synchronization: true
+- ignore synchronization: yes
+- ignore synchronization: false
+```
+TBD:
 - switch to
 - respond to dialog
 
 #### Debugging
-- sleep
-
+```YAML
+- sleep: 5s
+- sleep: 500ms
+```
 
 ## Plugins
 
