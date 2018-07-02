@@ -9,7 +9,8 @@ keywords = do ->
   expects = require './expect'
   misc = require './misc'
   run = require './run'
-  _.merge keywords, core, checks, navigates, waits, expects, misc, run
+  context = require './context'
+  _.merge keywords, core, checks, navigates, waits, expects, misc, run, context
 
 module.exports =
   add: (kw) -> _.merge keywords, defunc(kw)

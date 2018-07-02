@@ -5,13 +5,6 @@ module.exports =
   'get': (keys) ->
     for key in keys
       await get key
-  'save': (args, ctx) ->
-    for key, val of args
-      value = await get val
-      ctx[key] = value
-  'put': (args, ctx) ->
-    for key, val of args
-      ctx[key] = val
   'set': (args) ->
     for key, val of args
       await set key, val
