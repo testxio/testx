@@ -1,0 +1,27 @@
+- put:
+    myFirstVar:
+      one: two
+      three:
+        - four
+        - and five more
+      six: 'seven nine,ten'
+    secondVar:
+      - nine
+      - ten
+- expect:
+    ${myFirstVar.six}:
+      to equal: 'seven nine,ten'
+    ${secondVar[0]}:
+      to match: 'n..e'
+- go to:
+    url: /
+- set:
+    searchBox: "testxio\n"
+- wait:
+    - googleSearchForm
+- save:
+    thirdVar: resLink('testxio')
+- expect:
+    ${thirdVar}:
+      to equal: testxio · GitHub
+      to match: ^testx.\w
