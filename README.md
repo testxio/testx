@@ -184,7 +184,7 @@ Wait for the (dis)appearance of an object.
 #### Expect
 Assertions. **expect result** checks the result of the keyword executed before it. It can be used as a keyword, but it can be passed as a parameter to any other keyword as well. In the example below the **id** is a custom keyword that just returns its parameters, i.e. they are the result of the keyword.
 
-These are useful when you want to do some processing of a text you get off the screen and cannot check directly. Use the **check** keywords when wanting to directly assert values of objects. 
+These are useful when you want to do some processing of a text, that you get off the screen, and only then do assert. Use the **check** keywords when wanting to directly assert values of objects.
 ```YAML
 - go to:
     url: /
@@ -219,7 +219,7 @@ These are useful when you want to do some processing of a text you get off the s
 ```
 
 #### Run
-Run another **testx** script, optionally passing a context:
+Runs another **testx** script, optionally passing a context:
 ```YAML
 - run:
     file: tests/scripts/sample.testx # the script to run
@@ -228,19 +228,26 @@ Run another **testx** script, optionally passing a context:
 ```
 
 #### Context keywords
+##### Put
+Puts stuff in the test context of **testx**.
+The following example puts 2 values in the test context - an object bound to the *myFirstVar* variable and an array bound to the *secondVar* variable. These values can be used in subsequent steps with `${myFirstVar}` and `${secondVar}`
 ```YAML
-- put: # put stuff in the test context
-    some:
+- put:
+    myFirstVar:
       one: two
       three:
         - four
         - and five more
       six: 'seven nine,ten'
-    eight:
+    secondVar:
       - nine
       - ten
-- save # save the current value of an object to the test context
-    myElement: myContextVar
+```
+##### Save
+Saves the current value of an object into a context variable. In the example below the value (say text) of *myElement* is saved to *myContextVar*; you'll be able to retrieve it in subsequent steps with `${myContextVar}`
+```YAML
+- save #
+    myContextVar: myElement
 ```
 
 #### Browser keywords
@@ -261,6 +268,11 @@ TBD:
 - sleep: 500ms
 ```
 
+## Run configuration
+TBA
+
 ## Plugins
+TBA
 
 ## IDE integration
+TBA
