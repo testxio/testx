@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "2.11.0",
+  "version": "2.11.1",
   "description": "A library for executing keyword driven tests with Protractor.",
   "main": "index.coffee",
   "scripts": {
