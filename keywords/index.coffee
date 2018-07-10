@@ -1,5 +1,6 @@
 path = require 'path'
 fs = require 'fs'
+q = require 'q'
 
 _ = require 'lodash'
 colors = require 'colors'
