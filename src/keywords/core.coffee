@@ -24,7 +24,7 @@ module.exports =
           for t in titles
             if t.title == args.title
               browser.switchTo().window t.handle
-    if args.frame
+    else if args.frame
       browser.switchTo().frame args.frame
   'respond to dialog': (args) ->
     dialog = await browser.switchTo().alert()
