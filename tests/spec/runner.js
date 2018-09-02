@@ -10,7 +10,10 @@ describe("Runner", () => {
       testx.parsers
         .get("testx")
         .parse(
-          "- run:\n    file: 'tests/scripts/sample.testx'\n    match: 'testxio'"
+          `- run:
+                script: 'tests/scripts/sample.testx'
+                context:
+                    match: 'testxio'`
         )
     ));
 });

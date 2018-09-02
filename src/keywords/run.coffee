@@ -3,6 +3,6 @@ _ = require 'lodash'
 
 module.exports =
   run: (args, ctx) ->
-    args = convertSimpleArgs args, 'file'
-    context = _.extend {}, ctx, _.omit(args, ['file'])
-    await testx.run args.file, context
+    args = convertSimpleArgs args, 'script'
+    context = _.extend {}, args.context, ctx
+    await testx.run args.script, context

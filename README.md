@@ -222,8 +222,9 @@ These are useful when you want to do some processing of a text, that you get off
 Runs another **testx** script, optionally passing a context:
 ```YAML
 - run:
-    file: tests/scripts/sample.testx # the script to run
-    myVar: myVal # this goes in the testx context
+    script: tests/scripts/sample.testx # the script to run
+    context: # this goes in the testx context
+      myVar: myVal
 - run: tests/scripts/no-context.testx # no context shortcut
 ```
 
