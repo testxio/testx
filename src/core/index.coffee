@@ -13,8 +13,8 @@ module.exports = class TestX
     @objects = require '../objects'
     @element = @objects.element
     @elements = @objects.elements
-    @functions = require '../functions'
-    @runner = runner @keywords.get(), @functions.get()
+    @context = require '../context'
+    @runner = runner @keywords.get(), @context.get()
     @runScript = @runner.runScript
     @events = require '../events'
     logger @events

@@ -7,5 +7,6 @@ module.exports = {
   },
   identity: function(a) {
     return a;
-  }
+  },
+  nonFunc: 1
 };

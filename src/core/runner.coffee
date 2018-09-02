@@ -20,11 +20,11 @@ exec = (keywords, step, context) ->
   finally
     global.expect = origExpect
 
-module.exports = (keywords, functions) ->
+module.exports = (keywords, staticCtx) ->
   runScript: (script, ctx) ->
     base =
       _meta: script.source
-    context = _.merge {}, functions, base, ctx, testx.params.context
+    context = _.merge {}, staticCtx, base, ctx, testx.params.context
     testx.events.emit 'script/start', script, context
     for step in script.steps
       try

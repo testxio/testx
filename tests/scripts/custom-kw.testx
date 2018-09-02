@@ -9,6 +9,9 @@
       - nine
       - ten
 - compare:
+    expected: 1
+    actual: ${nonFunc}
+- compare:
     expected:
       one: two
       three:
