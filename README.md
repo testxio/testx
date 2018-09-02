@@ -7,23 +7,28 @@ testx
 A library for executing keyword driven tests with Protractor.
 
 - [What is **testx**](#what-is-testx)
+  - [Core principles](#core-principles)
+- [Getting started](#getting-started)
+- [Concepts](#concepts)
+- [API](#api)
+- [Core keywords](#core-keywords)
 
 ## What is **testx**
 **testx** is a library for E2E keyword driven tests. **testx** IS NOT a framework - you can use it in your [Protractor](http://www.protractortest.org) project to make test automation a breeze.
 **testx** is meant for testers. It requires a very limited set of technical skills. It is even suitable for the business people in your project.
 
-## Core principles
+### Core principles
 **testx** aims to be **simple**, **extensible** and **easy to integrate**.
 
-### Simple
+#### Simple
 Simplicity is the defining quality of **testx**. It has very few concepts and avoids variations whenever possible. The goal is to have non-technical people feel right at home when automating their tests. This is why **testx** tries to think about everything from the user point of view.
 
-### Extensible
+#### Extensible
 In order to make **testx** as simple as possible we need to make certain sacrifices. The main of those is the fact that **testx** is logic-less. This means that in a **testx** script there are no branches and no loops. A **testx** script is just a list of steps.
 
 However, sometimes you need something more complex, like a loop, in your tests. Because of situations like this **testx** makes it very easy to extend it, while keeping the core principle of simplicity intact.    
 
-### Easy to integrate
+#### Easy to integrate
 **testx** relies on [protractor](http://protractortest.org) to do the heavy lifting - anything you can do with protractor is still doable. A very important part of this "everything" is the ability to integrate your test execution into your continuous deployment pipeline. **testx** tries really hard to not make this any harder.
 
 ## Getting started
@@ -71,24 +76,89 @@ Locators are organized into what we refer to as **the object map**, but this is 
 The names of the object (in the object map) is how you will refer to this object in your **testx** scripts.
 
 #### Default behaviour
-TBA
+Key characteristic of **testx** is its simplicity, its ease of use. When it comes down to dealing with objects, this means that **testx** knows how to deal with them by default. In other words, when you tell **testx** to **set** a particular object it knows what to do with it - it will type into input boxes, select from dropdowns or click buttons.
+
 #### Custom behaviour
-TBA
+Sometimes you want to do something that is not common with a particular object on the screen or maybe you have a complex object that behaves in a very specific way (think an editor, for example). In such a case **testx** lets you define the behaviour of this element. This means that when you **set** or **get** (used in checks, for example) this object, a custom code will be executed.
+
+To do this, you need to provide a **behaviour** property to the object. It can have any or all of 3 polymorphic properties - **get**, **set** and **wait**. **Get** is used to retrieve the value of the element and is used by **testx** when it performs checks. **Set** is used by the **set** keyword and specifies the way **testx** manipulates this object. **Wait** describes how **testx** will know if the objects is on the screen and ready for manipulation.
+
 ### Test context
-TBA
+The test context includes all *variables* (and functions) you may need during the execution. It allows you to reuse your scripts. For example in this (contrived) script:
+
+```YAML
+- go to: ${customUrl}
+```
+
+you can pass *customUrl* in the test context and **testx**  will navigate to that different for every execution URL. This let's you run the same tests against different deployments, for example.
+
 ### Parsers
-TBA
+It is possible to not use YAML format for your scripts, but instead implement a custom parser for the format you prefer. **TBA**.
+
 ### Reporters
-TBA
+One of the most important things in every test execution is reporting the results. There are 3 types of default reporters, but you can implement your own (**TBA**).
+
+The default ones are **console**, **junit** and **HTML**. They are found in the [testx-jasmine-reporters](https://github.com/testxio/testx-jasmine-reporters) project - check it out to see how to use the reporters.
 
 ## API
-### **testx** API
-TBA
+### Run a script
+The **testx** API is pretty simple. The only thing you absolutely need to know is how to run a **testx** script. Once you have *require*-ed **testx** (you have to do this in the *onPrepare* function of your Protractor configuration) you can run a **testx** script in you specs like:
 
-### Core keywords
+```JS
+const context = {
+  someVar: 1,
+  anotherVar: "text",
+  someFunc: () => "more text"
+}
+
+testx.run("path/to/the/testx-script.yml");
+testx.run("path/to/the/testx-script.yml", context);
+```
+
+### Add objects to the test execution
+```JS
+testx.objects.add(myObjectsDict);
+```
+
+Usually you'll have the objects defined somewhere else and a lot more common is:
+```JS
+testx.objects.add(require("path/to/myObjects.js"));
+```
+
+It is possible to use a CSV file to define your objects. In this case you'd do:
+```JS
+testx.objects.add("path/to/myObjects.csv");
+```
+
+### Add stuff to the test context
+Adding variables and functions to the context is also very simple:
+```JS
+testx.context.add({"myVar": "some text"});
+```
+
+### Add custom keywords to the execution
+It is of course possible to add custom keywords to the execution. This is very common for non-trivial tests.
+
+You'll add keywords like so:
+```JS
+const keywords = {
+  myKwd: (kwdArguments, context) => //do something here
+}
+
+testx.keywords.add(keywords);
+```
+
+And then use them like so:
+```yaml
+- myKwd:
+    firstArg: 1
+    secondArg: this is another argument
+```
+
+## Core keywords
 These are the default keywords that come with **testx**.
 
-#### Set
+### Set
 **Set** performs an action on an element. It is polymorphic, meaning that the action depends on the type of the element. For example a **set** on an *input* will fill it in, while a **set** on a *button* will click it.
 ```YAML
 - set:
@@ -107,7 +177,7 @@ will cause **testx** to only click in the input box *myInput*.
 
 Default actions per element type are: **TBA**
 
-#### Check
+### Check
 Check text, attribute value, existence, enabled or readonly properties of an object.
 ```YAML
 - check equals:
@@ -143,7 +213,7 @@ Check text, attribute value, existence, enabled or readonly properties of an obj
     searchBox: false
 ```
 
-#### Wait
+### Wait
 Wait for the (dis)appearance of an object.
 ```YAML
 - wait: googleSearchForm
@@ -170,7 +240,7 @@ Wait for the (dis)appearance of an object.
     - resLink('no such thing, really')
 ```
 
-#### Navigational keywords
+### Navigational keywords
 ```YAML
 - go to:
     url: / # go to a path relative to the baseUrl
@@ -181,7 +251,7 @@ Wait for the (dis)appearance of an object.
 - refresh page
 ```
 
-#### Expect
+### Expect
 Assertions. **expect result** checks the result of the keyword executed before it. It can be used as a keyword, but it can be passed as a parameter to any other keyword as well. In the example below the **id** is a custom keyword that just returns its parameters, i.e. they are the result of the keyword.
 
 These are useful when you want to do some processing of a text, that you get off the screen, and only then do assert. Use the **check** keywords when wanting to directly assert values of objects.
@@ -218,7 +288,7 @@ These are useful when you want to do some processing of a text, that you get off
       test: test123
 ```
 
-#### Run
+### Run
 Runs another **testx** script, optionally passing a context:
 ```YAML
 - run:
@@ -228,8 +298,8 @@ Runs another **testx** script, optionally passing a context:
 - run: tests/scripts/no-context.testx # no context shortcut
 ```
 
-#### Context manipulation keywords
-##### Put
+### Context manipulation keywords
+#### Put
 Puts stuff in the test context of **testx**.
 The following example puts 2 values in the test context - an object bound to the *myFirstVar* variable and an array bound to the *secondVar* variable. These values can be used in subsequent steps with `${myFirstVar}` and `${secondVar}`
 ```YAML
@@ -244,14 +314,14 @@ The following example puts 2 values in the test context - an object bound to the
       - nine
       - ten
 ```
-##### Save
+#### Save
 Saves the current value of an object into a context variable. In the example below the value (say text) of *myElement* is saved to *myContextVar*; you'll be able to retrieve it in subsequent steps with `${myContextVar}`
 ```YAML
 - save #
     myContextVar: myElement
 ```
 
-#### Browser keywords
+### Browser keywords
 ```YAML
 - clear local storage
 - delete cookies
@@ -263,7 +333,7 @@ TBD:
 - switch to
 - respond to dialog
 
-#### Debugging
+### Debugging
 ```YAML
 - sleep: 5s
 - sleep: 500ms
