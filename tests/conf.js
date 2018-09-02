@@ -20,6 +20,7 @@ exports.config = {
     require("../lib");
     testx.objects.add("tests/objects/objects.csv");
     testx.objects.add(require("./objects"));
+    testx.objects.add(require('./objects'), 'test.');
     testx.context.add(require("./context"));
     testx.keywords.add(require("./keywords"));
     beforeEach(() => (browser.ignoreSynchronization = true));

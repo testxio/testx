@@ -7,13 +7,15 @@ defaultBehaviour = require './default-behaviour'
 objects = {}
 
 module.exports =
-  add: (objs) ->
+  add: (objs, prefix) ->
     objs = defunc objs
-    if typeof objs == "object"
-      _.assign(objects, objs)
-    else # if the argument is not an object we assume it is a CSV file path
-      for row in parse fs.readFileSync objs, {delimiter: ','}
-        objects[row[0]] = locator: row[1], value: row[2]
+    pref = prefix or ''
+    unless typeof objs is 'object'
+      contents = fs.readFileSync(objs)
+      rows = parse contents, {delimiter: ','}
+      objs = {}
+      (objs[row[0]] = locator: row[1], value: row[2]) for row in rows
+    (objects[pref + k] = v) for k, v of objs
 
   get: -> objects
   element: (key) -> _element() key

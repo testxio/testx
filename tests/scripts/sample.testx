@@ -4,6 +4,6 @@
 - wait:
     - resLink('{{match}}')
 - set:
-    resLink('{{match}}'):
+    test.resLink('{{match}}'):
 - check matches:
     orgName: '{{match}}'
