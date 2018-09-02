@@ -227,7 +227,7 @@ Runs another **testx** script, optionally passing a context:
 - run: tests/scripts/no-context.testx # no context shortcut
 ```
 
-#### Context keywords
+#### Context manipulation keywords
 ##### Put
 Puts stuff in the test context of **testx**.
 The following example puts 2 values in the test context - an object bound to the *myFirstVar* variable and an array bound to the *secondVar* variable. These values can be used in subsequent steps with `${myFirstVar}` and `${secondVar}`
