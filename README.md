@@ -263,7 +263,7 @@ These are useful when you want to do some processing of a text, that you get off
       not to equal: f
       to match: .
       not to match: d
-- id:
+- custom kwd that just returns params:
     test: test123
     expect result:
       to equal:
@@ -289,7 +289,7 @@ These are useful when you want to do some processing of a text, that you get off
 ```
 
 ### Run
-Runs another **testx** script, optionally passing a context:
+Runs another **testx** script, optionally passing it a context:
 ```YAML
 - run:
     script: tests/scripts/sample.testx # the script to run
@@ -329,21 +329,46 @@ Saves the current value of an object into a context variable. In the example bel
 - ignore synchronization: yes
 - ignore synchronization: false
 ```
-TBD:
-- switch to
-- respond to dialog
 
-### Debugging
+#### Switch to a different window or frame
+This keyword will switch the test execution to different window or frame.
 ```YAML
-- sleep: 5s
-- sleep: 500ms
+- switch to:
+    title: "My new window"
+- switch to:
+    frame: "My new frame ID"
+```
+
+#### Respond to a dialog
+```YAML
+- respond to dialog: OK
+- respond to dialog:
+    response: ok
+- respond to dialog:
+    response: Cancel
+```
+
+### Debugging keywords
+The **sleep** keyword will pause the execution of the test. It is strongly recommended that you only use it only while developing your tests.
+```YAML
+- sleep: 5s # the execution will stop here for 5 seconds
+- sleep: 500ms # the execution will stop here for half a second
 ```
 
 ## Run configuration
 TBA
 
 ## Plugins
-TBA
+A core characteristic of **testx** is its extensibility. This means it is very easy to develop keywords packages, for example. It is of course possible to extend **testx** in other areas of functionality, but 99% of the time you'll extend with a keyword package.
 
-## IDE integration
-TBA
+Here is what we have so far:
+| Npm package | Description |
+| ----------- | ----------- |
+|[testx-http-keywords](https://www.npmjs.com/package/testx-http-keywords)|Keywords to send simple http requests using the testx library.|
+|[testx-file-keywords](https://www.npmjs.com/package/testx-file-keywords)|Keywords to test file (text and pdf) content using the testx library.|
+|[testx-pop3-keywords](https://www.npmjs.com/package/testx-pop3-keywords)|Keywords to test mailserver using pop3.|
+|[testx-postgres-keywords](https://www.npmjs.com/package/testx-postgres-keywords)|Keywords to test postgres db.|
+|[testx-soap-keywords](https://www.npmjs.com/package/testx-soap-keywords)|Extension for testx to test soap services.|
+
+## Editor integration
+To make developing tests easier we've developed an [Atom syntax plugin](https://atom.io/packages/language-testx).
