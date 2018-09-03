@@ -1,5 +1,5 @@
 _ = require 'lodash'
-{get, set} = require './api'
+{get, set, convertSimpleArgs} = require './api'
 
 module.exports =
   'get': (keys) ->
@@ -27,6 +27,7 @@ module.exports =
     else if args.frame
       browser.switchTo().frame args.frame
   'respond to dialog': (args) ->
+    args = convertSimpleArgs args, 'response'
     dialog = await browser.switchTo().alert()
     switch args.response.toLowerCase() # Key should be 'response'
       when "ok" then dialog.accept()
