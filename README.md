@@ -14,7 +14,7 @@ A library for executing keyword driven tests with Protractor.
 - [Core keywords](#core-keywords)
 
 ## What is **testx**
-**testx** is a library for E2E keyword driven tests. **testx** IS NOT a framework - you can use it in your [Protractor](http://www.protractortest.org) project to make test automation a breeze.
+**testx** is a library for end-to-end keyword driven tests. **testx** IS NOT a framework - you can use it in your [Protractor](http://www.protractortest.org) project to make test automation a breeze.
 **testx** is meant for testers. It requires a very limited set of technical skills. It is even suitable for the business people in your project.
 
 ### Core principles
@@ -29,15 +29,15 @@ In order to make **testx** as simple as possible we need to make certain sacrifi
 However, sometimes you need something more complex, like a loop, in your tests. Because of situations like this **testx** makes it very easy to extend it, while keeping the core principle of simplicity intact.    
 
 #### Easy to integrate
-**testx** relies on [protractor](http://protractortest.org) to do the heavy lifting - anything you can do with protractor is still doable. A very important part of this "everything" is the ability to integrate your test execution into your continuous deployment pipeline. **testx** tries really hard to not make this any harder.
+**testx** relies on [Protractor](http://protractortest.org) to do the heavy lifting - anything you can do with Protractor is still possible. A very important part is the ability to integrate your test execution into your continuous deployment pipeline. **testx** tries really hard to not make this any more difficult.
 
 ## Getting started
 
 ### Creating a **testx** project
-A **testx** project is just a [protractor](http://protractortest.org) project. Just install **testx** as a dependency and you can start running your **testx** scripts in (a part of) your test run.
+A **testx** project is just a [Protractor](http://protractortest.org) project. Just install **testx** as a dependency and you can start running your **testx** scripts in (a part of) your test run.
 
 #### The **testx** CLI
-In line with the core concept of **simplicity**, **testx** provides you with a [CLI](https://www.npmjs.com/package/@testx/cli). It helps you create a **testx** project containing useful examples. Easy!
+In line with the core concept of **simplicity**, **testx** provides you with a [CLI](https://www.npmjs.com/package/@testx/cli). It helps you to create a **testx** project containing useful examples. Easy!
 
 ## Concepts
 The main thing that **testx** does is to execute (run) a **testx** script. This happens in your protractor specification and looks like this:
@@ -47,8 +47,9 @@ describe("My first", () =>
     testx.run("tests/scripts/my-first-test.testx")));
 ```
 All the rest of it is in the **testx** script file.
+
 ### Scripts and steps
-Each **testx** script is just a list of **steps**. These steps are synchronous and are executed in sequence. By default a script are encoded in a *.testx* file. By default it is a YAML file. Every step consists of two things - the keyword to be executed at this step, and the parameters of the execution. In general the steps are just actions/checks performed on objects (elements). Simple!
+Each **testx** script is just a list of **steps**. These steps are synchronous and are executed in sequence. By default a script is encoded in a *.testx* file. By default it is a YAML file. Every step consists of two things - the keyword to be executed at this step, and the parameters of the execution. In general the steps are just actions or checks performed on objects (elements on the screen). Simple!
 
 Here is an example:
 ```YAML
@@ -64,7 +65,7 @@ There are 3 **steps** in this script - **go to**, **set** and **check matches**.
 - The **check matches** checks that the content of the "orgName" object (an H1 html element in this case) RegEx match the text "testxio".
 
 ### Keywords
-Keywords tell **testx** what action do you want to perform the the parameters of the keyword tell it to which element (for example) you want to target. The combination of these two concepts represents a **step**. The type of action can be a click on a button or a link, typing something into an input box, etc. Keywords usually target (do something with) objects - the elements in the browser - or the test context. The core keywords, the ones that come with **testx**, are generally about actions, that a user will perform in the browser. A [list of all core action](#core-keywords) is available further in this documentation.
+Keywords tell **testx** what action you want to perform and the parameters of the keyword tell it which element (for example) you want to target. The combination of these two concepts represents a **step**. The type of action can be a click on a button or a link, typing something into an input box, etc. Keywords usually target (do something with) objects - the elements in the browser - or the test context. The core keywords, the ones that come with **testx**, are generally about actions, that a user will perform in the browser. A [list of all core action](#core-keywords) is available further in this documentation.
 
 ### Objects
 Objects in **testx** are an abstraction of the HTML elements in the browser. You can think of an object as **the name of a particular, actionable element**. They are discovered by **testx** with a **locator**.
@@ -76,10 +77,10 @@ Locators are organized into what we refer to as **the object map**, but this is 
 The names of the object (in the object map) is how you will refer to this object in your **testx** scripts.
 
 #### Default behaviour
-Key characteristic of **testx** is its simplicity, its ease of use. When it comes down to dealing with objects, this means that **testx** knows how to deal with them by default. In other words, when you tell **testx** to **set** a particular object it knows what to do with it - it will type into input boxes, select from dropdowns or click buttons.
+Key characteristic of **testx** is its simplicity and its ease of use. When it comes down to dealing with objects, this means that **testx** knows how to deal with them by default. In other words, when you tell **testx** to **set** a particular object it knows what to do with it - it will type into input boxes, select from dropdowns or click buttons.
 
 #### Custom behaviour
-Sometimes you want to do something that is not common with a particular object on the screen or maybe you have a complex object that behaves in a very specific way (think an editor, for example). In such a case **testx** lets you define the behaviour of this element. This means that when you **set** or **get** (used in checks, for example) this object, a custom code will be executed.
+Sometimes you want to do something that is not common with a particular object on the screen or maybe you have a complex object that behaves in a very specific way (think of a wysiwyg text editor, for example). In such a case **testx** lets you define the behaviour of this element. This means that when you **set** or **get** (used in checks, for example) this object, custom code will be executed.
 
 To do this, you need to provide a **behaviour** property to the object. It can have any or all of 3 polymorphic properties - **get**, **set** and **wait**. **Get** is used to retrieve the value of the element and is used by **testx** when it performs checks. **Set** is used by the **set** keyword and specifies the way **testx** manipulates this object. **Wait** describes how **testx** will know if the objects is on the screen and ready for manipulation.
 
@@ -90,7 +91,7 @@ The test context includes all *variables* (and functions) you may need during th
 - go to: ${customUrl}
 ```
 
-you can pass *customUrl* in the test context and **testx**  will navigate to that different for every execution URL. This let's you run the same tests against different deployments, for example.
+you can pass *customUrl* in the test context and **testx**  will navigate to that URL. This let's you run the same tests against different deployments, for example.
 
 ### Parsers
 It is possible to not use YAML format for your scripts, but instead implement a custom parser for the format you prefer. **TBA**.
@@ -254,7 +255,7 @@ Wait for the (dis)appearance of an object.
 ### Expect
 Assertions. **expect result** checks the result of the keyword executed before it. It can be used as a keyword, but it can be passed as a parameter to any other keyword as well. In the example below the **id** is a custom keyword that just returns its parameters, i.e. they are the result of the keyword.
 
-These are useful when you want to do some processing of a text, that you get off the screen, and only then do assert. Use the **check** keywords when wanting to directly assert values of objects.
+These are useful when you want to do some processing of a text, that you get from the screen, and only then do assert. Use the **check** keywords when wanting to directly assert values of objects.
 ```YAML
 - go to:
     url: /
