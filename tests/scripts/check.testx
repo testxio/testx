@@ -5,6 +5,9 @@
 - wait:
     - googleSearchForm
 - check equals:
+    searchBox: testxio
+    resLink('testxio'): testxio · GitHub
+- check equals:
     resLink('testxio'):
       href: https://github.com/testxio
       host: github.com
@@ -14,15 +17,18 @@
     resLink('testxio'):
       href: github\.com/\w{4}xio
       localName: \w
-- check equals:
-    searchBox: testxio
-    resLink('testxio'): testxio · GitHub
-- check not equals:
-    searchBox: testx1111.io
-    resLink('testxio'): something else
+- check matches:
+    resLink('testxio'):
+      href: https://github\..om/testxio
+      host: github\.com
+      isConnected: 't..e'
+      nodeType: '[1|2]'
 - check matches:
     searchBox: test[x|z].o
     resLink('testxio'): tx\w{2} · GitHub
+- check not equals:
+    searchBox: testx1111.io
+    resLink('testxio'): something else
 - check not matches:
     searchBox: testx1111\.io
     resLink('testxio'): test11o
