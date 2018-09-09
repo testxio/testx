@@ -11,5 +11,12 @@ module.exports = {
   orgName: {
     locator: "xpath",
     value: '//h1[contains(@class,"org-name")]'
+  },
+  myLink: {
+    locator: "xpath",
+    value: "//a",
+    behaviour: {
+      get: () => "a value"
+    }
   }
 };

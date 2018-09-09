@@ -1,0 +1,8 @@
+- go to:
+    url: /
+- set:
+    searchBox: "testxio\n"
+- wait:
+    - googleSearchForm
+- check equals:
+    myLink: a value
