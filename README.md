@@ -14,7 +14,7 @@ A library for executing keyword driven tests with Protractor.
 - [Core keywords](#core-keywords)
 
 ## What is **testx**
-**testx** is a library for end-to-end keyword driven tests. **testx** IS NOT a framework - you can use it in your [Protractor](http://www.protractortest.org) project to make test automation a breeze.
+**testx** is a library for end-to-end keyword driven tests. **testx** IS NOT a framework - you can use it in your [protractor](http://www.protractortest.org) project to make test automation a breeze.
 **testx** is meant for testers. It requires a very limited set of technical skills. It is even suitable for the business people in your project.
 
 ### Core principles
@@ -29,15 +29,15 @@ In order to make **testx** as simple as possible we need to make certain sacrifi
 However, sometimes you need something more complex, like a loop, in your tests. Because of situations like this **testx** makes it very easy to extend it, while keeping the core principle of simplicity intact.    
 
 #### Easy to integrate
-**testx** relies on [Protractor](http://protractortest.org) to do the heavy lifting - anything you can do with Protractor is still possible. A very important part is the ability to integrate your test execution into your continuous deployment pipeline. **testx** tries really hard to not make this any more difficult.
+**testx** relies on [protractor](http://protractortest.org) to do the heavy lifting - anything you can do with Protractor is still possible. A very important part is the ability to integrate your test execution into your continuous deployment pipeline. **testx** tries really hard to not make this any more difficult.
 
 ## Getting started
 
 ### Creating a **testx** project
-A **testx** project is just a [Protractor](http://protractortest.org) project. Just install **testx** as a dependency and you can start running your **testx** scripts in (a part of) your test run.
+A **testx** project is just a [protractor](http://protractortest.org) project. Just install **testx** as a dependency and you can start running your **testx** scripts in (a part of) your test run.
 
 #### The **testx** CLI
-In line with the core concept of **simplicity**, **testx** provides you with a [CLI](https://www.npmjs.com/package/@testx/cli). It helps you to create a **testx** project containing useful examples. Easy!
+In line with the core concept of **simplicity**, **testx** provides you with a [CLI](https://www.npmjs.com/package/@testx/cli). It helps you create a **testx** project containing useful examples. Easy!
 
 ## Concepts
 The main thing that **testx** does is to execute (run) a **testx** script. This happens in your protractor specification and looks like this:
@@ -49,7 +49,7 @@ describe("My first", () =>
 All the rest of it is in the **testx** script file.
 
 ### Scripts and steps
-Each **testx** script is just a list of **steps**. These steps are synchronous and are executed in sequence. By default a script is encoded in a *.testx* file. By default it is a YAML file. Every step consists of two things - the keyword to be executed at this step, and the parameters of the execution. In general the steps are just actions or checks performed on objects (elements on the screen). Simple!
+Each **testx** script is just a list of **steps**. These steps are synchronous and are executed in sequence. The script (usually) lives in a *.testx* file. By default this is a YAML file. Every step consists of two things - the keyword to be executed at this step, and the (zero or more) parameters of the execution. In general the steps are just actions or checks performed on objects (elements). Simple!
 
 Here is an example:
 ```YAML
@@ -65,24 +65,46 @@ There are 3 **steps** in this script - **go to**, **set** and **check matches**.
 - The **check matches** checks that the content of the "orgName" object (an H1 html element in this case) RegEx match the text "testxio".
 
 ### Keywords
-Keywords tell **testx** what action you want to perform and the parameters of the keyword tell it which element (for example) you want to target. The combination of these two concepts represents a **step**. The type of action can be a click on a button or a link, typing something into an input box, etc. Keywords usually target (do something with) objects - the elements in the browser - or the test context. The core keywords, the ones that come with **testx**, are generally about actions, that a user will perform in the browser. A [list of all core action](#core-keywords) is available further in this documentation.
+Keywords tell **testx** what action you want to perform and the parameters of the keyword tell it which element (for example) you want to target. The combination of these two concepts represents a **step**. The type of action can be a click on a button or a link, typing something into an input box, etc. Keywords usually target (do something with) objects - the elements in the browser - or the **test context** (more on that later). The core keywords, the ones that come with **testx**, are generally about actions, that a user performs in the browser. A [list of all core action](#core-keywords) is available further in this documentation.
 
 ### Objects
 Objects in **testx** are an abstraction of the HTML elements in the browser. You can think of an object as **the name of a particular, actionable element**. They are discovered by **testx** with a **locator**.
 
-You need this sort of abstraction to shield you from changes in the exact HTML structure of the application under test. With an object map like that, whenever a "logical" element on the screen changes you'll just change its locator and that's it, you don't need to change any of your scripts.
+You need this sort of abstraction to shield you from changes in the exact HTML structure of the application under test. With an object, whenever a "logical" element on the screen changes (e.g. you need a different xpath/css to locate the element) changes you'll just change its locator and that's it, you don't need to change any of your scripts.
 
 Locators are organized into what we refer to as **the object map**, but this is just a fancy name for a JSON object, where keys are the name of the object and the values are the locators.
 
-The names of the object (in the object map) is how you will refer to this object in your **testx** scripts.
+The names of the objects (in the object map) are how you refer to these objects in your **testx** scripts.
 
 #### Default behaviour
-Key characteristic of **testx** is its simplicity and its ease of use. When it comes down to dealing with objects, this means that **testx** knows how to deal with them by default. In other words, when you tell **testx** to **set** a particular object it knows what to do with it - it will type into input boxes, select from dropdowns or click buttons.
+Key characteristics of **testx** are its simplicity and its ease of use. When it comes down to dealing with objects, this means that **testx** knows what to do with them by default. In other words, when you tell **testx** to **set** a particular object it knows how to do it - it will type into input boxes, select from dropdowns or click buttons.
 
 #### Custom behaviour
 Sometimes you want to do something that is not common with a particular object on the screen or maybe you have a complex object that behaves in a very specific way (think of a wysiwyg text editor, for example). In such a case **testx** lets you define the behaviour of this element. This means that when you **set** or **get** (used in checks, for example) this object, custom code will be executed.
 
 To do this, you need to provide a **behaviour** property to the object. It can have any or all of 3 polymorphic properties - **get**, **set** and **wait**. **Get** is used to retrieve the value of the element and is used by **testx** when it performs checks. **Set** is used by the **set** keyword and specifies the way **testx** manipulates this object. **Wait** describes how **testx** will know if the objects is on the screen and ready for manipulation.
+
+Let's say you have a single link on the page and you want to check if the *href* attribute of that link (and not the default *value* of it, which is the text of the link) equals a certain value. There are a few ways to do that, but an example that uses the custom behaviour would look something like this:
+
+In your objects definition:
+```JS
+const objects = {
+  myLink: {
+    locator: "xpath",
+    value: "//a",
+    behaviour: {
+      get: function() { return this.getAttribute("href") }
+    }
+  }
+}
+```
+
+And then in your script:
+```yaml
+- go to: /
+- check equals:
+    myLink: https://testx.io
+```
 
 ### Test context
 The test context includes all *variables* (and functions) you may need during the execution. It allows you to reuse your scripts. For example in this (contrived) script:
@@ -182,6 +204,9 @@ Default actions per element type are: **TBA**
 Check text, attribute value, existence, enabled or readonly properties of an object.
 ```YAML
 - check equals:
+    searchBox: testxio
+    resLink('testxio'): testxio · GitHub
+- check equals:
     resLink('testxio'):
       href: https://github.com/testxio
       host: github.com
@@ -191,15 +216,18 @@ Check text, attribute value, existence, enabled or readonly properties of an obj
     resLink('testxio'):
       href: github\.com/\w{4}xio
       localName: \w
-- check equals:
-    searchBox: testxio
-    resLink('testxio'): testxio · GitHub
-- check not equals:
-    searchBox: testx1111.io
-    resLink('testxio'): something else
+- check matches:
+    resLink('testxio'):
+      href: https://github\..om/testxio
+      host: github\.com
+      isConnected: 't..e'
+      nodeType: '[1|2]'
 - check matches:
     searchBox: test[x|z].o
     resLink('testxio'): tx\w{2} · GitHub
+- check not equals:
+    searchBox: testx1111.io
+    resLink('testxio'): something else
 - check not matches:
     searchBox: testx1111\.io
     resLink('testxio'): test11o
