@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "coffeescript": "^2.1.1",
-    "protractor": "^5.3.2"
+    "protractor": "^5.4.1"
   },
   "testx": {
     "logScript": false,
