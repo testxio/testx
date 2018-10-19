@@ -25,7 +25,7 @@ module.exports =
             if t.title == args.title
               browser.switchTo().window t.handle
     else if args.frame
-      browser.switchTo().frame args.frame
+      browser.switchTo().frame testx.element(args.frame).getWebElement()
   'respond to dialog': (args) ->
     args = convertSimpleArgs args, 'response'
     dialog = await browser.switchTo().alert()
