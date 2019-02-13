@@ -136,3 +136,7 @@ keywords =
       keys = val.replace(/\[\w+\]/g, (match) ->
         protractor.Key[match.substring(1, match.length-1).toUpperCase()])
       browser.actions().sendKeys(keys).perform()
+  'clear': (args) ->
+    # Clear element(s)
+    for key, val of args
+      testx.element(key).clear()      
