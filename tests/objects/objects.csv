@@ -1,7 +1,7 @@
 googleSearchForm,css,form.tsf
 googleBigLogo,id,hplogo
 resultLink,xpath,(//h3[@class='r']/a)[1]
-searchBox,id,lst-ib
+searchBox,css,input[name='q']
 searchBtn,css,button[name='btnG']
 luckyBtn,css,button[name='btnI']
 radioChecked,id,f3
