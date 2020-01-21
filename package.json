@@ -1,6 +1,6 @@
 {
   "name": "testx",
-  "version": "3.0.8",
+  "version": "3.0.9",
   "description": "A library for executing keyword driven tests with Protractor.",
   "main": "lib/index.js",
   "scripts": {
@@ -37,15 +37,15 @@
   "dependencies": {
     "@testx/context-resolver": "^1.0.0",
     "@testx/logger-default": "^1.1.0",
-    "@testx/parser-yaml": "^3.0.0",
-    "csv-parse": "^1.1.7",
+    "@testx/parser-yaml": "^3.0.1",
+    "csv-parse": "^4.4.6",
     "duration-js": "^4.0.0",
     "jasmine2-custom-message": "^0.8.4",
-    "lodash": "^4.17.10"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "coffeescript": "^2.1.1",
-    "protractor": "^5.4.1"
+    "coffeescript": "^2.5.0",
+    "protractor": "^5.4.2"
   },
   "testx": {
     "logScript": false,
