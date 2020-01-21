@@ -3,4 +3,4 @@
 - set:
     searchBox: "testxio\n"
 - check matches:
-    resultLink: 'testxio · GitHub'
+    resultLink: 'Testxio/testx: TestX is a ...'

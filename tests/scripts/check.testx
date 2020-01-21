@@ -6,7 +6,7 @@
     - googleSearchForm
 - check equals:
     searchBox: testxio
-    resLink('testxio'): testxio · GitHub
+    resLink('testxio'): "github.com › testxio\ntestxio · GitHub"
 - check equals:
     resLink('testxio'):
       href: https://github.com/testxio

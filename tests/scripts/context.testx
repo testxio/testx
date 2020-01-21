@@ -23,5 +23,5 @@
     thirdVar: resLink('testxio')
 - expect:
     ${thirdVar}:
-      to equal: testxio · GitHub
-      to match: ^testx.\w
+      to equal: "github.com › testxio\ntestxio · GitHub"
+      to match: github\.\w
