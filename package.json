@@ -38,14 +38,14 @@
     "@testx/context-resolver": "^1.0.0",
     "@testx/logger-default": "^1.1.0",
     "@testx/parser-yaml": "^3.0.0",
-    "csv-parse": "^1.1.7",
+    "csv-parse": "^4.8.5",
     "duration-js": "^4.0.0",
-    "jasmine2-custom-message": "^0.8.4",
-    "lodash": "^4.17.10"
+    "jasmine2-custom-message": "^0.9.3",
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "coffeescript": "^2.1.1",
-    "protractor": "^5.4.1"
+    "coffeescript": "^2.5.0",
+    "protractor": "^5.4.2"
   },
   "testx": {
     "logScript": false,
