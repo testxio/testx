@@ -15,6 +15,7 @@ getAll = (key) ->
 set = (key, value) ->
   await wait {objects: [key]}, cond.elementToBeClickable
   el = await testx.element(key)
+  await wait {objects: [key]}, cond.elementToBeClickable
   await el.set value
 wait = (args, condition = cond.visibilityOf) ->
   for obj in args.objects
