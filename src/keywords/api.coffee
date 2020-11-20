@@ -15,13 +15,30 @@ getAll = (key) ->
 set = (key, value) ->
   await wait {objects: [key]}, cond.elementToBeClickable
   el = await testx.element(key)
-  await wait {objects: [key]}, cond.elementToBeClickable
-  await el.set value
+  try
+    await el.set value
+  catch e
+    if e.name == "WebDriverError" and e.message.includes("element click intercepted")
+      await wait {objects: [key], timeout: testx.params.disruptiveElement?.timeout or "30s"}, cond.elementToBeClickable
+      await el.set value
+
 wait = (args, condition = cond.visibilityOf) ->
   for obj in args.objects
     tmt = timeout args.timeout, DEFAULT_TIMEOUT()
     el = await testx.element obj
-    await el.wait tmt, condition
+    try
+      await el.wait tmt, condition
+    catch e
+      if e.name == "TimeoutError" and testx.params.disruptiveElement?.selector
+        loadEl = await testx.element(testx.params.disruptiveElement.selector)
+        try
+          await loadEl.wait 500, cond.visibilityOf
+          await loadEl.wait testx.params.disruptiveElement.timeout or "30s", cond.invisibilityOf
+          await el.wait tmt, condition
+        catch
+          throw e
+      else
+        throw e
 
 module.exports =
   get: get
