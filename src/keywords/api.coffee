@@ -20,7 +20,7 @@ set = (key, value) ->
   catch e
     if e.name == "WebDriverError" and e.message.includes("element click intercepted")
       await wait {objects: [key], timeout: testx.params.disruptiveElement?.timeout or "30s"}, cond.elementToBeClickable
-      await el.set value
+      set(key, value)
 
 wait = (args, condition = cond.visibilityOf) ->
   for obj in args.objects
